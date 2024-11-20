@@ -17,10 +17,13 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Admin',
-            'email' => 'admin@themesbrand.com',
-            'password' => Hash::make('12345678'),
-            'created_at' => now(),
+           'name' => 'Pastor João',
+                'email' => 'paranastate@gmail.com',
+                'password' => Hash::make('JesusVive'),
+                'role' => 'manager', // Assign role as manager
+                'institution_id' => 1, // Replace with a valid institution ID
+                'created_at' => now(),
+                'updated_at' => now(),
         ]);
     }
 }

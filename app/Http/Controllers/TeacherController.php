@@ -23,18 +23,49 @@ class TeacherController extends Controller
     {
         return view('teachers.create');
     }
+    // Show form to edit a teacher
+    public function edit($id)
+    {
+        $teacher = Teacher::where('institution_id', Auth::user()->institution_id)
+            ->findOrFail($id);
+
+        return view('teachers.edit', compact('teacher'));
+    }
+
+    // Show details of a specific teacher
+    public function show($id)
+    {
+        $teacher = Teacher::where('institution_id', Auth::user()->institution_id)
+            ->findOrFail($id);
+
+        return view('teachers.show', compact('teacher'));
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $teacher = Teacher::where('institution_id', Auth::user()->institution_id)
+                ->findOrFail($id);
+            $user = $teacher->user;
+            DB::transaction(function () use ($teacher, $user) {
+                $teacher->delete();
+                $user->delete();
+            });
+            return redirect()->route('teachers.index')->with('success', 'Teacher and User deleted successfully!');
+
+        } catch (Exception $e) {
+            Log::error('Error deleting teacher and user: ' . $e->getMessage());
+            return redirect()->route('teachers.index')->with('error', 'An error occurred while deleting the teacher and user. Please try again.');
+        }
+    }
 
     // Store a new teacher in the database
     public function store(Request $request)
     {
-        DB::beginTransaction(); 
+        DB::beginTransaction();
 
         try {
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|string|min:8',
-            ]);
+
 
             $user = User::create([
                 'name' => $request->name,
@@ -49,7 +80,7 @@ class TeacherController extends Controller
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
             ]);
 
-            DB::commit(); 
+            DB::commit();
 
             return redirect()->route('teachers.index')->with('success', 'Teacher created successfully!');
 
@@ -61,64 +92,52 @@ class TeacherController extends Controller
                 'teacher_email' => $request->email,
                 'institution_id' => Auth::user()->institution_id,
             ]);
-            return redirect()->route('teachers.index')->with('error', 'An error occurred while creating the teacher. Please try again.');
+            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while creating the teacher. Please try again.']);
         }
-    }
-
-
-    // Show details of a specific teacher
-    public function show($id)
-    {
-        $teacher = User::where('institution_id', Auth::user()->institution_id)
-            ->findOrFail($id);
-
-        return view('teachers.show', compact('teacher'));
-    }
-
-    // Show form to edit a teacher
-    public function edit($id)
-    {
-        $teacher = User::where('institution_id', Auth::user()->institution_id)
-            ->findOrFail($id);
-
-        return view('teachers.edit', compact('teacher'));
     }
 
     // Update teacher details in the database
     public function update(Request $request, $id)
     {
-        $teacher = User::where('institution_id', Auth::user()->institution_id)
-            ->findOrFail($id);
+        DB::beginTransaction();
 
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $teacher->id,
-        ]);
-
-        $teacher->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
-
-        return redirect()->route('teachers.index')->with('success', 'Teacher updated successfully!');
-    }
-
-    // Delete a teacher
-    public function destroy($id)
-    {
         try {
-            $teacher = Teacher::where('institution_id', Auth::user()->institution_id)
-                ->findOrFail($id);
-            $user = $teacher->user; 
-            DB::transaction(function () use ($teacher, $user) {
-                $teacher->delete();
-                $user->delete();
-            });
-            return redirect()->route('teachers.index')->with('success', 'Teacher and User deleted successfully!');
+            $teacher = Teacher::findOrFail($id);
+            $user = $teacher->user;
+            $emailExists = User::where('email', $request->email)
+                ->where('id', '!=', $user->id)
+                ->exists();
+
+            if ($emailExists) {
+                return redirect()->back()->withInput()->withErrors(['email' => 'The email has already been taken.']);
+            }
+
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->filled('password') ? bcrypt($request->password) : $user->password, // Update password only if provided
+            ]);
+
+            $teacher->update([
+                'institution_id' => Auth::user()->institution_id,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('teachers.index')->with('success', 'Teacher updated successfully!');
 
         } catch (Exception $e) {
-            Log::error('Error deleting teacher and user: ' . $e->getMessage());
-            return redirect()->route('teachers.index')->with('error', 'An error occurred while deleting the teacher and user. Please try again.');
+            DB::rollBack();
+            Log::error('Error updating teacher and user: ' . $e->getMessage(), [
+                'exception' => $e,
+                'teacher_id' => $id,
+                'teacher_name' => $request->name,
+                'teacher_email' => $request->email,
+                'institution_id' => Auth::user()->institution_id,
+            ]);
+            return redirect()->back()->withInput()->withErrors(['error' => 'Failed to Update teacher: ']);
         }
     }
+
+
 }

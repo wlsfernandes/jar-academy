@@ -76,8 +76,9 @@ Teachers
                                         <i class="uil uil-trash-alt font-size-18"></i>
                                     </a>
 
-                                    <form id="delete-form-{{ $teacher->id }}" action="{{ url('/teachers/' . $teacher->id) }}"
-                                        method="POST" style="display: none;">
+                                    <form id="delete-form-{{ $teacher->id }}"
+                                        action="{{ url('/teachers/' . $teacher->id) }}" method="POST"
+                                        style="display: none;">
                                         @method('DELETE')
                                         @csrf
                                     </form>

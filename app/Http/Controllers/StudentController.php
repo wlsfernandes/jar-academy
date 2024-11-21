@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -74,10 +75,12 @@ class StudentController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
-                'role' => 'student',
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
             ]);
-
+            
+            $role = Role::where('name', 'student')->first();
+            $user->roles()->attach($role->id);
+            
             Student::create([
                 'user_id' => $user->id,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
@@ -120,6 +123,9 @@ class StudentController extends Controller
                 'email' => $request->email,
                 'password' => $request->filled('password') ? bcrypt($request->password) : $user->password, // Update password only if provided
             ]);
+
+            $role = Role::where('name', 'student')->first();
+            $user->roles()->sync([$role->id]);
 
             $student->update([
                 'institution_id' => Auth::user()->institution_id,

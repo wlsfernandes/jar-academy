@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Teacher;
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -63,28 +64,27 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
         DB::beginTransaction();
-
         try {
-
+            // Check if the email already exists
             $emailExists = User::where('email', $request->email)->exists();
             if ($emailExists) {
                 return redirect()->back()->withInput()->withErrors(['email' => 'The email has already been taken.']);
             }
+            // Create the user
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
-                'role' => 'teacher',
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
             ]);
+            $role = Role::where('name', 'teacher')->first();
+            $user->roles()->attach($role->id);
 
             Teacher::create([
                 'user_id' => $user->id,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
             ]);
-
             DB::commit();
-
             return redirect()->route('teachers.index')->with('success', 'Teacher created successfully!');
 
         } catch (Exception $e) {
@@ -105,8 +105,11 @@ class TeacherController extends Controller
         DB::beginTransaction();
 
         try {
+            // Find the teacher and associated user
             $teacher = Teacher::findOrFail($id);
             $user = $teacher->user;
+
+            // Check if the email already exists (except for the current user)
             $emailExists = User::where('email', $request->email)
                 ->where('id', '!=', $user->id)
                 ->exists();
@@ -115,16 +118,22 @@ class TeacherController extends Controller
                 return redirect()->back()->withInput()->withErrors(['email' => 'The email has already been taken.']);
             }
 
+            // Update the user information
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $request->filled('password') ? bcrypt($request->password) : $user->password, // Update password only if provided
+                'password' => $request->filled('password') ? bcrypt($request->password) : $user->password,
             ]);
+
+
+            $role = Role::where('name', 'teacher')->first();
+            $user->roles()->sync([$role->id]);
 
             $teacher->update([
                 'institution_id' => Auth::user()->institution_id,
             ]);
 
+            // Commit the transaction
             DB::commit();
 
             return redirect()->route('teachers.index')->with('success', 'Teacher updated successfully!');
@@ -138,9 +147,8 @@ class TeacherController extends Controller
                 'teacher_email' => $request->email,
                 'institution_id' => Auth::user()->institution_id,
             ]);
-            return redirect()->back()->withInput()->withErrors(['error' => 'Failed to Update teacher: ']);
+            return redirect()->back()->withInput()->withErrors(['error' => 'Failed to update teacher. Please try again.']);
         }
     }
-
 
 }

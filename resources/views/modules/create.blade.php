@@ -17,10 +17,10 @@ AMID
 @section('content')
 @component('common-components.breadcrumb')
 @slot('pagetitle')
-@lang('app.teachers')
+Modules
 @endslot
 @slot('title')
-@lang('app.teachers')
+Modules
 @endslot
 @endcomponent
 
@@ -28,7 +28,7 @@ AMID
     <div class="col-lg-12">
         <div class="card">
             <div class="d-flex justify-content-between" style="margin:15px">
-                <a href="{{ url('/teachers') }}" class="btn btn-secondary waves-effect">
+                <a href="{{ url('/modules') }}" class="btn btn-secondary waves-effect">
                     <i class="bx bx-arrow-back"></i> Go Back
                 </a>
             </div>
@@ -55,38 +55,24 @@ AMID
                     </div>
                 @endif
 
-                <form action="{{ url('/teachers') }}" method="post">
+                <form action="{{ url('/modules') }}" method="post">
                     @csrf
 
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-2 col-form-label">@lang('app.name'):</label>
+                        <label for="name" class="col-md-2 col-form-label">Name:</label>
                         <div class="col-md-6">
                             <input class="form-control" type="text" value="{{ old('name') }}" id="name" name="name"
                                 required>
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <label for="email" class="col-md-2 col-form-label">Email:</label>
-                        <div class="col-md-6">
-                            <input class="form-control" type="email" value="{{ old('email') }}" id="email" name="email"
-                                required>
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="password" class="col-md-2 col-form-label">@lang('app.password'):</label>
-                        <div class="col-md-6">
-                            <input class="form-control" type="text" value="{{ old('password') }}" id="password" name="password"
-                                required>
-                        </div>
-                    </div>
                     <div class="d-flex flex-wrap gap-3">
                         <button type="submit" class="btn btn-secondary waves-effect">
-                            <a href="{{ url('/teachers') }}" class="btn btn-secondary waves-effect">
+                            <a href="{{ url('/modules') }}" class="btn btn-secondary waves-effect">
                                 <i class="bx bx-arrow-back"></i> Go Back
                             </a>
                         </button>
                         <button type="submit" class="btn btn-primary waves-effect waves-light"><i
-                                class="ui-plus"></i>@lang('app.save')</button>
+                                class="ui-plus"></i>Save</button>
                     </div>
                 </form>
 

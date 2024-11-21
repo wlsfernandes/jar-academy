@@ -34,8 +34,8 @@ class Institution extends Model
         return $this->hasMany(Classroom::class);
     }
     
-    public function assignments()
+    public function modules()
     {
-        return $this->hasMany(Assignment::class);
+        return $this->hasMany(Module::class);
     }
 }

@@ -107,7 +107,6 @@ return [
   "Level_2.1"=> "Level 2.1",
   "Level_2.2"=> "Level 2.2",
   "Search"=> "Search",
-  "Notifications"=> "Notifications",
   "Mark_read"=> "Mark all as read",
   "order_placed"=> "Your order is placed",
   "languages_grammar"=> "If several languages coalesce the grammar",

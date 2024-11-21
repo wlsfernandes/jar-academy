@@ -3,110 +3,110 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Teacher;
+use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Exception;
 
-class TeacherController extends Controller
+class StudentController extends Controller
 {
-    // Display a list of teachers
+    // Display a list of students
     public function index()
     {
-        $teachers = Teacher::where('institution_id', Auth::user()->institution_id)->get();
-        return view('teachers.index', compact('teachers'));
+        $students = Student::where('institution_id', Auth::user()->institution_id)->get();
+        return view('students.index', compact('students'));
     }
 
-    // Show form to create a new teacher
+    // Show form to create a new student
     public function create()
     {
-        return view('teachers.create');
+        return view('students.create');
     }
-    // Show form to edit a teacher
+    // Show form to edit a student
     public function edit($id)
     {
-        $teacher = Teacher::where('institution_id', Auth::user()->institution_id)
+        $student = Student::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
 
-        return view('teachers.edit', compact('teacher'));
+        return view('students.edit', compact('student'));
     }
 
-    // Show details of a specific teacher
+    // Show details of a specific student
     public function show($id)
     {
-        $teacher = Teacher::where('institution_id', Auth::user()->institution_id)
+        $student = Student::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
-
-        return view('teachers.show', compact('teacher'));
+        return view('students.show', compact('student'));
     }
 
     public function destroy($id)
     {
         try {
-            $teacher = Teacher::where('institution_id', Auth::user()->institution_id)
+            $student = Student::where('institution_id', Auth::user()->institution_id)
                 ->findOrFail($id);
-            $user = $teacher->user;
-            DB::transaction(function () use ($teacher, $user) {
-                $teacher->delete();
+            $user = $student->user;
+            DB::transaction(function () use ($student, $user) {
+                $student->delete();
                 $user->delete();
             });
-            return redirect()->route('teachers.index')->with('success', 'Teacher and User deleted successfully!');
+            return redirect()->route('students.index')->with('success', 'Student and User deleted successfully!');
 
         } catch (Exception $e) {
-            Log::error('Error deleting teacher and user: ' . $e->getMessage());
-            return redirect()->route('teachers.index')->with('error', 'An error occurred while deleting the teacher and user. Please try again.');
+            Log::error('Error deleting student and user: ' . $e->getMessage());
+            return redirect()->route('students.index')->with('error', 'An error occurred while deleting the student and user. Please try again.');
         }
     }
 
-    // Store a new teacher in the database
+    // Store a new student in the database
     public function store(Request $request)
     {
         DB::beginTransaction();
 
         try {
-
             $emailExists = User::where('email', $request->email)->exists();
+
             if ($emailExists) {
                 return redirect()->back()->withInput()->withErrors(['email' => 'The email has already been taken.']);
             }
+
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
-                'role' => 'teacher',
+                'role' => 'student',
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
             ]);
 
-            Teacher::create([
+            Student::create([
                 'user_id' => $user->id,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
             ]);
 
             DB::commit();
 
-            return redirect()->route('teachers.index')->with('success', 'Teacher created successfully!');
+            return redirect()->route('students.index')->with('success', 'Student created successfully!');
 
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error('Error creating teacher and user: ' . $e->getMessage(), [
+            Log::error('Error creating student and user: ' . $e->getMessage(), [
                 'exception' => $e,
-                'teacher_name' => $request->name,
-                'teacher_email' => $request->email,
+                'student_name' => $request->name,
+                'student_email' => $request->email,
                 'institution_id' => Auth::user()->institution_id,
             ]);
-            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while creating the teacher. Please try again.']);
+            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while creating the student. Please try again.']);
         }
     }
 
-    // Update teacher details in the database
+    // Update student details in the database
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
 
         try {
-            $teacher = Teacher::findOrFail($id);
-            $user = $teacher->user;
+            $student = Student::findOrFail($id);
+            $user = $student->user;
             $emailExists = User::where('email', $request->email)
                 ->where('id', '!=', $user->id)
                 ->exists();
@@ -121,24 +121,24 @@ class TeacherController extends Controller
                 'password' => $request->filled('password') ? bcrypt($request->password) : $user->password, // Update password only if provided
             ]);
 
-            $teacher->update([
+            $student->update([
                 'institution_id' => Auth::user()->institution_id,
             ]);
 
             DB::commit();
 
-            return redirect()->route('teachers.index')->with('success', 'Teacher updated successfully!');
+            return redirect()->route('students.index')->with('success', 'Student updated successfully!');
 
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error('Error updating teacher and user: ' . $e->getMessage(), [
+            Log::error('Error updating student and user: ' . $e->getMessage(), [
                 'exception' => $e,
-                'teacher_id' => $id,
-                'teacher_name' => $request->name,
-                'teacher_email' => $request->email,
+                'student_id' => $id,
+                'student_name' => $request->name,
+                'student_email' => $request->email,
                 'institution_id' => Auth::user()->institution_id,
             ]);
-            return redirect()->back()->withInput()->withErrors(['error' => 'Failed to Update teacher: ']);
+            return redirect()->back()->withInput()->withErrors(['error' => 'Failed to Update student: ']);
         }
     }
 

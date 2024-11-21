@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-AMID
+Students
 @endsection
 
 @section('css')
@@ -17,24 +17,14 @@ AMID
 @section('content')
 @component('common-components.breadcrumb')
 @slot('pagetitle')
-@lang('app.teachers')
+AMID
 @endslot
 @slot('title')
-@lang('app.teachers')
+Students
 @endslot
 @endcomponent
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="d-flex justify-content-between" style="margin:15px">
-                <a href="{{ url('/teachers') }}" class="btn btn-secondary waves-effect">
-                    <i class="bx bx-arrow-back"></i> Go Back
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -46,47 +36,44 @@ AMID
                     </div>
                 @endif
                 @if ($errors->any())
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
-                                <li><i class="bx bx-error"></i> {{ $error }}</li>
+                                <li>{{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>
                 @endif
 
-                <form action="{{ url('/teachers') }}" method="post">
+                <form action="{{ route('students.update', $student->id) }}" method="POST">
                     @csrf
+                    @method('PUT')
 
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-2 col-form-label">@lang('app.name'):</label>
+                        <label for="name" class="col-md-2 col-form-label">Name:</label>
                         <div class="col-md-6">
-                            <input class="form-control" type="text" value="{{ old('name') }}" id="name" name="name"
-                                required>
+                            <input class="form-control" type="text" value="{{ $student->user->name ?? ''}}" id="name"
+                                name="name" required>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="email" class="col-md-2 col-form-label">Email:</label>
                         <div class="col-md-6">
-                            <input class="form-control" type="email" value="{{ old('email') }}" id="email" name="email"
-                                required>
+                            <input class="form-control" type="email" value="{{ $student->user->email ?? ''}}" id="email"
+                                name="email" disabled>
+                            <input type="hidden" name="email" value="{{ $student->user->email ?? '' }}">
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <label for="password" class="col-md-2 col-form-label">@lang('app.password'):</label>
-                        <div class="col-md-6">
-                            <input class="form-control" type="text" value="{{ old('password') }}" id="password" name="password"
-                                required>
-                        </div>
-                    </div>
+
+
                     <div class="d-flex flex-wrap gap-3">
                         <button type="submit" class="btn btn-secondary waves-effect">
-                            <a href="{{ url('/teachers') }}" class="btn btn-secondary waves-effect">
+                            <a href="{{ url('/students') }}" class="btn btn-secondary waves-effect">
                                 <i class="bx bx-arrow-back"></i> Go Back
                             </a>
                         </button>
                         <button type="submit" class="btn btn-primary waves-effect waves-light"><i
-                                class="ui-plus"></i>@lang('app.save')</button>
+                                class="ui-plus"></i>Update</button>
                     </div>
                 </form>
 

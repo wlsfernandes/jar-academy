@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Teachers
+@lang('app.teachers')
 @endsection
 
 @section('css')
@@ -20,7 +20,7 @@ Teachers
 AMID
 @endslot
 @slot('title')
-Teachers
+@lang('app.teachers')
 @endslot
 @endcomponent
 
@@ -50,7 +50,7 @@ Teachers
                     @method('PUT')
 
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-2 col-form-label">Name:</label>
+                        <label for="name" class="col-md-2 col-form-label">@lang('app.name')</label>
                         <div class="col-md-6">
                             <input class="form-control" type="text" value="{{ $teacher->user->name ?? ''}}" id="name"
                                 name="name" required>

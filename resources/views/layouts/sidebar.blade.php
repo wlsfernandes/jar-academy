@@ -40,38 +40,39 @@
                         <span>@lang('translation.Dashboard')</span>
                     </a>
                 </li>
-
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="uil-window-section"></i>
-                        <span>@lang('translation.Layouts')</span>
+                    <a href="teachers" class="waves-effect">
+                        <i class="dripicons-user"></i>
+                        <span>@lang('app.teachers')</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="true">
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow">@lang('translation.Vertical')</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                                <li><a href="layouts-dark-sidebar">@lang('translation.Dark_Sidebar')</a></li>
-                                <li><a href="layouts-compact-sidebar">@lang('translation.Compact_Sidebar')</a></li>
-                                <li><a href="layouts-icon-sidebar">@lang('translation.Icon_Sidebar')</a></li>
-                                <li><a href="layouts-boxed">@lang('translation.Boxed_Width')</a></li>
-                                <li><a href="layouts-preloader">@lang('translation.Preloader')</a></li>
-                                <li><a href="layouts-colored-sidebar">@lang('translation.Colored_Sidebar')</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow">@lang('translation.Horizontal')</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                                <li><a href="layouts-horizontal">@lang('translation.Horizontal')</a></li>
-                                <li><a href="layouts-hori-topbar-dark">@lang('translation.Dark_Topbar')</a></li>
-                                <li><a href="layouts-hori-boxed-width">@lang('translation.Boxed_Width')</a></li>
-                                <li><a href="layouts-hori-preloader">@lang('translation.Preloader')</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                </li>
+                <li>
+                    <a href="students" class="waves-effect">
+                        <i class="dripicons-graduation"></i>
+                        <span>@lang('app.students')</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="modules" class="waves-effect">
+                        <i class="uil-books"></i>
+                        <span>@lang('app.modules')</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="classrooms" class="waves-effect">
+                    <i class="fas fa-graduation-cap icon"></i>
+                        <span>@lang('app.courses')</span>
+                    </a>
                 </li>
 
                 <li class="menu-title">@lang('translation.Apps')</li>
 
+                <li>
+                    <a href="" class=" waves-effect">
+                        <i class="dripicons-megaphone"></i>
+                        <span>@lang('app.announcement')</span>
+                    </a>
+                </li>
                 <li>
                     <a href="calendar" class="waves-effect">
                         <i class="uil-calender"></i>
@@ -85,7 +86,28 @@
                         <span>@lang('translation.Chat')</span>
                     </a>
                 </li>
-
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="uil-invoice"></i>
+                        <span>@lang('translation.Invoices')</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="invoices-list">@lang('translation.Invoice_List')</a></li>
+                        <li><a href="invoices-detail">@lang('translation.Invoice_Detail')</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="uil-book-alt"></i>
+                        <span>@lang('translation.Contacts')</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="contacts-grid">@lang('translation.User_Grid')</a></li>
+                        <li><a href="contacts-list">@lang('translation.User_List')</a></li>
+                        <li><a href="contacts-profile">@lang('translation.Profile')</a></li>
+                    </ul>
+                </li>
+                <!--
                 <li>
                     <a href="file-manager" class=" waves-effect">
                         <i class="uil-comments-alt"></i>
@@ -144,7 +166,7 @@
                     </ul>
                 </li>
 
-                <li class="menu-title">@lang('translation.Pages')</li>
+             <li class="menu-title">@lang('translation.Pages')</li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -201,7 +223,9 @@
                         <li><a href="ui-sweet-alert">@lang('translation.Sweet_Alert')</a></li>
                         <li><a href="ui-tabs-accordions">@lang('translation.Tabs_Accordions')</a></li>
                         <li><a href="ui-typography">@lang('translation.Typography')</a></li>
-                        <li><a href="ui-utilities.html">@lang('translation.Utilities')<span class="badge rounded-pill bg-success float-end">@lang('translation.New')</span></a></li>
+                        <li><a href="ui-utilities.html">@lang('translation.Utilities')<span
+                                    class="badge rounded-pill bg-success float-end">@lang('translation.New')</span></a>
+                        </li>
                         <li><a href="ui-toasts">@lang('translation.Toasts')</a></li>
                         <li><a href="ui-video">@lang('translation.Video')</a></li>
                         <li><a href="ui-general">@lang('translation.General')</a></li>
@@ -298,7 +322,7 @@
                         </li>
                     </ul>
                 </li>
-
+-->
             </ul>
         </div>
         <!-- Sidebar -->

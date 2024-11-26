@@ -10,19 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // Disable foreign key checks to allow dropping tables with relationships
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
+       // Get all table names in the current schema
+       $tables = DB::select("SELECT tablename FROM pg_tables WHERE schemaname = 'public'");
 
-        // Get all table names from the database
-        $tables = DB::select('SHOW TABLES');
-
-        foreach ($tables as $table) {
-            $tableName = array_values((array) $table)[0];
-            DB::statement("DROP TABLE `$tableName`");
-        }
-
-        // Re-enable foreign key checks
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
+       // Loop through and drop each table
+       foreach ($tables as $table) {
+           $tableName = $table->tablename;
+           DB::statement("DROP TABLE IF EXISTS \"$tableName\" CASCADE");
+       }
     }
 
     /**

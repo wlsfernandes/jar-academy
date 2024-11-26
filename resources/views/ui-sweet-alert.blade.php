@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- DataTables -->
-    <link href="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ secure_asset('/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -126,8 +126,8 @@
 @endsection
 @section('script')
     <!-- Sweet Alerts js -->
-    <script src="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ secure_asset('/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 
     <!-- Range slider init js-->
-    <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js') }}"></script>
+    <script src="{{ secure_asset('/assets/js/pages/sweet-alerts.init.js') }}"></script>
 @endsection

@@ -3,7 +3,7 @@
 @lang('translation.Products')
 @endsection
 @section('css')
-<link href="{{ URL::asset('/assets/libs/ion-rangeslider/ion-rangeslider.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ secure_asset('/assets/libs/ion-rangeslider/ion-rangeslider.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -248,7 +248,7 @@
                                             <i class="mdi mdi-heart-outline"></i>
                                         </a>
                                     </div>
-                                    <img src="{{URL::asset('assets/images/product/img-1.png')}}" alt="" class="img-fluid mx-auto d-block">
+                                    <img src="{{secure_asset('assets/images/product/img-1.png')}}" alt="" class="img-fluid mx-auto d-block">
                                 </div>
 
                                 <div class="text-center product-content p-4">
@@ -287,7 +287,7 @@
                                             <i class="mdi mdi-heart-outline"></i>
                                         </a>
                                     </div>
-                                    <img src="{{URL::asset('assets/images/product/img-2.png')}}" alt="" class="img-fluid mx-auto d-block">
+                                    <img src="{{secure_asset('assets/images/product/img-2.png')}}" alt="" class="img-fluid mx-auto d-block">
                                 </div>
 
                                 <div class="text-center product-content p-4">
@@ -324,7 +324,7 @@
                                             <i class="mdi mdi-heart-outline"></i>
                                         </a>
                                     </div>
-                                    <img src="{{URL::asset('assets/images/product/img-3.png')}}" alt="" class="img-fluid mx-auto d-block">
+                                    <img src="{{secure_asset('assets/images/product/img-3.png')}}" alt="" class="img-fluid mx-auto d-block">
                                 </div>
 
                                 <div class="text-center product-content p-4">
@@ -361,7 +361,7 @@
                                             <i class="mdi mdi-heart-outline"></i>
                                         </a>
                                     </div>
-                                    <img src="{{URL::asset('assets/images/product/img-4.png')}}" alt="" class="img-fluid mx-auto d-block">
+                                    <img src="{{secure_asset('assets/images/product/img-4.png')}}" alt="" class="img-fluid mx-auto d-block">
                                 </div>
 
                                 <div class="text-center product-content p-4">
@@ -395,7 +395,7 @@
                                             <i class="mdi mdi-heart-outline"></i>
                                         </a>
                                     </div>
-                                    <img src="{{URL::asset('assets/images/product/img-5.png')}}" alt="" class="img-fluid mx-auto d-block">
+                                    <img src="{{secure_asset('assets/images/product/img-5.png')}}" alt="" class="img-fluid mx-auto d-block">
                                 </div>
 
                                 <div class="text-center product-content p-4">
@@ -434,7 +434,7 @@
                                             <i class="mdi mdi-heart-outline"></i>
                                         </a>
                                     </div>
-                                    <img src="{{URL::asset('assets/images/product/img-6.png')}}" alt="" class="img-fluid mx-auto d-block">
+                                    <img src="{{secure_asset('assets/images/product/img-6.png')}}" alt="" class="img-fluid mx-auto d-block">
                                 </div>
 
                                 <div class="text-center product-content p-4">
@@ -506,6 +506,6 @@
 
 @endsection
 @section('script')
-<script src="{{ URL::asset('/assets/libs/ion-rangeslider/ion-rangeslider.min.js') }}"></script>
-<script src="{{ URL::asset('/assets/js/pages/product-filter-range.init.js') }}"></script>
+<script src="{{ secure_asset('/assets/libs/ion-rangeslider/ion-rangeslider.min.js') }}"></script>
+<script src="{{ secure_asset('/assets/js/pages/product-filter-range.init.js') }}"></script>
 @endsection

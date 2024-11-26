@@ -3,7 +3,7 @@
     @lang('translation.Vector_Maps')
 @endsection
 @section('css')
-    <link href="{{ URL::asset('/assets/libs/jquery-vectormap/jquery-vectormap.min.css') }}" rel="stylesheet"
+    <link href="{{ secure_asset('/assets/libs/jquery-vectormap/jquery-vectormap.min.css') }}" rel="stylesheet"
         type="text/css" />
 @endsection
 
@@ -98,7 +98,7 @@
 @endsection
 @section('script')
     <!-- Plugins js-->
-    <script src="{{ URL::asset('/assets/libs/jquery-vectormap/jquery-vectormap.min.js') }}"></script>
+    <script src="{{ secure_asset('/assets/libs/jquery-vectormap/jquery-vectormap.min.js') }}"></script>
     <!-- Init js-->
-    <script src="{{ URL::asset('/assets/js/pages/vector-maps.init.js') }}"></script>
+    <script src="{{ secure_asset('/assets/js/pages/vector-maps.init.js') }}"></script>
 @endsection

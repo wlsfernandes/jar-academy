@@ -27,7 +27,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div>
-                        <img src="{{ URL::asset('/assets/images/users/avatar-4.jpg') }}" alt="" class="avatar-lg rounded-circle img-thumbnail">
+                        <img src="{{ secure_asset('/assets/images/users/avatar-4.jpg') }}" alt="" class="avatar-lg rounded-circle img-thumbnail">
                     </div>
                     <h5 class="mt-3 mb-1">Marcus</h5>
                     <p class="text-muted">UI/UX Designer</p>
@@ -414,7 +414,7 @@
                         <div data-simplebar style="max-height: 430px;">
                             <div class="d-flex align-items-start border-bottom py-4">
                                 <div class="flex-shrink-0 me-2">
-                                    <img class="rounded-circle avatar-xs" src="{{URL::asset('assets/images/users/avatar-3.jpg')}}" alt="avatar-3 images">
+                                    <img class="rounded-circle avatar-xs" src="{{secure_asset('assets/images/users/avatar-3.jpg')}}" alt="avatar-3 images">
                                 </div>
 
                                 <div class="flex-grow-1">
@@ -425,7 +425,7 @@
 
                                     <div class="d-flex align-items-start mt-4">
                                         <div class="flex-shrink-0 me-2">
-                                            <img class="rounded-circle avatar-xs" src="{{URL::asset('assets/images/users/avatar-4.jpg')}}" alt="avatar-4 images">
+                                            <img class="rounded-circle avatar-xs" src="{{secure_asset('assets/images/users/avatar-4.jpg')}}" alt="avatar-4 images">
                                         </div>
 
                                         <div class="flex-grow-1">
@@ -442,7 +442,7 @@
                             </div>
                             <div class="d-flex align-items-start border-bottom py-4">
                                 <div class="flex-shrink-0 me-2">
-                                    <img class="rounded-circle avatar-xs" src="{{URL::asset('assets/images/users/avatar-5.jpg')}}" alt="avatar-5 images">
+                                    <img class="rounded-circle avatar-xs" src="{{secure_asset('assets/images/users/avatar-5.jpg')}}" alt="avatar-5 images">
                                 </div>
 
                                 <div class="flex-grow-1">
@@ -456,7 +456,7 @@
 
                             <div class="d-flex align-items-start border-bottom py-4">
                                 <div class="flex-shrink-0 me-2">
-                                    <img class="rounded-circle avatar-xs" src="{{URL::asset('assets/images/users/avatar-7.jpg')}}" alt="avatar-7 images">
+                                    <img class="rounded-circle avatar-xs" src="{{secure_asset('assets/images/users/avatar-7.jpg')}}" alt="avatar-7 images">
                                 </div>
 
                                 <div class="flex-grow-1">

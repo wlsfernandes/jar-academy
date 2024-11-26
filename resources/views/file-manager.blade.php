@@ -4,7 +4,7 @@
 @endsection
 
 @section('css')
-<link href="{{URL::asset('assets/libs/dropzone/dropzone.min.css')}}" rel="stylesheet" type="text/css" /> @endsection
+<link href="{{secure_asset('assets/libs/dropzone/dropzone.min.css')}}" rel="stylesheet" type="text/css" /> @endsection
 
 @section('content')
 @component('common-components.breadcrumb')
@@ -86,7 +86,7 @@
                             <div class="card mb-0">
                                 <div class="card-body">
                                     <div class="px-4">
-                                        <img src="{{ URL::asset('assets/images/upgrade-img.png') }}" class="img-fluid" alt="">
+                                        <img src="{{ secure_asset('assets/images/upgrade-img.png') }}" class="img-fluid" alt="">
                                     </div>
                                     <h5 class="mt-4">Upgrade Features</h5>
                                     <p class="pt-1">4 integrations, 30 team members, advanced features </p>
@@ -262,7 +262,7 @@
                                                 <div class="avatar-group">
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-4.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-4.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                     <div class="avatar-group-item">
@@ -302,12 +302,12 @@
                                                 <div class="avatar-group">
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-3.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-3.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                 </div>
@@ -347,7 +347,7 @@
                                                     </div>
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-2.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                 </div>
@@ -379,7 +379,7 @@
                                         <div class="">
                                             <div class="d-flex align-items-center">
                                                 <div class="avatar align-self-center me-3">
-                                                    <img src="{{ URL::asset('assets/images/users/avatar-3.jpg') }}" alt="" class="avatar rounded">
+                                                    <img src="{{ secure_asset('assets/images/users/avatar-3.jpg') }}" alt="" class="avatar rounded">
                                                 </div>
                                                 <div class="flex-1">
                                                     <h5 class="font-size-15 mb-1">Sadie Stanfield</h5>
@@ -398,7 +398,7 @@
                                         <div class="">
                                             <div class="d-flex align-items-center">
                                                 <div class="avatar align-self-center me-3">
-                                                    <img src="{{ URL::asset('assets/images/users/avatar-5.jpg') }}" alt="" class="avatar rounded">
+                                                    <img src="{{ secure_asset('assets/images/users/avatar-5.jpg') }}" alt="" class="avatar rounded">
                                                 </div>
 
                                                 <div class="flex-1">
@@ -418,7 +418,7 @@
                                         <div class="">
                                             <div class="d-flex align-items-center">
                                                 <div class="avatar align-self-center me-3">
-                                                    <img src="{{ URL::asset('assets/images/users/avatar-6.jpg') }}" alt="" class="avatar rounded">
+                                                    <img src="{{ secure_asset('assets/images/users/avatar-6.jpg') }}" alt="" class="avatar rounded">
                                                 </div>
 
                                                 <div class="flex-1">
@@ -459,12 +459,12 @@
                                                 <div class="avatar-group">
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-4.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-4.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                     <div class="avatar-group-item">
@@ -502,12 +502,12 @@
                                                 <div class="avatar-group">
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-8.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-8.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-2.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                 </div>
@@ -545,7 +545,7 @@
                                                     </div>
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-2.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                 </div>
@@ -574,17 +574,17 @@
                                                 <div class="avatar-group">
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-1.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-1.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-7.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-7.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                 </div>
@@ -613,12 +613,12 @@
                                                 <div class="avatar-group">
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-1.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-1.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-3.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-3.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                     <div class="avatar-group-item">
@@ -656,12 +656,12 @@
                                                 <div class="avatar-group">
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-4.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-4.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                 </div>
@@ -699,7 +699,7 @@
                                                     </div>
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-2.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                 </div>
@@ -728,12 +728,12 @@
                                                 <div class="avatar-group">
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-4.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-4.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                     <div class="avatar-group-item">
@@ -771,12 +771,12 @@
                                                 <div class="avatar-group">
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-8.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-8.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                     <div class="avatar-group-item">
                                                         <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" alt="" class="rounded-circle avatar-xs">
+                                                            <img src="{{ secure_asset('assets/images/users/avatar-2.jpg') }}" alt="" class="rounded-circle avatar-xs">
                                                         </a>
                                                     </div>
                                                 </div>
@@ -945,7 +945,7 @@
 
 @endsection
 @section('script')
-<script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
-<script src="{{ URL::asset('/assets/libs/dropzone/dropzone.min.js') }}"></script>
-<script src="{{ URL::asset('/assets/js/pages/file-manager.init.js') }}"></script>
+<script src="{{ secure_asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ secure_asset('/assets/libs/dropzone/dropzone.min.js') }}"></script>
+<script src="{{ secure_asset('/assets/js/pages/file-manager.init.js') }}"></script>
 @endsection

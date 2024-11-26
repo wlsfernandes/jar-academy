@@ -9,16 +9,16 @@
                 <div class="col-12 text-center">
                     <div class="home-wrapper">
                         <a href="{{ url('index') }}" class="mb-5 d-block auth-logo">
-                            <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="22"
+                            <img src="{{ secure_asset('/assets/images/logo-dark.png') }}" alt="" height="22"
                                 class="logo logo-dark">
-                            <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="22"
+                            <img src="{{ secure_asset('/assets/images/logo-light.png') }}" alt="" height="22"
                                 class="logo logo-light">
                         </a>
 
                         <div class="row justify-content-center">
                             <div class="col-lg-4 col-sm-5">
                                 <div class="maintenance-img">
-                                    <img src="{{ URL::asset('/assets/images/maintenance.png') }}" alt=""
+                                    <img src="{{ secure_asset('/assets/images/maintenance.png') }}" alt=""
                                         class="img-fluid mx-auto d-block">
                                 </div>
                             </div>
@@ -86,6 +86,6 @@
     </div>
 @endsection
 @section('script')
-    <script src="{{ URL::asset('/assets/libs/owl-carousel/owl-carousel.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/js/pages/auth-carousel.init.js') }}"></script>
+    <script src="{{ secure_asset('/assets/libs/owl-carousel/owl-carousel.min.js') }}"></script>
+    <script src="{{ secure_asset('/assets/js/pages/auth-carousel.init.js') }}"></script>
 @endsection

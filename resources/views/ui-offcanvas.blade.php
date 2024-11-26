@@ -192,6 +192,6 @@
     <!-- end row -->
 @endsection
 @section('script')
-    <script src="{{ URL::asset('/assets/libs/toastr/toastr.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/js/pages/toastr.init.js') }}"></script>
+    <script src="{{ secure_asset('/assets/libs/toastr/toastr.min.js') }}"></script>
+    <script src="{{ secure_asset('/assets/js/pages/toastr.init.js') }}"></script>
 @endsection

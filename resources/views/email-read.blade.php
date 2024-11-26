@@ -40,7 +40,7 @@
             <div class="mt-2">
                 <a href="#" class="d-flex align-items-start">
                     <div class="flex-shrink-0 me-3">
-                        <img class="rounded-circle" src="{{URL::asset('assets/images/users/avatar-2.jpg')}}" alt="Generic placeholder image" height="36">
+                        <img class="rounded-circle" src="{{secure_asset('assets/images/users/avatar-2.jpg')}}" alt="Generic placeholder image" height="36">
                     </div>
 
                     <div class="flex-grow-1 chat-user-box overflow-hidden">
@@ -51,7 +51,7 @@
 
                 <a href="#" class="d-flex align-items-start">
                     <div class="flex-shrink-0 me-3">
-                        <img class="rounded-circle" src="{{URL::asset('assets/images/users/avatar-3.jpg')}}" alt="Generic placeholder image" height="36">
+                        <img class="rounded-circle" src="{{secure_asset('assets/images/users/avatar-3.jpg')}}" alt="Generic placeholder image" height="36">
                     </div>
 
                     <div class="flex-grow-1 chat-user-box overflow-hidden">
@@ -62,7 +62,7 @@
 
                 <a href="#" class="d-flex align-items-start">
                     <div class="flex-shrink-0 me-3">
-                        <img class="rounded-circle" src="{{URL::asset('assets/images/users/avatar-4.jpg')}}" alt="Generic placeholder image" height="36">
+                        <img class="rounded-circle" src="{{secure_asset('assets/images/users/avatar-4.jpg')}}" alt="Generic placeholder image" height="36">
                     </div>
 
                     <div class="flex-grow-1 chat-user-box overflow-hidden">
@@ -73,7 +73,7 @@
 
                 <a href="#" class="d-flex align-items-start">
                     <div class="flex-shrink-0 me-3">
-                        <img class="rounded-circle" src="{{URL::asset('assets/images/users/avatar-6.jpg')}}" alt="Generic placeholder image" height="36">
+                        <img class="rounded-circle" src="{{secure_asset('assets/images/users/avatar-6.jpg')}}" alt="Generic placeholder image" height="36">
                     </div>
 
                     <div class="flex-grow-1 chat-user-box overflow-hidden">
@@ -134,7 +134,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-start mb-4">
                         <div class="flex-shrink-0 me-3">
-                            <img class="rounded-circle avatar-sm" src="{{URL::asset('assets/images/users/avatar-2.jpg')}}" alt="Generic placeholder image">
+                            <img class="rounded-circle avatar-sm" src="{{secure_asset('assets/images/users/avatar-2.jpg')}}" alt="Generic placeholder image">
                         </div>
                         <div class="flex-grow-1">
                             <h5 class="font-size-14 my-1">Humberto D. Champion</h5>
@@ -154,7 +154,7 @@
                     <div class="row">
                         <div class="col-xl-2 col-6">
                             <div class="card border shadow-none">
-                                <img class="card-img-top img-fluid" src="{{URL::asset('assets/images/small/img-3.jpg')}}" alt="Card image cap">
+                                <img class="card-img-top img-fluid" src="{{secure_asset('assets/images/small/img-3.jpg')}}" alt="Card image cap">
                                 <div class="py-2 text-center">
                                     <a href="javascript:void(0);" class="fw-medium">Download</a>
                                 </div>
@@ -162,7 +162,7 @@
                         </div>
                         <div class="col-xl-2 col-6">
                             <div class="card border shadow-none">
-                                <img class="card-img-top img-fluid" src="{{URL::asset('assets/images/small/img-4.jpg')}}" alt="Card image cap">
+                                <img class="card-img-top img-fluid" src="{{secure_asset('assets/images/small/img-4.jpg')}}" alt="Card image cap">
                                 <div class="py-2 text-center">
                                     <a href="javascript:void(0);" class="fw-medium">Download</a>
                                 </div>
@@ -218,6 +218,6 @@
 </div>
 @endsection
 @section('script')
-<script src="{{ URL::asset('/assets/libs/tinymce/tinymce.min.js') }}"></script>
-<script src="{{ URL::asset('/assets/js/pages/email-editor.init.js') }}"></script>
+<script src="{{ secure_asset('/assets/libs/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ secure_asset('/assets/js/pages/email-editor.init.js') }}"></script>
 @endsection

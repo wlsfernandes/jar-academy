@@ -30,7 +30,7 @@
                 <div class="row mt-5">
                     <div class="col-xl-3 col-sm-5 mx-auto">
                         <div>
-                            <img src="{{URL::asset('assets/images/faqs-img.png')}}" alt="" class="img-fluid mx-auto d-block">
+                            <img src="{{secure_asset('assets/images/faqs-img.png')}}" alt="" class="img-fluid mx-auto d-block">
                         </div>
                     </div>
 

@@ -46,6 +46,6 @@
 
 @endsection
 @section('script')
-    <script src="{{ URL::asset('/assets/libs/curiosityx/curiosityx.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/js/pages/session-timeout.init.js') }}"></script>
+    <script src="{{ secure_asset('/assets/libs/curiosityx/curiosityx.min.js') }}"></script>
+    <script src="{{ secure_asset('/assets/js/pages/session-timeout.init.js') }}"></script>
 @endsection

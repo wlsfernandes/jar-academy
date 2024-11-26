@@ -41,7 +41,7 @@
             <div class="mt-2">
                 <a href="#" class="d-flex align-items-start">
                     <div class="flex-shrink-0 me-3">
-                        <img class="rounded-circle" src="{{URL::asset('assets/images/users/avatar-2.jpg')}}" alt="Generic placeholder image" height="36">
+                        <img class="rounded-circle" src="{{secure_asset('assets/images/users/avatar-2.jpg')}}" alt="Generic placeholder image" height="36">
                     </div>
 
                     <div class="flex-grow-1 chat-user-box overflow-hidden">
@@ -52,7 +52,7 @@
 
                 <a href="#" class="d-flex align-items-start">
                     <div class="flex-shrink-0 me-3">
-                        <img class="rounded-circle" src="{{URL::asset('assets/images/users/avatar-3.jpg')}}" alt="Generic placeholder image" height="36">
+                        <img class="rounded-circle" src="{{secure_asset('assets/images/users/avatar-3.jpg')}}" alt="Generic placeholder image" height="36">
                     </div>
 
                     <div class="flex-grow-1 chat-user-box overflow-hidden">
@@ -63,7 +63,7 @@
 
                 <a href="#" class="d-flex align-items-start">
                     <div class="flex-shrink-0 me-3">
-                        <img class="rounded-circle" src="{{URL::asset('assets/images/users/avatar-4.jpg')}}" alt="Generic placeholder image" height="36">
+                        <img class="rounded-circle" src="{{secure_asset('assets/images/users/avatar-4.jpg')}}" alt="Generic placeholder image" height="36">
                     </div>
 
                     <div class="flex-grow-1 chat-user-box overflow-hidden">
@@ -74,7 +74,7 @@
 
                 <a href="#" class="d-flex align-items-start">
                     <div class="flex-shrink-0 me-3">
-                        <img class="rounded-circle" src="{{URL::asset('assets/images/users/avatar-6.jpg')}}" alt="Generic placeholder image" height="36">
+                        <img class="rounded-circle" src="{{secure_asset('assets/images/users/avatar-6.jpg')}}" alt="Generic placeholder image" height="36">
                     </div>
 
                     <div class="flex-grow-1 chat-user-box overflow-hidden">
@@ -462,6 +462,6 @@
 
 @endsection
 @section('script')
-<script src="{{ URL::asset('/assets/libs/tinymce/tinymce.min.js') }}"></script>
-<script src="{{ URL::asset('/assets/js/pages/email-editor.init.js') }}"></script>
+<script src="{{ secure_asset('/assets/libs/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ secure_asset('/assets/js/pages/email-editor.init.js') }}"></script>
 @endsection

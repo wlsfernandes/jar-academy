@@ -134,7 +134,7 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="mt-4 mt-sm-0">
-                                <img src="{{ URL::asset('assets/images/setup-analytics-amico.svg') }}" class="img-fluid" alt="">
+                                <img src="{{ secure_asset('assets/images/setup-analytics-amico.svg') }}" class="img-fluid" alt="">
                             </div>
                         </div>
                     </div>
@@ -263,7 +263,7 @@
                             <table class="table table-borderless table-centered table-nowrap">
                                 <tbody>
                                     <tr>
-                                        <td style="width: 20px;"><img src="{{ URL::asset('assets/images/users/avatar-4.jpg') }}" class="avatar-xs rounded-circle " alt="..."></td>
+                                        <td style="width: 20px;"><img src="{{ secure_asset('assets/images/users/avatar-4.jpg') }}" class="avatar-xs rounded-circle " alt="..."></td>
                                         <td>
                                             <h6 class="font-size-15 mb-1 fw-normal">Glenn Holden</h6>
                                             <p class="text-muted font-size-13 mb-0"><i class="mdi mdi-map-marker"></i> Nevada</p>
@@ -272,7 +272,7 @@
                                         <td class="text-muted fw-semibold text-end"><i class="icon-xs icon me-2 text-success" data-feather="trending-up"></i>$250.00</td>
                                     </tr>
                                     <tr>
-                                        <td><img src="{{ URL::asset('assets/images/users/avatar-5.jpg') }}" class="avatar-xs rounded-circle " alt="..."></td>
+                                        <td><img src="{{ secure_asset('assets/images/users/avatar-5.jpg') }}" class="avatar-xs rounded-circle " alt="..."></td>
                                         <td>
                                             <h6 class="font-size-15 mb-1 fw-normal">Lolita Hamill</h6>
                                             <p class="text-muted font-size-13 mb-0"><i class="mdi mdi-map-marker"></i> Texas</p>
@@ -281,7 +281,7 @@
                                         <td class="text-muted fw-semibold text-end"><i class="icon-xs icon me-2 text-danger" data-feather="trending-down"></i>$110.00</td>
                                     </tr>
                                     <tr>
-                                        <td><img src="{{ URL::asset('assets/images/users/avatar-6.jpg') }}" class="avatar-xs rounded-circle " alt="..."></td>
+                                        <td><img src="{{ secure_asset('assets/images/users/avatar-6.jpg') }}" class="avatar-xs rounded-circle " alt="..."></td>
                                         <td>
                                             <h6 class="font-size-15 mb-1 fw-normal">Robert Mercer</h6>
                                             <p class="text-muted font-size-13 mb-0"><i class="mdi mdi-map-marker"></i> California</p>
@@ -290,7 +290,7 @@
                                         <td class="text-muted fw-semibold text-end"><i class="icon-xs icon me-2 text-success" data-feather="trending-up"></i>$420.00</td>
                                     </tr>
                                     <tr>
-                                        <td><img src="{{ URL::asset('assets/images/users/avatar-7.jpg') }}" class="avatar-xs rounded-circle " alt="..."></td>
+                                        <td><img src="{{ secure_asset('assets/images/users/avatar-7.jpg') }}" class="avatar-xs rounded-circle " alt="..."></td>
                                         <td>
                                             <h6 class="font-size-15 mb-1 fw-normal">Marie Kim</h6>
                                             <p class="text-muted font-size-13 mb-0"><i class="mdi mdi-map-marker"></i> Montana</p>
@@ -299,7 +299,7 @@
                                         <td class="text-muted fw-semibold text-end"><i class="icon-xs icon me-2 text-danger" data-feather="trending-down"></i>$120.00</td>
                                     </tr>
                                     <tr>
-                                        <td><img src="{{ URL::asset('assets/images/users/avatar-8.jpg') }}" class="avatar-xs rounded-circle " alt="..."></td>
+                                        <td><img src="{{ secure_asset('assets/images/users/avatar-8.jpg') }}" class="avatar-xs rounded-circle " alt="..."></td>
                                         <td>
                                             <h6 class="font-size-15 mb-1 fw-normal">Sonya Henshaw</h6>
                                             <p class="text-muted font-size-13 mb-0"><i class="mdi mdi-map-marker"></i> Colorado</p>
@@ -308,7 +308,7 @@
                                         <td class="text-muted fw-semibold text-end"><i class="icon-xs icon me-2 text-success" data-feather="trending-up"></i>$112.00</td>
                                     </tr>
                                     <tr>
-                                        <td><img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" class="avatar-xs rounded-circle " alt="..."></td>
+                                        <td><img src="{{ secure_asset('assets/images/users/avatar-2.jpg') }}" class="avatar-xs rounded-circle " alt="..."></td>
                                         <td>
                                             <h6 class="font-size-15 mb-1 fw-normal">Marie Kim</h6>
                                             <p class="text-muted font-size-13 mb-0"><i class="mdi mdi-map-marker"></i> Australia</p>
@@ -317,7 +317,7 @@
                                         <td class="text-muted fw-semibold text-end"><i class="icon-xs icon me-2 text-danger" data-feather="trending-down"></i>$120.00</td>
                                     </tr>
                                     <tr>
-                                        <td><img src="{{ URL::asset('assets/images/users/avatar-1.jpg') }}" class="avatar-xs rounded-circle " alt="..."></td>
+                                        <td><img src="{{ secure_asset('assets/images/users/avatar-1.jpg') }}" class="avatar-xs rounded-circle " alt="..."></td>
                                         <td>
                                             <h6 class="font-size-15 mb-1 fw-normal">Sonya Henshaw</h6>
                                             <p class="text-muted font-size-13 mb-0"><i class="mdi mdi-map-marker"></i> India</p>
@@ -674,6 +674,6 @@
     @endsection
     @section('script')
     <!-- apexcharts -->
-    <script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/js/pages/dashboard.init.js') }}"></script>
+    <script src="{{ secure_asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ secure_asset('/assets/js/pages/dashboard.init.js') }}"></script>
     @endsection

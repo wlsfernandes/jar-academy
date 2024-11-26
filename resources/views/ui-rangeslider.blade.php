@@ -5,7 +5,7 @@
 
 @section('css')
 <!-- DataTables -->
-<link href="{{ URL::asset('/assets/libs/ion-rangeslider/ion-rangeslider.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ secure_asset('/assets/libs/ion-rangeslider/ion-rangeslider.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 @component('common-components.breadcrumb')
@@ -124,8 +124,8 @@
 @endsection
 @section('script')
 <!-- Ion Range Slider-->
-<script src="{{ URL::asset('/assets/libs/ion-rangeslider/ion-rangeslider.min.js') }}"></script>
+<script src="{{ secure_asset('/assets/libs/ion-rangeslider/ion-rangeslider.min.js') }}"></script>
 
 <!-- Range slider init js-->
-<script src="{{ URL::asset('/assets/js/pages/range-sliders.init.js') }}"></script>
+<script src="{{ secure_asset('/assets/js/pages/range-sliders.init.js') }}"></script>
 @endsection

@@ -10,9 +10,9 @@
                 <div class="col-md-8 col-lg-6 col-xl-5">
                     <div>
                         <a href="{{ url('index') }}" class="mb-5 d-block auth-logo">
-                            <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="22"
+                            <img src="{{ secure_asset('/assets/images/logo-dark.png') }}" alt="" height="22"
                                 class="logo logo-dark">
-                            <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="22"
+                            <img src="{{ secure_asset('/assets/images/logo-light.png') }}" alt="" height="22"
                                 class="logo logo-light">
                         </a>
                         <div class="card">
@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="p-2 mt-4">
                                     <div class="user-thumb text-center mb-4">
-                                        <img src="{{ URL::asset('/assets/images/users/avatar-4.jpg') }}"
+                                        <img src="{{ secure_asset('/assets/images/users/avatar-4.jpg') }}"
                                             class="rounded-circle img-thumbnail avatar-lg" alt="thumbnail">
                                         <h5 class="font-size-15 mt-3">Marcus</h5>
                                     </div>

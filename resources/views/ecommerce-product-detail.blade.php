@@ -20,16 +20,16 @@
                                 <div class="col-3">
                                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                         <a class="nav-link active" id="product-1-tab" data-bs-toggle="pill" href="#product-1" role="tab">
-                                            <img src="{{URL::asset('assets/images/product/img-1.png')}}" alt="" class="img-fluid mx-auto d-block tab-img rounded">
+                                            <img src="{{secure_asset('assets/images/product/img-1.png')}}" alt="" class="img-fluid mx-auto d-block tab-img rounded">
                                         </a>
                                         <a class="nav-link" id="product-2-tab" data-bs-toggle="pill" href="#product-2" role="tab">
-                                            <img src="{{URL::asset('assets/images/product/img-2.png')}}" alt="" class="img-fluid mx-auto d-block tab-img rounded">
+                                            <img src="{{secure_asset('assets/images/product/img-2.png')}}" alt="" class="img-fluid mx-auto d-block tab-img rounded">
                                         </a>
                                         <a class="nav-link" id="product-3-tab" data-bs-toggle="pill" href="#product-3" role="tab">
-                                            <img src="{{URL::asset('assets/images/product/img-3.png')}}" alt="" class="img-fluid mx-auto d-block tab-img rounded">
+                                            <img src="{{secure_asset('assets/images/product/img-3.png')}}" alt="" class="img-fluid mx-auto d-block tab-img rounded">
                                         </a>
                                         <a class="nav-link" id="product-4-tab" data-bs-toggle="pill" href="#product-4" role="tab">
-                                            <img src="{{URL::asset('assets/images/product/img-6.png')}}" alt="" class="img-fluid mx-auto d-block tab-img rounded">
+                                            <img src="{{secure_asset('assets/images/product/img-6.png')}}" alt="" class="img-fluid mx-auto d-block tab-img rounded">
                                         </a>
                                     </div>
                                 </div>
@@ -44,22 +44,22 @@
                                         </div>
                                         <div class="tab-pane fade show active" id="product-1" role="tabpanel">
                                             <div class="product-img">
-                                                <img src="{{URL::asset('assets/images/product/img-1.png')}}" alt="" class="img-fluid mx-auto d-block" data-zoom="{{URL::asset('assets/images/product/img-1.png')}}">
+                                                <img src="{{secure_asset('assets/images/product/img-1.png')}}" alt="" class="img-fluid mx-auto d-block" data-zoom="{{secure_asset('assets/images/product/img-1.png')}}">
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="product-2" role="tabpanel">
                                             <div class="product-img">
-                                                <img src="{{URL::asset('assets/images/product/img-2.png')}}" alt="" class="img-fluid mx-auto d-block">
+                                                <img src="{{secure_asset('assets/images/product/img-2.png')}}" alt="" class="img-fluid mx-auto d-block">
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="product-3" role="tabpanel">
                                             <div class="product-img">
-                                                <img src="{{URL::asset('assets/images/product/img-3.png')}}" alt="" class="img-fluid mx-auto d-block">
+                                                <img src="{{secure_asset('assets/images/product/img-3.png')}}" alt="" class="img-fluid mx-auto d-block">
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="product-4" role="tabpanel">
                                             <div class="product-img">
-                                                <img src="{{URL::asset('assets/images/product/img-6.png')}}" alt="" class="img-fluid mx-auto d-block">
+                                                <img src="{{secure_asset('assets/images/product/img-6.png')}}" alt="" class="img-fluid mx-auto d-block">
                                             </div>
                                         </div>
                                     </div>
@@ -148,21 +148,21 @@
                                                 <li class="list-inline-item">
                                                     <a href="#" class="active" data-bs-toggle="tooltip" data-bs-placement="top" title="Gray">
                                                         <div class="product-color-item">
-                                                            <img src="{{URL::asset('assets/images/product/img-1.png')}}" alt="" class="avatar-md">
+                                                            <img src="{{secure_asset('assets/images/product/img-1.png')}}" alt="" class="avatar-md">
                                                         </div>
                                                     </a>
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Dark">
                                                         <div class="product-color-item">
-                                                            <img src="{{URL::asset('assets/images/product/img-2.png')}}" alt="" class="avatar-md">
+                                                            <img src="{{secure_asset('assets/images/product/img-2.png')}}" alt="" class="avatar-md">
                                                         </div>
                                                     </a>
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Purple">
                                                         <div class="product-color-item">
-                                                            <img src="{{URL::asset('assets/images/product/img-3.png')}}" alt="" class="avatar-md">
+                                                            <img src="{{secure_asset('assets/images/product/img-3.png')}}" alt="" class="avatar-md">
                                                         </div>
                                                     </a>
                                                 </li>
@@ -217,7 +217,7 @@
                                 <div class="row">
                                     <div class="col-sm-3 col-md-2">
                                         <div>
-                                            <img src="{{URL::asset('assets/images/product/img-6.png')}}" alt="" class="img-fluid mx-auto d-block">
+                                            <img src="{{secure_asset('assets/images/product/img-6.png')}}" alt="" class="img-fluid mx-auto d-block">
                                         </div>
                                     </div>
                                     <div class="col-sm-9 col-md-10">

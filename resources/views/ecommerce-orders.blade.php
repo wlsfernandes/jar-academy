@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- DataTables -->
-    <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ secure_asset('/assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -369,6 +369,6 @@
 
 @endsection
 @section('script')
-    <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/js/pages/ecommerce-datatables.init.js') }}"></script>
+    <script src="{{ secure_asset('/assets/libs/datatables/datatables.min.js') }}"></script>
+    <script src="{{ secure_asset('/assets/js/pages/ecommerce-datatables.init.js') }}"></script>
 @endsection

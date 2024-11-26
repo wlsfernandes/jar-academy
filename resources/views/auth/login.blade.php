@@ -27,7 +27,7 @@
                                 <p class="text-muted">Sign in to continue to Minible.</p>
                             </div>
                             <div class="p-2 mt-4">
-                                <form method="POST" action="{{ route('login') }}">
+                                <form method="POST" action="{{ secure_url(route('login')) }}">
                                     @csrf
 
                                     <div class="mb-3">
@@ -45,7 +45,7 @@
                                     <div class="mb-3">
                                         <div class="float-end">
                                             @if (Route::has('password.request'))
-                                                <a href="{{ route('password.request') }}" class="text-muted">Forgot
+                                                <a href="{{ secure_url(route('password.request')) }}" class="text-muted">Forgot
                                                     password?</a>
                                             @endif
                                         </div>

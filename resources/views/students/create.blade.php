@@ -55,7 +55,7 @@ Student
                     </div>
                 @endif
 
-                <form action="{{ url('/students') }}" method="post">
+                <form action="{{ secure_url('/students') }}" method="post">
                     @csrf
 
                     <div class="mb-3 row">

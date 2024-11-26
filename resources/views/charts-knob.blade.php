@@ -86,6 +86,6 @@
 
 @endsection
 @section('script')
-    <script src="{{ secure_asset('/assets/libs/jquery-knob/jquery-knob.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/js/pages/jquery-knob.init.js') }}"></script>
+    <script src="{{ asset('/assets/libs/jquery-knob/jquery-knob.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/jquery-knob.init.js') }}"></script>
 @endsection

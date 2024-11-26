@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- jquery-bar-rating css -->
-    <link href="{{ secure_asset('/assets/libs/jquery-bar-rating/jquery-bar-rating.min.css') }}" rel="stylesheet"
+    <link href="{{ asset('/assets/libs/jquery-bar-rating/jquery-bar-rating.min.css') }}" rel="stylesheet"
         type="text/css" />
 @endsection
 
@@ -189,8 +189,8 @@
 @endsection
 @section('script')
     <!-- Sweet Alerts js -->
-    <script src="{{ secure_asset('/assets/libs/jquery-bar-rating/jquery-bar-rating.min.js') }}"></script>
+    <script src="{{ asset('/assets/libs/jquery-bar-rating/jquery-bar-rating.min.js') }}"></script>
 
     <!-- Range slider init js-->
-    <script src="{{ secure_asset('/assets/js/pages/rating-init.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/rating-init.js') }}"></script>
 @endsection

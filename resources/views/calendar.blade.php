@@ -25,7 +25,7 @@
                                     <button class="btn font-16 btn-primary" id="btn-new-event"><i
                                             class="mdi mdi-plus-circle-outline"></i> Create New Event</button>
                                     <div class="row justify-content-center mt-5">
-                                        <img src="{{ secure_asset('/assets/images/coming-soon-img.png') }}" alt=""
+                                        <img src="{{ asset('/assets/images/coming-soon-img.png') }}" alt=""
                                             class="img-fluid d-block">
                                     </div>
                                     <div id="external-events" class="mt-2">
@@ -144,10 +144,10 @@
 @endsection
 @section('script')
     <!-- apexcharts -->
-    <script src="{{ secure_asset('/assets/libs/moment/moment.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/libs/jquery-ui-dist/jquery-ui-dist.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/libs/fullcalendar/fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('/assets/libs/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('/assets/libs/jquery-ui-dist/jquery-ui-dist.min.js') }}"></script>
+    <script src="{{ asset('/assets/libs/fullcalendar/fullcalendar.min.js') }}"></script>
 
     <!-- Calendar init -->
-    <script src="{{ secure_asset('/assets/js/pages/calendar.init.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/calendar.init.js') }}"></script>
 @endsection

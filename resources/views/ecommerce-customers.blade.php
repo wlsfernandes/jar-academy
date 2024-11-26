@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- DataTables -->
-    <link href="{{ secure_asset('assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -52,7 +52,7 @@
                                         
                                         <td><a href="javascript: void(0);" class="text-reset  fw-bold">#MN0123</a> </td>
                                         <td>
-                                            <img src="{{ secure_asset('assets/images/users/avatar-2.jpg') }}" alt="" class="avatar-xs rounded-circle me-2">
+                                            <img src="{{ asset('assets/images/users/avatar-2.jpg') }}" alt="" class="avatar-xs rounded-circle me-2">
                                             <span>William Shipp</span>
                                         </td>
                                         <td>WilliamShipp@jourrapide.com</td>
@@ -108,7 +108,7 @@
                                         
                                         <td><a href="javascript: void(0);" class="text-reset  fw-bold">#MN0121</a> </td>
                                         <td>
-                                            <img src="{{ secure_asset('assets/images/users/avatar-3.jpg') }}" alt="" class="avatar-xs rounded-circle me-2">
+                                            <img src="{{ asset('assets/images/users/avatar-3.jpg') }}" alt="" class="avatar-xs rounded-circle me-2">
                                             <span>Thomas Hankins</span>
                                         </td>
                                         <td>ThomasHankins@dayrep.com</td>
@@ -134,7 +134,7 @@
                                         
                                         <td><a href="javascript: void(0);" class="text-reset  fw-bold">#MN0120</a> </td>
                                         <td>
-                                            <img src="{{ secure_asset('assets/images/users/avatar-4.jpg') }}" alt="" class="avatar-xs rounded-circle me-2">
+                                            <img src="{{ asset('assets/images/users/avatar-4.jpg') }}" alt="" class="avatar-xs rounded-circle me-2">
                                             <span>Mary Frazier</span>
                                         </td>
                                         <td>MaryFrazier@armyspy.com</td>
@@ -190,7 +190,7 @@
                                         
                                         <td><a href="javascript: void(0);" class="text-reset  fw-bold">#MN0118</a> </td>
                                         <td>
-                                            <img src="{{ secure_asset('assets/images/users/avatar-5.jpg') }}" alt="" class="avatar-xs rounded-circle me-2">
+                                            <img src="{{ asset('assets/images/users/avatar-5.jpg') }}" alt="" class="avatar-xs rounded-circle me-2">
                                             <span>Muriel Myers</span>
                                         </td>
                                         <td>MurielMyers@rhyta.com</td>
@@ -246,7 +246,7 @@
                                         
                                         <td><a href="javascript: void(0);" class="text-reset  fw-bold">#MN0116</a> </td>
                                         <td>
-                                            <img src="{{ secure_asset('assets/images/users/avatar-6.jpg') }}" alt="" class="avatar-xs rounded-circle me-2">
+                                            <img src="{{ asset('assets/images/users/avatar-6.jpg') }}" alt="" class="avatar-xs rounded-circle me-2">
                                             <span>Edward King</span>
                                         </td>
                                         <td>EdwardKing@teleworm.us</td>
@@ -272,7 +272,7 @@
                                         
                                         <td><a href="javascript: void(0);" class="text-reset  fw-bold">#MN0115</a> </td>
                                         <td>
-                                            <img src="{{ secure_asset('assets/images/users/avatar-7.jpg') }}" alt="" class="avatar-xs rounded-circle me-2">
+                                            <img src="{{ asset('assets/images/users/avatar-7.jpg') }}" alt="" class="avatar-xs rounded-circle me-2">
                                             <span>Stacy Webster</span>
                                         </td>
                                         <td>StacyWebster@armyspy.com</td>
@@ -358,7 +358,7 @@
                                         
                                         <td><a href="javascript: void(0);" class="text-reset  fw-bold">#MN0112</a> </td>
                                         <td>
-                                            <img src="{{ secure_asset('assets/images/users/avatar-8.jpg') }}" alt="" class="avatar-xs rounded-circle me-2">
+                                            <img src="{{ asset('assets/images/users/avatar-8.jpg') }}" alt="" class="avatar-xs rounded-circle me-2">
                                             <span>Crissy Holland</span>
                                         </td>
                                         <td>CrissyHolland@armyspy.com</td>
@@ -386,6 +386,6 @@
 
 @endsection
 @section('script')
-    <script src="{{ secure_asset('/assets/libs/datatables/datatables.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/js/pages/ecommerce-datatables.init.js') }}"></script>
+    <script src="{{ asset('/assets/libs/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/ecommerce-datatables.init.js') }}"></script>
 @endsection

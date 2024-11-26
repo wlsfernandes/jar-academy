@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- plugin css -->
-    <link href="{{ secure_asset('/assets/libs/bootstrap-editable/bootstrap-editable.min.css') }}" rel="stylesheet"
+    <link href="{{ asset('/assets/libs/bootstrap-editable/bootstrap-editable.min.css') }}" rel="stylesheet"
         type="text/css" />
 @endsection
 
@@ -86,7 +86,7 @@
 @endsection
 @section('script')
     <!-- Plugins js -->
-    <script src="{{ secure_asset('/assets/libs/bootstrap-editable/bootstrap-editable.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/libs/moment/moment.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/js/pages/form-xeditable.init.js') }}"></script>
+    <script src="{{ asset('/assets/libs/bootstrap-editable/bootstrap-editable.min.js') }}"></script>
+    <script src="{{ asset('/assets/libs/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/form-xeditable.init.js') }}"></script>
 @endsection

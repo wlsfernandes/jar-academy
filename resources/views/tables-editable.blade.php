@@ -96,6 +96,6 @@
 
 @endsection
 @section('script')
-    <script src="{{ secure_asset('/assets/libs/table-edits/table-edits.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/js/pages/table-editable.init.js') }}"></script>
+    <script src="{{ asset('/assets/libs/table-edits/table-edits.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/table-editable.init.js') }}"></script>
 @endsection

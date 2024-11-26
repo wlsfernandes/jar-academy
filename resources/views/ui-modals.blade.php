@@ -754,5 +754,5 @@
 @endsection
 @section('script')
   <!-- Varying Modal Content js -->
-<script src="{{secure_asset('assets/js/pages/modal.init.js')}}"></script>
+<script src="{{asset('assets/js/pages/modal.init.js')}}"></script>
 @endsection

@@ -19,11 +19,11 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <img class="rounded me-2" alt="200x200" width="200" src="{{secure_asset('assets/images/small/img-4.jpg')}}" data-holder-rendered="true">
+                        <img class="rounded me-2" alt="200x200" width="200" src="{{asset('assets/images/small/img-4.jpg')}}" data-holder-rendered="true">
                     </div>
                     <div class="col-md-6">
                         <div class="mt-4 mt-md-0">
-                            <img class="rounded-circle avatar-xl" alt="200x200" src="{{secure_asset('assets/images/users/avatar-4.jpg')}}" data-holder-rendered="true">
+                            <img class="rounded-circle avatar-xl" alt="200x200" src="{{asset('assets/images/users/avatar-4.jpg')}}" data-holder-rendered="true">
                         </div>
                     </div>
                 </div>
@@ -39,11 +39,11 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <img class="img-thumbnail" alt="200x200" width="200" src="{{secure_asset('assets/images/small/img-3.jpg')}}" data-holder-rendered="true">
+                        <img class="img-thumbnail" alt="200x200" width="200" src="{{asset('assets/images/small/img-3.jpg')}}" data-holder-rendered="true">
                     </div>
                     <div class="col-md-6">
                         <div class="mt-4 mt-md-0">
-                            <img class="img-thumbnail rounded-circle avatar-xl" alt="200x200" src="{{secure_asset('assets/images/users/avatar-3.jpg')}}" data-holder-rendered="true">
+                            <img class="img-thumbnail rounded-circle avatar-xl" alt="200x200" src="{{asset('assets/images/users/avatar-3.jpg')}}" data-holder-rendered="true">
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                     the image so that it scales with the parent element.</p>
 
                 <div class="">
-                    <img src="{{secure_asset('assets/images/small/img-2.jpg')}}" class="img-fluid" alt="Responsive image">
+                    <img src="{{asset('assets/images/small/img-2.jpg')}}" class="img-fluid" alt="Responsive image">
                 </div>
             </div>
         </div>
@@ -80,19 +80,19 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div>
-                                    <img src="{{secure_asset('assets/images/users/avatar-3.jpg')}}" alt="" class="rounded avatar-sm">
+                                    <img src="{{asset('assets/images/users/avatar-3.jpg')}}" alt="" class="rounded avatar-sm">
                                     <p class="mt-2 mb-lg-0"><code>.avatar-sm</code></p>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div>
-                                    <img src="{{secure_asset('assets/images/users/avatar-4.jpg')}}" alt="" class="rounded avatar-md">
+                                    <img src="{{asset('assets/images/users/avatar-4.jpg')}}" alt="" class="rounded avatar-md">
                                     <p class="mt-2  mb-lg-0"><code>.avatar-md</code></p>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div>
-                                    <img src="{{secure_asset('assets/images/users/avatar-5.jpg')}}" alt="" class="rounded avatar-lg">
+                                    <img src="{{asset('assets/images/users/avatar-5.jpg')}}" alt="" class="rounded avatar-lg">
                                     <p class="mt-2 mb-lg-0"><code>.avatar-lg</code></p>
                                 </div>
                             </div>
@@ -102,19 +102,19 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div>
-                                    <img src="{{secure_asset('assets/images/users/avatar-3.jpg')}}" alt="" class="rounded-circle avatar-sm">
+                                    <img src="{{asset('assets/images/users/avatar-3.jpg')}}" alt="" class="rounded-circle avatar-sm">
                                     <p class="mt-2 mb-lg-0"><code>.avatar-sm</code></p>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div>
-                                    <img src="{{secure_asset('assets/images/users/avatar-4.jpg')}}" alt="" class="rounded-circle avatar-md">
+                                    <img src="{{asset('assets/images/users/avatar-4.jpg')}}" alt="" class="rounded-circle avatar-md">
                                     <p class="mt-2  mb-lg-0"><code>.avatar-md</code></p>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div>
-                                    <img src="{{secure_asset('assets/images/users/avatar-5.jpg')}}" alt="" class="rounded-circle avatar-lg">
+                                    <img src="{{asset('assets/images/users/avatar-5.jpg')}}" alt="" class="rounded-circle avatar-lg">
                                     <p class="mt-2 mb-lg-0"><code>.avatar-lg</code></p>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
                 <!-- Start Media Object -->
                 <div class="d-flex">
                     <div class="flex-shrink-0 me-3">
-                        <img class="rounded avatar-sm" src="{{secure_asset('assets/images/users/avatar-3.jpg')}}" alt="Generic placeholder image">
+                        <img class="rounded avatar-sm" src="{{asset('assets/images/users/avatar-3.jpg')}}" alt="Generic placeholder image">
                     </div>
                     <div class="flex-grow-1">
                         <h5>Top-aligned media</h5>
@@ -152,7 +152,7 @@
                 <!-- Start Media Object -->
                 <div class="d-flex align-items-center">
                     <div class="flex-shrink-0 me-3">
-                        <img class="rounded avatar-sm" src="{{secure_asset('assets/images/users/avatar-5.jpg')}}" alt="Generic placeholder image">
+                        <img class="rounded avatar-sm" src="{{asset('assets/images/users/avatar-5.jpg')}}" alt="Generic placeholder image">
                     </div>
                     <div class="flex-grow-1">
                         <h5>Center-aligned media</h5>
@@ -166,7 +166,7 @@
                 <!-- Start Media Object -->
                 <div class="d-flex align-items-end">
                     <div class="flex-shrink-0 me-3">
-                        <img class="rounded avatar-sm" src="{{secure_asset('assets/images/users/avatar-1.jpg')}}" alt="Generic placeholder image">
+                        <img class="rounded avatar-sm" src="{{asset('assets/images/users/avatar-1.jpg')}}" alt="Generic placeholder image">
                     </div>
                     <div class="flex-grow-1">
                         <h5>Bottom-aligned media</h5>

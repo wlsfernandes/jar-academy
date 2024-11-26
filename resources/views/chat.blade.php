@@ -14,7 +14,7 @@
         <div class="p-3 px-4">
             <div class="d-flex align-items-start">
                 <div class="flex-shrink-0 me-3 align-self-center">
-                    <img src="{{secure_asset('assets/images/users/avatar-4.jpg')}}" class="avatar-xs rounded-circle" alt="">
+                    <img src="{{asset('assets/images/users/avatar-4.jpg')}}" class="avatar-xs rounded-circle" alt="">
                 </div>
 
                 <div class="flex-grow-1">
@@ -125,7 +125,7 @@
                                     <div class="d-flex align-items-start">
                                         <div class="flex-shrink-0 me-3 align-self-center">
                                             <div class="user-img online">
-                                                <img src="{{secure_asset('assets/images/users/avatar-2.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                                <img src="{{asset('assets/images/users/avatar-2.jpg')}}" class="rounded-circle avatar-xs" alt="">
                                                 <span class="user-status"></span>
                                             </div>
                                         </div>
@@ -174,7 +174,7 @@
                                     <div class="d-flex align-items-start">
                                         <div class="flex-shrink-0 align-self-center me-3">
                                             <div class="user-img away">
-                                                <img src="{{secure_asset('assets/images/users/avatar-3.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                                <img src="{{asset('assets/images/users/avatar-3.jpg')}}" class="rounded-circle avatar-xs" alt="">
                                                 <span class="user-status"></span>
                                             </div>
                                         </div>
@@ -195,7 +195,7 @@
                                     <div class="d-flex align-items-start">
                                         <div class="flex-shrink-0 align-self-center me-3">
                                             <div class="user-img">
-                                                <img src="{{secure_asset('assets/images/users/avatar-4.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                                <img src="{{asset('assets/images/users/avatar-4.jpg')}}" class="rounded-circle avatar-xs" alt="">
                                                 <span class="user-status"></span>
                                             </div>
                                         </div>
@@ -459,13 +459,13 @@
                                         <ul class="list-inline message-img mt-3  mb-0">
                                             <li class="list-inline-item message-img-list">
                                                 <a class="d-inline-block m-1" href="javascript:void(0);">
-                                                    <img src="{{ secure_asset('/assets/images/small/img-1.jpg') }}" alt="" class="rounded img-thumbnail">
+                                                    <img src="{{ asset('/assets/images/small/img-1.jpg') }}" alt="" class="rounded img-thumbnail">
                                                 </a>
                                             </li>
 
                                             <li class="list-inline-item message-img-list">
                                                 <a class="d-inline-block m-1" href="javascript:void(0);">
-                                                    <img src="{{ secure_asset('/assets/images/small/img-2.jpg') }}" alt="" class="rounded img-thumbnail">
+                                                    <img src="{{ asset('/assets/images/small/img-2.jpg') }}" alt="" class="rounded img-thumbnail">
                                                 </a>
                                             </li>
                                         </ul>

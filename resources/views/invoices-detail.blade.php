@@ -21,8 +21,8 @@
                         <h4 class="float-end font-size-16">Invoice #MN0131 <span
                                 class="badge bg-success font-size-12 ms-2">Paid</span></h4>
                         <div class="mb-4">
-                            <img src="{{ secure_asset('assets/images/logo-dark.png') }}" alt="logo" height="20" class="logo-dark" />
-                            <img src="{{ secure_asset('assets/images/logo-light.png') }}" alt="logo" height="20" class="logo-light" />
+                            <img src="{{ asset('assets/images/logo-dark.png') }}" alt="logo" height="20" class="logo-dark" />
+                            <img src="{{ asset('assets/images/logo-light.png') }}" alt="logo" height="20" class="logo-light" />
                         </div>
                         <div class="text-muted">
                             <p class="mb-1">641 Counts Lane Wilmore, KY 40390</p>

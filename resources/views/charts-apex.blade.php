@@ -130,6 +130,6 @@
     <!-- end row -->
 @endsection
 @section('script')
-    <script src="{{ secure_asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/js/pages/apexcharts.init.js') }}"></script>
+    <script src="{{ asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/apexcharts.init.js') }}"></script>
 @endsection

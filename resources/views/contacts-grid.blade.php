@@ -27,7 +27,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="mb-4">
-                        <img src="{{ secure_asset('/assets/images/users/avatar-2.jpg') }}" alt=""
+                        <img src="{{ asset('/assets/images/users/avatar-2.jpg') }}" alt=""
                             class="avatar-lg rounded-circle img-thumbnail">
                     </div>
                     <h5 class="font-size-16 mb-1"><a href="#" class="text-reset">Simon Ryles</a></h5>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="mb-4">
-                        <img src="{{ secure_asset('/assets/images/users/avatar-3.jpg') }}" alt=""
+                        <img src="{{ asset('/assets/images/users/avatar-3.jpg') }}" alt=""
                             class="avatar-lg rounded-circle img-thumbnail">
                     </div>
                     <h5 class="font-size-16 mb-1"><a href="#" class="text-reset">Marion Walker</a></h5>
@@ -130,7 +130,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="mb-4">
-                        <img src="{{ secure_asset('/assets/images/users/avatar-4.jpg') }}" alt=""
+                        <img src="{{ asset('/assets/images/users/avatar-4.jpg') }}" alt=""
                             class="avatar-lg rounded-circle img-thumbnail">
                     </div>
                     <h5 class="font-size-16 mb-1"><a href="#" class="text-reset">Shanon Marvin</a></h5>
@@ -199,7 +199,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="mb-4">
-                        <img src="{{ secure_asset('/assets/images/users/avatar-5.jpg') }}" alt=""
+                        <img src="{{ asset('/assets/images/users/avatar-5.jpg') }}" alt=""
                             class="avatar-lg rounded-circle img-thumbnail">
                     </div>
                     <h5 class="font-size-16 mb-1"><a href="#" class="text-reset">Janice Morgan</a></h5>
@@ -233,7 +233,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="mb-4">
-                        <img src="{{ secure_asset('/assets/images/users/avatar-7.jpg') }}" alt=""
+                        <img src="{{ asset('/assets/images/users/avatar-7.jpg') }}" alt=""
                             class="avatar-lg rounded-circle img-thumbnail">
                     </div>
                     <h5 class="font-size-16 mb-1"><a href="#" class="text-reset">Patrick Petty</a></h5>
@@ -267,7 +267,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="mb-4">
-                        <img src="{{ secure_asset('/assets/images/users/avatar-8.jpg') }}" alt=""
+                        <img src="{{ asset('/assets/images/users/avatar-8.jpg') }}" alt=""
                             class="avatar-lg rounded-circle img-thumbnail">
                     </div>
                     <h5 class="font-size-16 mb-1"><a href="#" class="text-reset">Marilyn Horton</a></h5>

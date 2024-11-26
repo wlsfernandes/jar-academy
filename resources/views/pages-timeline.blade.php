@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- DataTables -->
-    <link href="{{ secure_asset('/assets/libs/owl-carousel/owl-carousel.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/assets/libs/owl-carousel/owl-carousel.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -165,6 +165,6 @@
     <!-- end row -->
 @endsection
 @section('script')
-    <script src="{{ secure_asset('/assets/libs/owl-carousel/owl-carousel.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/js/pages/timeline.init.js') }}"></script>
+    <script src="{{ asset('/assets/libs/owl-carousel/owl-carousel.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/timeline.init.js') }}"></script>
 @endsection

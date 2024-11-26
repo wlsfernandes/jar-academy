@@ -65,6 +65,6 @@
 @endsection
 @section('script')
     <script src="https://maps.google.com/maps/api/js?key=AIzaSyCtSAR45TFgZjOs4nBFFZnII-6mMHLfSYI"></script>
-    <script src="{{ secure_asset('/assets/libs/gmaps/gmaps.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/js/pages/gmaps.init.js') }}"></script>
+    <script src="{{ asset('/assets/libs/gmaps/gmaps.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/gmaps.init.js') }}"></script>
 @endsection

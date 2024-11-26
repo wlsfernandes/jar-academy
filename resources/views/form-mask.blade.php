@@ -83,6 +83,6 @@
 @endsection
 @section('script')
     <!-- Plugins js -->
-    <script src="{{ secure_asset('/assets/libs/inputmask/inputmask.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/js/pages/form-mask.init.js') }}"></script>
+    <script src="{{ asset('/assets/libs/inputmask/inputmask.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/form-mask.init.js') }}"></script>
 @endsection

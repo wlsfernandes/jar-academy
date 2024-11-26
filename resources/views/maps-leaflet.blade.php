@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- leaflet Css -->
-    <link href="{{ secure_asset('/assets/libs/leaflet/leaflet.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/assets/libs/leaflet/leaflet.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -79,8 +79,8 @@
 @endsection
 @section('script')
     <!-- leaflet plugin -->
-    <script src="{{ secure_asset('assets/libs/leaflet/leaflet.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/leaflet/leaflet.min.js') }}"></script>
     <!-- leaflet map.init -->
-    <script src="{{ secure_asset('assets/js/pages/leaflet-us-states.js') }}"></script>
-    <script src="{{ secure_asset('assets/js/pages/leaflet-map.init.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/leaflet-us-states.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/leaflet-map.init.js') }}"></script>
 @endsection

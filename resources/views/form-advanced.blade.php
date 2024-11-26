@@ -4,12 +4,12 @@
 @endsection
 @section('css')
 <!-- plugin css -->
-<link href="{{ secure_asset('/assets/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ secure_asset('/assets/libs/spectrum-colorpicker/spectrum-colorpicker.min.css') }}" rel="stylesheet">
-<link href="{{ secure_asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet">
-<link href="{{ secure_asset('/assets/libs/bootstrap-touchspin/bootstrap-touchspin.min.css') }}" rel="stylesheet" />
-<link rel="stylesheet" href="{{ secure_asset('/assets/libs/datepicker/datepicker.min.css') }}">
-<link rel="stylesheet" href="{{ secure_asset('/assets/libs/flatpickr/flatpickr.min.css') }}">
+<link href="{{ asset('/assets/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/assets/libs/spectrum-colorpicker/spectrum-colorpicker.min.css') }}" rel="stylesheet">
+<link href="{{ asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+<link href="{{ asset('/assets/libs/bootstrap-touchspin/bootstrap-touchspin.min.css') }}" rel="stylesheet" />
+<link rel="stylesheet" href="{{ asset('/assets/libs/datepicker/datepicker.min.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/libs/flatpickr/flatpickr.min.css') }}">
 @endsection
 
 @section('content')
@@ -564,12 +564,12 @@
 
 @endsection
 @section('script')
-<script src="{{ secure_asset('/assets/libs/select2/select2.min.js') }}"></script>
-<script src="{{ secure_asset('/assets/libs/spectrum-colorpicker/spectrum-colorpicker.min.js') }}"></script>
-<script src="{{ secure_asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
-<script src="{{ secure_asset('/assets/libs/bootstrap-touchspin/bootstrap-touchspin.min.js') }}"></script>
-<script src="{{ secure_asset('/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
-<script src="{{ secure_asset('/assets/libs/datepicker/datepicker.min.js') }}"></script>
-<script src="{{ secure_asset('/assets/libs/flatpickr/flatpickr.min.js') }}"></script>
-<script src="{{ secure_asset('/assets/js/pages/form-advanced.init.js') }}"></script>
+<script src="{{ asset('/assets/libs/select2/select2.min.js') }}"></script>
+<script src="{{ asset('/assets/libs/spectrum-colorpicker/spectrum-colorpicker.min.js') }}"></script>
+<script src="{{ asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('/assets/libs/bootstrap-touchspin/bootstrap-touchspin.min.js') }}"></script>
+<script src="{{ asset('/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+<script src="{{ asset('/assets/libs/datepicker/datepicker.min.js') }}"></script>
+<script src="{{ asset('/assets/libs/flatpickr/flatpickr.min.js') }}"></script>
+<script src="{{ asset('/assets/js/pages/form-advanced.init.js') }}"></script>
 @endsection

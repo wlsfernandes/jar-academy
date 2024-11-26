@@ -89,6 +89,6 @@
 
 @endsection
 @section('script')
-    <script src="{{ secure_asset('/assets/libs/jquery-sparkline/jquery-sparkline.min.js')}}"></script>
-    <script src="{{ secure_asset('/assets/js/pages/sparklines.init.js')}}"></script>
+    <script src="{{ asset('/assets/libs/jquery-sparkline/jquery-sparkline.min.js')}}"></script>
+    <script src="{{ asset('/assets/js/pages/sparklines.init.js')}}"></script>
 @endsection

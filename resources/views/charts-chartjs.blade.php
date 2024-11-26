@@ -88,6 +88,6 @@
 
 @endsection
 @section('script')
-    <script src="{{ secure_asset('/assets/libs/chart-js/chart-js.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/js/pages/chartjs.init.js') }}"></script>
+    <script src="{{ asset('/assets/libs/chart-js/chart-js.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/chartjs.init.js') }}"></script>
 @endsection

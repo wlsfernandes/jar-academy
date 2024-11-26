@@ -4,8 +4,8 @@
 @endsection
 @section('css')
 <!-- DataTables -->
-<link href="{{ secure_asset('/assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ secure_asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -443,7 +443,7 @@
 
 @endsection
 @section('script')
-<script src="{{ secure_asset('/assets/libs/datatables/datatables.min.js') }}"></script>
-<script src="{{ secure_asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
-<script src="{{ secure_asset('/assets/js/pages/ecommerce-datatables.init.js') }}"></script>
+<script src="{{ asset('/assets/libs/datatables/datatables.min.js') }}"></script>
+<script src="{{ asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('/assets/js/pages/ecommerce-datatables.init.js') }}"></script>
 @endsection

@@ -380,6 +380,6 @@
 @endsection
 @section('script')
 <!-- jquery-steps js -->
-<script src="{{ secure_asset('/assets/libs/jquery-steps/jquery-steps.min.js') }}"></script>
-<script src="{{ secure_asset('/assets/js/pages/form-wizard.init.js') }}"></script>
+<script src="{{ asset('/assets/libs/jquery-steps/jquery-steps.min.js') }}"></script>
+<script src="{{ asset('/assets/js/pages/form-wizard.init.js') }}"></script>
 @endsection

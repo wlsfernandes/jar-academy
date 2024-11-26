@@ -474,7 +474,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <th scope="row"><img src="{{secure_asset('assets/images/product/img-1.png')}}" alt="product-img" title="product-img" class="avatar-md"></th>
+                                <th scope="row"><img src="{{asset('assets/images/product/img-1.png')}}" alt="product-img" title="product-img" class="avatar-md"></th>
                                 <td>
                                     <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail" class="text-reset">Nike N012 Running Shoes</a></h5>
                                     <p class="text-muted mb-0">$ 260 x 2</p>
@@ -482,7 +482,7 @@
                                 <td>$ 520</td>
                             </tr>
                             <tr>
-                                <th scope="row"><img src="{{secure_asset('assets/images/product/img-2.png')}}" alt="product-img" title="product-img" class="avatar-md"></th>
+                                <th scope="row"><img src="{{asset('assets/images/product/img-2.png')}}" alt="product-img" title="product-img" class="avatar-md"></th>
                                 <td>
                                     <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail" class="text-reset">Adidas Running Shoes</a></h5>
                                     <p class="text-muted mb-0">$ 260 x 1</p>

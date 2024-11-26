@@ -4,8 +4,8 @@
 @endsection
 @section('css')
 <!-- DataTables -->
-<link href="{{ secure_asset('/assets/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ secure_asset('/assets/libs/dropzone/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/assets/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/assets/libs/dropzone/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -226,7 +226,7 @@
 
 @endsection
 @section('script')
-<script src="{{ secure_asset('/assets/libs/select2/select2.min.js') }}"></script>
-<script src="{{ secure_asset('/assets/libs/dropzone/dropzone.min.js') }}"></script>
-<script src="{{ secure_asset('/assets/js/pages/ecommerce-add-product.init.js') }}"></script>
+<script src="{{ asset('/assets/libs/select2/select2.min.js') }}"></script>
+<script src="{{ asset('/assets/libs/dropzone/dropzone.min.js') }}"></script>
+<script src="{{ asset('/assets/js/pages/ecommerce-add-product.init.js') }}"></script>
 @endsection

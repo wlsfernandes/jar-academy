@@ -69,6 +69,6 @@
 
 @endsection
 @section('script')
-    <script src="{{ secure_asset('/assets/libs/flot-charts/flot-charts.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/js/pages/flot.init.js') }}"></script>
+    <script src="{{ asset('/assets/libs/flot-charts/flot-charts.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/flot.init.js') }}"></script>
 @endsection

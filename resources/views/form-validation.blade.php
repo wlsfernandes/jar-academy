@@ -332,6 +332,6 @@
 
 @endsection
 @section('script')
-    <script src="{{ secure_asset('/assets/libs/parsleyjs/parsleyjs.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/js/pages/form-validation.init.js') }}"></script>
+    <script src="{{ asset('/assets/libs/parsleyjs/parsleyjs.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/form-validation.init.js') }}"></script>
 @endsection

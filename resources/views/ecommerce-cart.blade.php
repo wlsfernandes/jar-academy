@@ -4,7 +4,7 @@
 @endsection
 @section('css')
 <!-- DataTables -->
-<link href="{{ secure_asset('/assets/libs/bootstrap-touchspin/bootstrap-touchspin.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/assets/libs/bootstrap-touchspin/bootstrap-touchspin.min.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -20,7 +20,7 @@
 
                 <div class="d-flex align-items-start border-bottom pb-3">
                     <div class="flex-shrink-0 me-4">
-                        <img src="{{secure_asset('assets/images/product/img-1.png')}}" alt="" class="avatar-lg">
+                        <img src="{{asset('assets/images/product/img-1.png')}}" alt="" class="avatar-lg">
                     </div>
                     <div class="flex-grow-1 align-self-center overflow-hidden">
                         <div>
@@ -79,7 +79,7 @@
 
                 <div class="d-flex align-items-start border-bottom pb-3">
                     <div class="flex-shrink-0 me-4">
-                        <img src="{{secure_asset('assets/images/product/img-2.png')}}" alt="" class="avatar-lg">
+                        <img src="{{asset('assets/images/product/img-2.png')}}" alt="" class="avatar-lg">
                     </div>
                     <div class="flex-grow-1 align-self-center overflow-hidden">
                         <div>
@@ -195,6 +195,6 @@
 
 @endsection
 @section('script')
-<script src="{{ secure_asset('/assets/libs/bootstrap-touchspin/bootstrap-touchspin.min.js')}}"></script>
-<script src="{{ secure_asset('/assets/js/pages/ecommerce-cart.init.js')}}"></script>
+<script src="{{ asset('/assets/libs/bootstrap-touchspin/bootstrap-touchspin.min.js')}}"></script>
+<script src="{{ asset('/assets/js/pages/ecommerce-cart.init.js')}}"></script>
 @endsection

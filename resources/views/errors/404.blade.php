@@ -13,7 +13,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-sm-4">
                                     <div class="error-img">
-                                        <img src="{{ secure_asset('/assets/images/404-error.png') }}" alt=""
+                                        <img src="{{ asset('/assets/images/404-error.png') }}" alt=""
                                             class="img-fluid mx-auto d-block">
                                     </div>
                                 </div>

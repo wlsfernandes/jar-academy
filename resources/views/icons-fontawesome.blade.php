@@ -43,5 +43,5 @@
 
 @endsection
 @section('script')
-    <script src="{{ secure_asset('/assets/js/pages/fontawesome.init.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/fontawesome.init.js') }}"></script>
 @endsection

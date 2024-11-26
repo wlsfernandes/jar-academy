@@ -44,9 +44,9 @@
 
 @endsection
 @section('script')
-    <script src="{{ secure_asset('/assets/libs/ckeditor/ckeditor.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/libs/tinymce/tinymce.min.js') }}"></script>
-    <script src="{{ secure_asset('/assets/js/pages/form-editor.init.js') }}"></script>
+    <script src="{{ asset('/assets/libs/ckeditor/ckeditor.min.js') }}"></script>
+    <script src="{{ asset('/assets/libs/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/form-editor.init.js') }}"></script>
     <script>
         ClassicEditor
             .create(document.querySelector('#classic-editor'))

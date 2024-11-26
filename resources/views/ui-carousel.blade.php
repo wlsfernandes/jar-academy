@@ -23,15 +23,15 @@
                     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-interval="3000">
                         <div class="carousel-inner" role="listbox">
                             <div class="carousel-item active">
-                                <img class="d-block img-fluid" src="{{ secure_asset('/assets/images/small/img-1.jpg') }}"
+                                <img class="d-block img-fluid" src="{{ asset('/assets/images/small/img-1.jpg') }}"
                                     alt="First slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block img-fluid" src="{{ secure_asset('/assets/images/small/img-2.jpg') }}"
+                                <img class="d-block img-fluid" src="{{ asset('/assets/images/small/img-2.jpg') }}"
                                     alt="Second slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block img-fluid" src="{{ secure_asset('/assets/images/small/img-3.jpg') }}"
+                                <img class="d-block img-fluid" src="{{ asset('/assets/images/small/img-3.jpg') }}"
                                     alt="Third slide">
                             </div>
                         </div>
@@ -50,15 +50,15 @@
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner" role="listbox">
                             <div class="carousel-item active">
-                                <img class="d-block img-fluid" src="{{ secure_asset('/assets/images/small/img-4.jpg') }}"
+                                <img class="d-block img-fluid" src="{{ asset('/assets/images/small/img-4.jpg') }}"
                                     alt="First slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block img-fluid" src="{{ secure_asset('/assets/images/small/img-5.jpg') }}"
+                                <img class="d-block img-fluid" src="{{ asset('/assets/images/small/img-5.jpg') }}"
                                     alt="Second slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block img-fluid" src="{{ secure_asset('/assets/images/small/img-6.jpg') }}"
+                                <img class="d-block img-fluid" src="{{ asset('/assets/images/small/img-6.jpg') }}"
                                     alt="Third slide">
                             </div>
                         </div>
@@ -93,15 +93,15 @@
                         </ol>
                         <div class="carousel-inner" role="listbox">
                             <div class="carousel-item active">
-                                <img class="d-block img-fluid" src="{{ secure_asset('/assets/images/small/img-3.jpg') }}"
+                                <img class="d-block img-fluid" src="{{ asset('/assets/images/small/img-3.jpg') }}"
                                     alt="First slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block img-fluid" src="{{ secure_asset('/assets/images/small/img-2.jpg') }}"
+                                <img class="d-block img-fluid" src="{{ asset('/assets/images/small/img-2.jpg') }}"
                                     alt="Second slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block img-fluid" src="{{ secure_asset('/assets/images/small/img-1.jpg') }}"
+                                <img class="d-block img-fluid" src="{{ asset('/assets/images/small/img-1.jpg') }}"
                                     alt="Third slide">
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                     <div id="carouselExampleCaption" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner" role="listbox">
                             <div class="carousel-item active">
-                                <img src="{{ secure_asset('/assets/images/small/img-7.jpg') }}" alt="..."
+                                <img src="{{ asset('/assets/images/small/img-7.jpg') }}" alt="..."
                                     class="d-block img-fluid">
                                 <div class="carousel-caption d-none d-md-block text-white-50">
                                     <h5 class="text-white">First slide label</h5>
@@ -140,7 +140,7 @@
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="{{ secure_asset('/assets/images/small/img-5.jpg') }}" alt="..."
+                                <img src="{{ asset('/assets/images/small/img-5.jpg') }}" alt="..."
                                     class="d-block img-fluid">
                                 <div class="carousel-caption d-none d-md-block text-white-50">
                                     <h5 class="text-white">Second slide label</h5>
@@ -148,7 +148,7 @@
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="{{ secure_asset('/assets/images/small/img-4.jpg') }}" alt="..."
+                                <img src="{{ asset('/assets/images/small/img-4.jpg') }}" alt="..."
                                     class="d-block img-fluid">
                                 <div class="carousel-caption d-none d-md-block text-white-50">
                                     <h5 class="text-white">Third slide label</h5>
@@ -185,15 +185,15 @@
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="d-block img-fluid" src="{{ secure_asset('/assets/images/small/img-1.jpg') }}"
+                                <img class="d-block img-fluid" src="{{ asset('/assets/images/small/img-1.jpg') }}"
                                     alt="First slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block img-fluid" src="{{ secure_asset('/assets/images/small/img-2.jpg') }}"
+                                <img class="d-block img-fluid" src="{{ asset('/assets/images/small/img-2.jpg') }}"
                                     alt="Second slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block img-fluid" src="{{ secure_asset('/assets/images/small/img-3.jpg') }}"
+                                <img class="d-block img-fluid" src="{{ asset('/assets/images/small/img-3.jpg') }}"
                                     alt="Third slide">
                             </div>
                         </div>
@@ -222,15 +222,15 @@
                     <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active" data-bs-interval="10000">
-                                <img src="{{ secure_asset('/assets/images/small/img-1.jpg') }}" class="d-block w-100"
+                                <img src="{{ asset('/assets/images/small/img-1.jpg') }}" class="d-block w-100"
                                     alt="...">
                             </div>
                             <div class="carousel-item" data-bs-interval="2000">
-                                <img src="{{ secure_asset('/assets/images/small/img-2.jpg') }}" class="d-block w-100"
+                                <img src="{{ asset('/assets/images/small/img-2.jpg') }}" class="d-block w-100"
                                     alt="...">
                             </div>
                             <div class="carousel-item">
-                                <img src="{{ secure_asset('/assets/images/small/img-3.jpg') }}" class="d-block w-100"
+                                <img src="{{ asset('/assets/images/small/img-3.jpg') }}" class="d-block w-100"
                                     alt="...">
                             </div>
                         </div>
@@ -270,7 +270,7 @@
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active" data-bs-interval="10000">
-                                <img src="{{ secure_asset('/assets/images/small/img-3.jpg') }}" class="d-block w-100"
+                                <img src="{{ asset('/assets/images/small/img-3.jpg') }}" class="d-block w-100"
                                     alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>First slide label</h5>
@@ -278,7 +278,7 @@
                                 </div>
                             </div>
                             <div class="carousel-item" data-bs-interval="2000">
-                                <img src="{{ secure_asset('/assets/images/small/img-5.jpg') }}" class="d-block w-100"
+                                <img src="{{ asset('/assets/images/small/img-5.jpg') }}" class="d-block w-100"
                                     alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Second slide label</h5>
@@ -286,7 +286,7 @@
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="{{ secure_asset('/assets/images/small/img-7.jpg') }}" class="d-block w-100"
+                                <img src="{{ asset('/assets/images/small/img-7.jpg') }}" class="d-block w-100"
                                     alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Third slide label</h5>

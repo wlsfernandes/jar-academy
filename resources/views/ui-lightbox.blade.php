@@ -4,7 +4,7 @@
 @endsection
 @section('css')
 <!-- Lightbox css -->
-<link href="{{ secure_asset('/assets/libs/magnific-popup/magnific-popup.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/assets/libs/magnific-popup/magnific-popup.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -25,16 +25,16 @@
                     <div class="col-6">
                         <div>
                             <h5 class="font-size-14">Fits (Horz/Vert)</h5>
-                            <a class="image-popup-vertical-fit" href="{{secure_asset('assets/images/small/img-2.jpg')}}" title="Caption. Can be aligned it to any side and contain any HTML.">
-                                <img class="img-fluid" alt="" src="{{secure_asset('assets/images/small/img-2.jpg')}}" width="145">
+                            <a class="image-popup-vertical-fit" href="{{asset('assets/images/small/img-2.jpg')}}" title="Caption. Can be aligned it to any side and contain any HTML.">
+                                <img class="img-fluid" alt="" src="{{asset('assets/images/small/img-2.jpg')}}" width="145">
                             </a>
                         </div>
                     </div>
                     <div class="col-6">
                         <div>
                             <h5 class="font-size-14">Effects</h5>
-                            <a class="image-popup-no-margins" href="{{secure_asset('assets/images/small/img-3.jpg')}}">
-                                <img class="img-fluid" alt="" src="{{secure_asset('assets/images/small/img-3.jpg')}}" width="75">
+                            <a class="image-popup-no-margins" href="{{asset('assets/images/small/img-3.jpg')}}">
+                                <img class="img-fluid" alt="" src="{{asset('assets/images/small/img-3.jpg')}}" width="75">
                             </a>
                             <p class="mt-2 mb-0 text-muted">No gaps, zoom animation, close icon in top-right corner.</p>
                         </div>
@@ -55,54 +55,54 @@
                     <div class="row">
                         <div class="col-xl-2 col-md-4 col-6">
                             <div class="mt-4">
-                                <a href="{{secure_asset('assets/images/small/img-1.jpg')}}" title="Project 1">
+                                <a href="{{asset('assets/images/small/img-1.jpg')}}" title="Project 1">
                                     <div class="img-fluid">
-                                        <img src="{{secure_asset('assets/images/small/img-1.jpg')}}" alt="" class="img-fluid d-block">
+                                        <img src="{{asset('assets/images/small/img-1.jpg')}}" alt="" class="img-fluid d-block">
                                     </div>
                                 </a>
                             </div>
                         </div>
                         <div class="col-xl-2 col-md-4 col-6">
                             <div class="mt-4">
-                                <a href="{{secure_asset('assets/images/small/img-2.jpg')}}" title="Project 2">
+                                <a href="{{asset('assets/images/small/img-2.jpg')}}" title="Project 2">
                                     <div class="img-fluid">
-                                        <img src="{{secure_asset('assets/images/small/img-2.jpg')}}" alt="" class="img-fluid d-block">
+                                        <img src="{{asset('assets/images/small/img-2.jpg')}}" alt="" class="img-fluid d-block">
                                     </div>
                                 </a>
                             </div>
                         </div>
                         <div class="col-xl-2 col-md-4 col-6">
                             <div class="mt-4">
-                                <a href="{{secure_asset('assets/images/small/img-3.jpg')}}" title="Project 3">
+                                <a href="{{asset('assets/images/small/img-3.jpg')}}" title="Project 3">
                                     <div class="img-fluid">
-                                        <img src="{{secure_asset('assets/images/small/img-3.jpg')}}" alt="" class="img-fluid d-block">
+                                        <img src="{{asset('assets/images/small/img-3.jpg')}}" alt="" class="img-fluid d-block">
                                     </div>
                                 </a>
                             </div>
                         </div>
                         <div class="col-xl-2 col-md-4 col-6">
                             <div class="mt-4">
-                                <a href="{{secure_asset('assets/images/small/img-4.jpg')}}" title="Project 4">
+                                <a href="{{asset('assets/images/small/img-4.jpg')}}" title="Project 4">
                                     <div class="img-fluid">
-                                        <img src="{{secure_asset('assets/images/small/img-4.jpg')}}" alt="" class="img-fluid d-block">
+                                        <img src="{{asset('assets/images/small/img-4.jpg')}}" alt="" class="img-fluid d-block">
                                     </div>
                                 </a>
                             </div>
                         </div>
                         <div class="col-xl-2 col-md-4 col-6">
                             <div class="mt-4">
-                                <a href="{{secure_asset('assets/images/small/img-5.jpg')}}" title="Project 5">
+                                <a href="{{asset('assets/images/small/img-5.jpg')}}" title="Project 5">
                                     <div class="img-fluid">
-                                        <img src="{{secure_asset('assets/images/small/img-5.jpg')}}" alt="" class="img-fluid d-block">
+                                        <img src="{{asset('assets/images/small/img-5.jpg')}}" alt="" class="img-fluid d-block">
                                     </div>
                                 </a>
                             </div>
                         </div>
                         <div class="col-xl-2 col-md-4 col-6">
                             <div class="mt-4">
-                                <a href="{{secure_asset('assets/images/small/img-6.jpg')}}" title="Project 6">
+                                <a href="{{asset('assets/images/small/img-6.jpg')}}" title="Project 6">
                                     <div class="img-fluid">
-                                        <img src="{{secure_asset('assets/images/small/img-6.jpg')}}" alt="" class="img-fluid d-block">
+                                        <img src="{{asset('assets/images/small/img-6.jpg')}}" alt="" class="img-fluid d-block">
                                     </div>
                                 </a>
                             </div>
@@ -127,8 +127,8 @@
                 <p class="card-title-desc">Zoom effect works only with images.</p>
 
                 <div class="zoom-gallery">
-                    <a class="float-start" href="{{secure_asset('assets/images/small/img-3.jpg')}}" title="Project 1"><img src="{{secure_asset('assets/images/small/img-3.jpg')}}" alt="" width="275"></a>
-                    <a class="float-start" href="{{secure_asset('assets/images/small/img-7.jpg')}}" title="Project 2"><img src="{{secure_asset('assets/images/small/img-7.jpg')}}" alt="" width="275"></a>
+                    <a class="float-start" href="{{asset('assets/images/small/img-3.jpg')}}" title="Project 1"><img src="{{asset('assets/images/small/img-3.jpg')}}" alt="" width="275"></a>
+                    <a class="float-start" href="{{asset('assets/images/small/img-7.jpg')}}" title="Project 2"><img src="{{asset('assets/images/small/img-7.jpg')}}" alt="" width="275"></a>
                 </div>
             </div>
         </div>
@@ -214,7 +214,7 @@
 @endsection
 @section('script')
 <!-- Magnific Popup-->
-<script src="{{ secure_asset('/assets/libs/magnific-popup/magnific-popup.min.js') }}"></script>
+<script src="{{ asset('/assets/libs/magnific-popup/magnific-popup.min.js') }}"></script>
 <!-- lightbox init js-->
-<script src="{{ secure_asset('/assets/js/pages/lightbox.init.js') }}"></script>
+<script src="{{ asset('/assets/js/pages/lightbox.init.js') }}"></script>
 @endsection

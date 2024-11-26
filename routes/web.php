@@ -48,13 +48,13 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     Route::put('/modules/{id}', [ModuleController::class, 'update'])->name('modules.update');
     Route::delete('/modules/{id}', [ModuleController::class, 'destroy'])->name('modules.destroy');
     // Courses
-    Route::get('/courses', [StudentController::class, 'index'])->name('courses.index');
-    Route::get('/courses/create', [StudentController::class, 'create'])->name('courses.create');
-    Route::post('/courses', [StudentController::class, 'store'])->name('courses.store');
-    Route::get('/courses/{id}', [StudentController::class, 'show'])->name('courses.show');
-    Route::get('/courses/{id}/edit', [StudentController::class, 'edit'])->name('coursess.edit');
-    Route::put('/courses/{id}', [StudentController::class, 'update'])->name('courses.update');
-    Route::delete('/courses/{id}', [StudentController::class, 'destroy'])->name('courses.destroy');
+    Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+    Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
+    Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
+    Route::get('/courses/{id}', [CourseController::class, 'show'])->name('courses.show');
+    Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('coursess.edit');
+    Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
+    Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
     
 });
 

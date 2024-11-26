@@ -41,6 +41,19 @@
                     </a>
                 </li>
                 <li>
+                    <a href="modules" class="waves-effect">
+                        <i class="uil-books"></i>
+                        <span>@lang('app.modules')</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="courses" class="waves-effect">
+                        <i class="fas fa-graduation-cap icon"></i>
+                        <span>@lang('app.courses')</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="teachers" class="waves-effect">
                         <i class="dripicons-user"></i>
                         <span>@lang('app.teachers')</span>
@@ -52,24 +65,13 @@
                         <span>@lang('app.students')</span>
                     </a>
                 </li>
-                <li>
-                    <a href="modules" class="waves-effect">
-                        <i class="uil-books"></i>
-                        <span>@lang('app.modules')</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="classrooms" class="waves-effect">
-                    <i class="fas fa-graduation-cap icon"></i>
-                        <span>@lang('app.courses')</span>
-                    </a>
-                </li>
+
 
                 <li class="menu-title">@lang('translation.Apps')</li>
 
                 <li>
-                    <a href="" class=" waves-effect">
-                        <i class="dripicons-megaphone"></i>
+                    <a href="index" class=" waves-effect">
+                        <i class="uil-microphone"></i>
                         <span>@lang('app.announcement')</span>
                     </a>
                 </li>

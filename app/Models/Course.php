@@ -8,12 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
    
-    protected $fillable = ['name', 'description', 'teacher_id', 'institution_id'];
+    protected $fillable = ['title', 'small_description', 'description', 'module_id', 'institution_id'];
 
-    public function teacher()
-    {
-        return $this->belongsTo(Teacher::class);
-    }
+   
 
     public function institution()
     {
@@ -24,5 +21,17 @@ class Course extends Model
     {
         return $this->hasMany(Assignment::class);
     }
+
+    // Define the relationship for one or many classrooms
+    public function classrooms()
+    {
+        return $this->hasMany(Classroom::class);
+    }
+
+    public function module()
+    {
+        return $this->belongsTo(Module::class);
+    }
+    
     use HasFactory;
 }

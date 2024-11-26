@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center">
-                        <a href="{{ url('index') }}" class="mb-5 d-block auth-logo">
+                        <a href="{{ secure_url('index') }}" class="mb-5 d-block auth-logo">
                             <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="22"
                                 class="logo logo-dark">
                             <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="22"
@@ -99,7 +99,7 @@
                                     </div>
 
                                     <div class="mt-4 text-center">
-                                        <p class="mb-0">Don't have an account ? <a href="{{ url('register') }}"
+                                        <p class="mb-0">Don't have an account ? <a href="{{ secure_url('register') }}"
                                                 class="fw-medium text-primary"> Signup now </a> </p>
                                     </div>
                                 </form>

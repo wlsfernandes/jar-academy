@@ -14,7 +14,10 @@ class Module extends Model
     {
         return $this->belongsTo(Institution::class);
     }
-
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
     use HasFactory;
     
 }

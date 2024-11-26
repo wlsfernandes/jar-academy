@@ -66,7 +66,12 @@
                     </a>
                 </li>
 
-
+                <li>
+                    <a href="/access" class="waves-effect">
+                        <i class="uil-chat-bubble-user"></i>
+                        <span>@lang('app.users')</span>
+                    </a>
+                </li>
                 <li class="menu-title">@lang('translation.Apps')</li>
 
                 <li>

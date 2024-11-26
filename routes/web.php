@@ -6,6 +6,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\AccessController;
 
 
 /*
@@ -52,9 +53,12 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
     Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
     Route::get('/courses/{id}', [CourseController::class, 'show'])->name('courses.show');
-    Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('coursess.edit');
+    Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');
     Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
     Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
+    // Users Access
+    Route::get('/access', [AccessController::class, 'index'])->name('courses.index');
+   
     
 });
 

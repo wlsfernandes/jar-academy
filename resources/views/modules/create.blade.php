@@ -55,7 +55,7 @@ Modules
                     </div>
                 @endif
 
-                <form action="{{ url('/modules') }}" method="post">
+                <form action="{{ secure_url('/modules') }}" method="post">
                     @csrf
 
                     <div class="mb-3 row">

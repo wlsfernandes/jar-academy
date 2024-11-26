@@ -33,7 +33,7 @@
                                     <div class="mb-3">
                                         <label class="form-label" for="email">Email</label>
                                         <input type="text" class="form-control @error('email') is-invalid @enderror"
-                                            name="email" value="{{ old('email', 'admin@themesbrand.com') }}" id="email"
+                                            name="email" value="{{ old('email', '') }}" id="email"
                                             placeholder="Enter Email address">
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">

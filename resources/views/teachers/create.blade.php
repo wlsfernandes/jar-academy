@@ -55,7 +55,7 @@ AMID
                     </div>
                 @endif
 
-                <form action="{{ secure_url('/teachers') }}" method="post">
+                <form action="{{ url('/teachers') }}" method="post">
                     @csrf
 
                     <div class="mb-3 row">

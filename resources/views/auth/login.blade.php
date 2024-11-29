@@ -24,7 +24,7 @@
                         <div class="card-body p-4">
                             <div class="text-center mt-2">
                                 <h5 class="text-primary">Welcome Back !</h5>
-                                <p class="text-muted">Sign in to continue to Minible.</p>
+                                <p class="text-muted">Sign in to continue to Amid learning.</p>
                             </div>
                             <div class="p-2 mt-4">
                                 <form method="POST" action="{{ route('login') }}">
@@ -112,7 +112,7 @@
                         <p>© <script>
                                 document.write(new Date().getFullYear())
 
-                            </script> Minible. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                            </script> created <i class="mdi mdi-heart text-danger"></i> by devpromaster</p>
                     </div>
 
                 </div>

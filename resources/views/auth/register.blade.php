@@ -132,7 +132,7 @@
                         <p>© <script>
                                 document.write(new Date().getFullYear())
 
-                            </script> Minible. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                            </script> Created <i class="mdi mdi-heart text-danger"></i> by devpromaster</p>
                     </div>
 
                 </div>

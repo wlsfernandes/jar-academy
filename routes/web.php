@@ -20,6 +20,12 @@ use App\Http\Controllers\AccessController;
 |
 */
 
+// Public routes 
+Route::get('/', function () {
+    return view('site.welcome');
+});
+
+
 
 Auth::routes();
 
@@ -63,12 +69,12 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
 });
 
 
+Route::middleware('auth')->group(function () {
+    Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang']);
+    Route::post('/formsubmit', [App\Http\Controllers\HomeController::class, 'FormSubmit'])->name('FormSubmit');
+    Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index']);
+});
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'root']);
+//Route::get('/', [App\Http\Controllers\HomeController::class, 'root']);
 
-Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index']);
-//Language Translation
-
-Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang']);
-
-Route::post('/formsubmit', [App\Http\Controllers\HomeController::class, 'FormSubmit'])->name('FormSubmit');
+// Authenticated routes

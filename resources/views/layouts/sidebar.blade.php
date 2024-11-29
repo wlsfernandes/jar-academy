@@ -5,19 +5,19 @@
     <div class="navbar-brand-box">
         <a href="{{url('index')}}" class="logo logo-dark">
             <span class="logo-sm">
-                <img src="{{ asset('/assets/images/logo-sm.png') }}" alt="" height="22">
+                <img src="{{ asset('/assets/site/img/AMID.png') }}" alt="" >
             </span>
             <span class="logo-lg">
-                <img src="{{ asset('/assets/images/logo-dark.png') }}" alt="" height="20">
+                <img src="{{ asset('/assets/site/img/AMID.png') }}" alt="" >
             </span>
         </a>
 
         <a href="{{url('index')}}" class="logo logo-light">
             <span class="logo-sm">
-                <img src="{{ asset('/assets/images/logo-sm.png') }}" alt="" height="22">
+                <img src="{{ asset('/assets/site/img/AMID.png') }}" alt="" >
             </span>
             <span class="logo-lg">
-                <img src="{{ asset('/assets/images/logo-light.png') }}" alt="" height="20">
+                <img src="{{ asset('/assets/site/img/AMID.png') }}" alt="" >
             </span>
         </a>
     </div>
@@ -41,33 +41,33 @@
                     </a>
                 </li>
                 <li>
-                    <a href="modules" class="waves-effect">
+                    <a href="{{url('modules')}}" class="waves-effect">
                         <i class="uil-books"></i>
                         <span>@lang('app.modules')</span>
                     </a>
                 </li>
                 <li>
-                    <a href="courses" class="waves-effect">
+                    <a href="{{url('courses')}}" class="waves-effect">
                         <i class="fas fa-graduation-cap icon"></i>
                         <span>@lang('app.courses')</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="teachers" class="waves-effect">
+                    <a href="{{url(path: 'teachers')}}" class="waves-effect">
                         <i class="dripicons-user"></i>
                         <span>@lang('app.teachers')</span>
                     </a>
                 </li>
                 <li>
-                    <a href="students" class="waves-effect">
+                    <a href="{{url('students')}}" class="waves-effect">
                         <i class="dripicons-graduation"></i>
                         <span>@lang('app.students')</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="/access" class="waves-effect">
+                    <a href="{{url('access')}}" class="waves-effect">
                         <i class="uil-chat-bubble-user"></i>
                         <span>@lang('app.users')</span>
                     </a>
@@ -75,7 +75,7 @@
                 <li class="menu-title">@lang('translation.Apps')</li>
 
                 <li>
-                    <a href="index" class=" waves-effect">
+                    <a href="{{url('index')}}" class=" waves-effect">
                         <i class="uil-microphone"></i>
                         <span>@lang('app.announcement')</span>
                     </a>

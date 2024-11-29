@@ -55,7 +55,7 @@ Student
                     </div>
                 @endif
 
-                <form action="{{ secure_url('/students') }}" method="post">
+                <form action="{{ url('/students') }}" method="post">
                     @csrf
 
                     <div class="mb-3 row">
@@ -75,8 +75,8 @@ Student
                     <div class="mb-3 row">
                         <label for="password" class="col-md-2 col-form-label">Password:</label>
                         <div class="col-md-6">
-                            <input class="form-control" type="text" value="{{ old('password') }}" id="password" name="password"
-                                required>
+                            <input class="form-control" type="text" value="{{ old('password') }}" id="password"
+                                name="password" required>
                         </div>
                     </div>
                     <div class="d-flex flex-wrap gap-3">

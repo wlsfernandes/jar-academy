@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center">
-                        <a href="{{ secure_url('index') }}" class="mb-5 d-block auth-logo">
+                        <a href="{{ url('index') }}" class="mb-5 d-block auth-logo">
                             <img src="{{ asset('assets/site/img/amid-logo2.png') }}" alt="" height="70"
                                 class="logo logo-dark">
                             <img src="{{ asset('assets/site/img/amid-logo2.png') }}" alt="" height="70"

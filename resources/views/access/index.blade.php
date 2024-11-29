@@ -82,7 +82,7 @@ Amid - User
                                         <i class="uil uil-trash-alt font-size-18"></i>
                                     </a>
 
-                                    <form id="delete-form-{{ $user->id }}" action="{{ url('/user/' . $user->id) }}"
+                                    <form id="delete-form-{{ $user->id }}" action="{{ url('/access/' . $user->id) }}"
                                         method="POST" style="display: none;">
                                         @method('DELETE')
                                         @csrf

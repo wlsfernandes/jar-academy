@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Validator;
 use App\Providers\RouteServiceProvider;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
 use App\Models\User;
 use App\Models\Role;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Student;
+
+use Exception;
 
 class RegisterController extends Controller
 {
@@ -59,20 +66,39 @@ class RegisterController extends Controller
 
     /**
      * Create a new user instance after a valid registration.
-     * TODO hard code instituion 
+     * TODO hard code institution and roles..... 
      * @param  array  $data
      * @return \App\Models\User
      */
     protected function create(array $data)
     {
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'institution_id' => 1,
-        ]);
-        $role = Role::where('name', 'student')->first();
-        $user->roles()->attach($role->id);
-        return $user;
+        DB::beginTransaction();
+
+        try {
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'institution_id' => 1,
+            ]);
+            $role = Role::where('name', 'student')->first();
+            if (!$role) {
+                throw new Exception('Role not found');
+            }
+            $user->roles()->attach($role->id);
+
+            Student::create([
+                'user_id' => $user->id,
+                'institution_id' => 1,
+            ]);
+            DB::commit();
+            return $user;
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error('Error creating user: ' . $e->getMessage());
+            session()->flash('error', 'An error occurred while creating the user.');
+            return redirect()->back();
+        }
     }
+
 }

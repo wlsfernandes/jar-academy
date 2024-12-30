@@ -8,7 +8,7 @@
             "port": 9003,
             "runtimeArgs": [
                 "-S",
-                "127.0.0.1:8000",
+                "127.0.0.1:7777",
                 "-t",
                 "/var/www/html/jar-academy/public"
             ],

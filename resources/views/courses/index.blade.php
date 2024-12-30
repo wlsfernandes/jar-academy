@@ -56,6 +56,7 @@ AMID
                             <th>#</th>
                             <th>@lang('app.title')</th>
                             <th>@lang('app.modules')</th>
+                            <th>@lang('app.resources')</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -65,6 +66,8 @@ AMID
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $course->title ?? ''}}</td>
                                 <td>{{ $course->module->name ?? ''}}</td>
+                                <td><a href="{{ url('/courses/' . $course->id . '/resources') }}"
+                                        class="px-3 text-primary"><i class="uil uil-file-plus font-size-18"></i></a></td>
                                 <td>
                                     <a href="{{ url('/courses/' . $course->id) }}" class="px-3 text-primary"><i
                                             class="fas fa-eye"></i></a>
@@ -76,9 +79,8 @@ AMID
                                         <i class="uil uil-trash-alt font-size-18"></i>
                                     </a>
 
-                                    <form id="delete-form-{{ $course->id }}"
-                                        action="{{ url('/courses/' . $course->id) }}" method="POST"
-                                        style="display: none;">
+                                    <form id="delete-form-{{ $course->id }}" action="{{ url('/courses/' . $course->id) }}"
+                                        method="POST" style="display: none;">
                                         @method('DELETE')
                                         @csrf
                                     </form>

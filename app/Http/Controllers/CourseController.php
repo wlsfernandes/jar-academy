@@ -6,9 +6,11 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Course;
 use App\Models\Module;
+use App\Models\Resource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Exception;
 
 class CourseController extends Controller
@@ -31,17 +33,19 @@ class CourseController extends Controller
     {
         $course = Course::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
-            $modules = Module::where('institution_id', Auth::user()->institution_id)->get();
+        $modules = Module::where('institution_id', Auth::user()->institution_id)->get();
         return view('courses.edit', compact('course', 'modules'));
     }
+
+
 
     // Show details of a specific course
     public function show($id)
     {
         $course = Course::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
-            $modules = Module::where('institution_id', Auth::user()->institution_id)->get();
-        return view('courses.show', compact('course','modules'));
+        $modules = Module::where('institution_id', Auth::user()->institution_id)->get();
+        return view('courses.show', compact('course', 'modules'));
     }
 
     public function destroy($id)
@@ -98,7 +102,7 @@ class CourseController extends Controller
 
         try {
             $course = Course::findOrFail($id);
-            
+
             $course->update([
                 'title' => $request->title,
                 'description' => $request->description,
@@ -120,6 +124,66 @@ class CourseController extends Controller
                 'institution_id' => Auth::user()->institution_id,
             ]);
             return redirect()->back()->withInput()->withErrors(['error' => 'Failed to Update course: ']);
+        }
+    }
+
+    public function resources($id)
+    {
+        $course = Course::where('institution_id', Auth::user()->institution_id)
+            ->findOrFail($id);
+        $resource_types = ['documento', 'prova', 'tarefa'];
+        $types = ['audio', 'docx', 'pdf', 'power-point', 'video'];
+        return view('courses.resources', compact('course', 'resource_types', 'types'));
+    }
+    public function homeworks($id)
+    {
+        $course = Course::where('institution_id', Auth::user()->institution_id)
+            ->findOrFail($id);
+        return view('courses.homeworks', compact('course'));
+    }
+
+    public function addResource(Request $request, $id)
+    {
+        // Validate the file input
+        $request->validate([
+            'document' => 'required|file|mimes:pdf,doc,docx|max:2048',
+        ]);
+        try {
+            DB::beginTransaction();
+
+            $course = Course::findOrFail($id);
+
+            $file = $request->file('document');
+
+            if ($file->isValid()) {
+                // Generate the file name and path
+                $fileName = $course->omekaIdentifier . '.' . $file->getClientOriginalExtension();
+                $path = $fileName;
+                Storage::disk('s3')->put($path, file_get_contents($file));
+                $url = Storage::cloud()->url($fileName);
+                $course->save();
+
+                Resource::create([
+                    'course_id' => $course->id,
+                    'title' => $request->input('title'),
+                    'description' => $request->input('description'),
+                    'type' => $file->getClientOriginalExtension(),
+                    'url' => $url,
+                ]);
+
+                DB::commit();
+                session()->flash('success', 'Resource added successfully.');
+                Log::info('Resource uploaded successfully.');
+                return redirect()->route('courses.index');
+            } else {
+                DB::rollBack();
+                return back()->withErrors(['document' => 'File upload error: ' . $file->getError()]);
+            }
+        } catch (Exception $e) {
+            DB::rollBack();
+            session()->flash('error', 'Failed to upload file: ' . $e->getMessage());
+            Log::error('Error uploading file: ' . $e->getMessage());
+            return redirect()->route('courses.index');
         }
     }
 

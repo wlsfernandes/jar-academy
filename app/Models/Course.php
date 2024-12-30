@@ -7,16 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-   
+
     protected $fillable = ['title', 'small_description', 'description', 'module_id', 'institution_id'];
 
-   
+
 
     public function institution()
     {
         return $this->belongsTo(Institution::class);
     }
-   
+    public function resources()
+    {
+        return $this->hasMany(Resource::class);
+
+    }
     public function assignments()
     {
         return $this->hasMany(Assignment::class);
@@ -32,6 +36,6 @@ class Course extends Model
     {
         return $this->belongsTo(Module::class);
     }
-    
+
     use HasFactory;
 }

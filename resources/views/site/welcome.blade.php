@@ -81,7 +81,7 @@
         </div>
     </div>
 </section>
-<section>
+<!-- <section>
     <div class="about-area position-relative" style="margin-top:75px;">
         <img class="position_animate_img top_image_bounce position-top-right" src="assets/img/shape/4.png" alt="img">
         <div class="container">
@@ -102,7 +102,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <section>
     <div class="offer-area position-relative" style="margin-top:75px;">
         <img class="position_animate_img top_image_bounce position-top-right" src="assets/site/img/shape/4.png"

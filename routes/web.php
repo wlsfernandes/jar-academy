@@ -6,6 +6,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\AccessController;
 use Illuminate\Support\Facades\Storage;
 use Aws\S3\S3Client;
@@ -24,49 +25,7 @@ use Aws\S3\S3Client;
 Route::get('/', function () {
     return view('site.welcome');
 });
-Route::get('/test-s3-debug', function () {
-    try {
-        $folder = 'main/';
-        $fileName = 'merecedor-file.txt';
-        $fileContent = 'This is a test file.';
-        $filePath = $folder . $fileName;
 
-        // Upload the file to S3
-        Storage::disk('s3')->put($filePath, $fileContent);
-
-        // Log the file path
-        logger()->info('Uploaded to S3 at path: ' . $filePath);
-
-        return response()->json(['message' => 'File uploaded successfully!', 'path' => $filePath]);
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
-    }
-});
-Route::get('/debug-s3-credentials', function () {
-    try {
-        // Directly create an S3 client to fetch credentials and configuration
-        $s3Client = new S3Client([
-            'region' => env('AWS_DEFAULT_REGION'),
-            'version' => 'latest',
-            'credentials' => [
-                'key' => env('AWS_ACCESS_KEY_ID'),
-                'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            ],
-        ]);
-
-        // Return configuration details as a JSON response
-        return response()->json([
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            's3_client_class' => get_class($s3Client),
-        ]);
-    } catch (\Exception $e) {
-        return response()->json([
-            'error' => $e->getMessage(),
-        ], 500);
-    }
-});
 Auth::routes();
 
 Route::middleware(['auth', 'institution.scope'])->group(function () {
@@ -104,6 +63,12 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
     Route::get('/courses/{id}/resources', [CourseController::class, 'resources'])->name('courses.resources');
     Route::post('/courses/{id}/addResource', [CourseController::class, 'addResource'])->name('courses.addResource');
+
+    // Resources
+    Route::get('/resources/{id}/edit', [ResourceController::class, 'edit'])->name('resources.edit');
+    Route::put('/resources/{id}', [ResourceController::class, 'update'])->name('resources.update');
+    Route::delete('/resources/{id}', [ResourceController::class, 'destroy'])->name('resources.destroy');
+
     // Access
     Route::resource('access', AccessController::class)->only(['index', 'destroy']);
 });

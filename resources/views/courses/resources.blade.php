@@ -10,6 +10,7 @@
 @slot('title') File Upload @endslot
 @endcomponent
 
+<!-- add Resource -->
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -96,5 +97,67 @@
             </div>
         </div>
     </div>
+</div> <!-- end row -->
+
+<!-- display resources -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card border border-primary">
+            <div class="card-header bg-transparent border-primary">
+                <h5 class="my-0 text-primary"><i class="uil uil-file-plus"></i> @lang('app.resources')</b></h5>
+            </div>
+            @if ($resources->isEmpty())
+                <div class="alert alert-warning" role="alert">
+                    @lang('app.there_no_resource')
+                </div>
+            @else
+                <div class="card-body">
+                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
+                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>@lang('app.title')</th>
+                                <th>@lang('app.description')</th>
+                                <th>@lang('app.resource_type')</th>
+                                <th>@lang('app.media_type')</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($resources as $resource)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $resource->title ?? ''}}</td>
+                                    <td>{{ $resource->description ?? ''}}</td>
+                                    <td>{{ $resource->resource_type ?? ''}}</td>
+                                    <td>{{ $resource->type ?? ''}}</td>
+
+                                    <td>
+                                        <a href="{{ url('/resources/' . $resource->id . '/edit') }}"
+                                            class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
+
+                                        <a href="javascript:void(0);" class="px-3 text-danger"
+                                            onclick="event.preventDefault(); if(confirm('Confirm delete?')) { document.getElementById('delete-form-{{ $resource->id }}').submit(); }">
+                                            <i class="uil uil-trash-alt font-size-18"></i>
+                                        </a>
+
+                                        <form id="delete-form-{{ $resource->id }}"
+                                            action="{{ url('/resources/' . $resource->id) }}" method="POST"
+                                            style="display: none;">
+                                            @method('DELETE')
+                                            @csrf
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+
+                    </table>
+
+                </div>
+            @endif
+        </div>
+    </div> <!-- end col -->
 </div> <!-- end row -->
 @endsection

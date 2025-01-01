@@ -17,4 +17,9 @@ return [
     'select' => 'please select a option',
     'title' => 'Title',
     'users' => 'Users',
+    'resource_type' => 'Resource Type',
+    'media_type' => 'Media Type',
+    'resources' => 'Resources',
+    'there_no_resource' => 'There is no resource vinculated to this course.',
+    'update_resource' => 'Update Resource',
 ];

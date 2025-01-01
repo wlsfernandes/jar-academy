@@ -14,4 +14,25 @@ class Resource extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
+    /**
+     * Get the list of resource types.
+     *
+     * @return array
+     */
+    public static function getResourceTypes()
+    {
+        return ['documento', 'prova', 'tarefa'];
+    }
+
+    /**
+     * Get the list of types.
+     *
+     * @return array
+     */
+    public static function getTypes()
+    {
+        return ['audio', 'docx', 'pdf', 'power-point', 'video'];
+    }
+
 }

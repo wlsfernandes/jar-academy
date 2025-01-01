@@ -2,15 +2,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Role;
 use App\Models\Course;
 use App\Models\Module;
 use App\Models\Resource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
+use App\Helpers\StorageS3;
 use Exception;
 
 class CourseController extends Controller
@@ -131,16 +129,12 @@ class CourseController extends Controller
     {
         $course = Course::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
-        $resource_types = ['documento', 'prova', 'tarefa'];
-        $types = ['audio', 'docx', 'pdf', 'power-point', 'video'];
-        return view('courses.resources', compact('course', 'resource_types', 'types'));
+        $resources = $course->resources;
+        $resource_types = Resource::getResourceTypes();
+        $types = Resource::getTypes();
+        return view('courses.resources', compact('course', 'resources', 'resource_types', 'types'));
     }
-    public function homeworks($id)
-    {
-        $course = Course::where('institution_id', Auth::user()->institution_id)
-            ->findOrFail($id);
-        return view('courses.homeworks', compact('course'));
-    }
+
 
     public function addResource(Request $request, $id)
     {
@@ -155,26 +149,23 @@ class CourseController extends Controller
 
             $file = $request->file('document');
 
-            if ($file->isValid()) {
-                // Generate the file name and path
-                $fileName = $course->omekaIdentifier . '.' . $file->getClientOriginalExtension();
-                $path = $fileName;
-                Storage::disk('s3')->put($path, file_get_contents($file));
-                $url = Storage::cloud()->url($fileName);
-                $course->save();
+            $url = StorageS3::uploadToS3($file);
+
+            if ($url) {
 
                 Resource::create([
                     'course_id' => $course->id,
                     'title' => $request->input('title'),
                     'description' => $request->input('description'),
-                    'type' => $file->getClientOriginalExtension(),
+                    'type' => $request->input('type'),
+                    'resource_type' => $request->input('resource_type'),
                     'url' => $url,
                 ]);
 
                 DB::commit();
                 session()->flash('success', 'Resource added successfully.');
                 Log::info('Resource uploaded successfully.');
-                return redirect()->route('courses.index');
+                return redirect()->back()->with('success', 'Resources deleted successfully!');
             } else {
                 DB::rollBack();
                 return back()->withErrors(['document' => 'File upload error: ' . $file->getError()]);

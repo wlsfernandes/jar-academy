@@ -75,6 +75,8 @@ class CourseController extends Controller
                 'small_description' => $request->small_description,
                 'module_id' => $request->module,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
+                'amount' => $request->amount ?? 0.00,
+                'currency' => 'BRL',
             ]);
             DB::commit();
             return redirect()->route('courses.index')->with('success', 'Course created successfully!');
@@ -88,6 +90,8 @@ class CourseController extends Controller
                 'small_description' => $request->small_description,
                 'module_id' => $request->module,
                 'institution_id' => Auth::user()->institution_id,
+                'amount' => $request->amount ?? 0.00,
+                'currency' => 'BRL',
             ]);
             return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while creating the course. Please try again.']);
         }
@@ -107,6 +111,8 @@ class CourseController extends Controller
                 'small_description' => $request->small_description,
                 'module_id' => $request->module,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
+                'amount' => $request->amount ?? 0.00,
+                'currency' => 'BRL',
             ]);
             DB::commit();
             return redirect()->route('courses.index')->with('success', 'Course updated successfully!');
@@ -138,10 +144,7 @@ class CourseController extends Controller
 
     public function addResource(Request $request, $id)
     {
-        // Validate the file input
-        $request->validate([
-            'document' => 'required|file|mimes:pdf,doc,docx|max:2048',
-        ]);
+
         try {
             DB::beginTransaction();
 
@@ -165,7 +168,7 @@ class CourseController extends Controller
                 DB::commit();
                 session()->flash('success', 'Resource added successfully.');
                 Log::info('Resource uploaded successfully.');
-                return redirect()->back()->with('success', 'Resources deleted successfully!');
+                return redirect()->back()->with('success', 'Resources updated successfully!');
             } else {
                 DB::rollBack();
                 return back()->withErrors(['document' => 'File upload error: ' . $file->getError()]);

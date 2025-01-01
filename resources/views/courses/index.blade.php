@@ -56,8 +56,9 @@ AMID
                             <th>#</th>
                             <th>@lang('app.title')</th>
                             <th>@lang('app.modules')</th>
-                            <th>@lang('app.resources')</th>
-                            <th>Actions</th>
+                            <th>@lang('app.price')</th>
+                            <th class="text-center align-middle">@lang('app.manager_resources')</th>
+                            <th class="text-center align-middle">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,9 +67,13 @@ AMID
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $course->title ?? ''}}</td>
                                 <td>{{ $course->module->name ?? ''}}</td>
-                                <td><a href="{{ url('/courses/' . $course->id . '/resources') }}"
-                                        class="px-3 text-primary"><i class="uil uil-file-plus font-size-18"></i></a></td>
-                                <td>
+                                <td>{{ $course->amount ?? ''}}</td>
+                                <td class="text-center align-middle"> <a
+                                        href="{{ url('/courses/' . $course->id . '/resources') }}"
+                                        class="px-3 text-success"><i class="uil uil-apps font-size-24"></i></a></td>
+                                <td class="text-center align-middle">
+
+
                                     <a href="{{ url('/courses/' . $course->id) }}" class="px-3 text-primary"><i
                                             class="fas fa-eye"></i></a>
                                     <a href="{{ url('/courses/' . $course->id . '/edit') }}" class="px-3 text-primary"><i

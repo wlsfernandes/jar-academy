@@ -19,6 +19,7 @@ class StorageS3
     {
         try {
             if ($file->isValid()) {
+
                 // Generate a unique ID for the file
                 $uniqueId = Str::uuid()->toString();
                 // Get the original file extension

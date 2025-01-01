@@ -22,4 +22,7 @@ return [
     'resources' => 'Resources',
     'there_no_resource' => 'There is no resource vinculated to this course.',
     'update_resource' => 'Update Resource',
+    'price' => 'Price',
+    'manager_resources' => 'Manage Course Resources',
+    'resource' => 'Resource',
 ];

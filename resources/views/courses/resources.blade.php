@@ -6,8 +6,8 @@
 
 @section('content')
 @component('common-components.breadcrumb')
-@slot('pagetitle') Forms @endslot
-@slot('title') File Upload @endslot
+@slot('pagetitle') AMID @endslot
+@slot('title') Resources @endslot
 @endcomponent
 
 <!-- add Resource -->
@@ -117,23 +117,28 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>@lang('app.resource')</th>
                                 <th>@lang('app.title')</th>
                                 <th>@lang('app.description')</th>
                                 <th>@lang('app.resource_type')</th>
                                 <th>@lang('app.media_type')</th>
-                                <th>Actions</th>
+                                <th class="text-center align-middle">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($resources as $resource)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td> <a href="{{ $resource->url }}" target="_blank" class="me-2"
+                                            style="font-size: 18px; text-decoration: none;">
+                                            <i class="uil uil-file-plus"></i>
+                                        </a></td>
                                     <td>{{ $resource->title ?? ''}}</td>
                                     <td>{{ $resource->description ?? ''}}</td>
                                     <td>{{ $resource->resource_type ?? ''}}</td>
                                     <td>{{ $resource->type ?? ''}}</td>
 
-                                    <td>
+                                    <td class="text-center align-middle">
                                         <a href="{{ url('/resources/' . $resource->id . '/edit') }}"
                                             class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
 

@@ -1,13 +1,16 @@
 <?php
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use App\Models\Course;
-use Exception;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Models\Course;
+use App\Models\Student;
+use App\Models\Payment;
+
+use Illuminate\Support\Facades\Auth;
+
+use Exception;
 
 class PayPalController extends Controller
 {
@@ -38,8 +41,8 @@ class PayPalController extends Controller
                 ]
             ],
             "application_context" => [
-                "return_url" => route('paypal.capture'), // Redirects here after approval
-                "cancel_url" => route('test.paypal') // Redirects here if user cancels
+                "return_url" => route('paypal.capture', ['course_id' => $id, 'amount' => $amount]),
+                "cancel_url" => route('test.paypal')
             ]
         ]);
 
@@ -66,18 +69,41 @@ class PayPalController extends Controller
         $provider->setAccessToken($provider->getAccessToken());
 
         try {
-            // Capture the payment using the token from PayPal
             $response = $provider->capturePaymentOrder($request->query('token'));
 
-            // Check if the payment was successful
+            Log::info('PayPal Response:', $response);
+
             if (isset($response['status']) && $response['status'] === 'COMPLETED') {
-                return redirect()->route('courses.listCourses')->with('success', 'Payment successful.');
+                $transactionId = $response['id'] ?? 'unknown';
+                $amount = $request->query('amount');
+                $currency = 'BRL';
+                $user = auth()->user();
+                $student = $user->student;
+                $studentId = $student->id;
+                $courseId = $request->query('course_id');
+
+                // Save payment data
+                Payment::create([
+                    'student_id' => $studentId,
+                    'course_id' => $courseId,
+                    'transaction_id' => $transactionId,
+                    'status' => 'COMPLETED',
+                    'amount' => $amount,
+                    'currency' => $currency,
+                ]);
+
+                // Associate student with the course
+                $student = Student::find($studentId);
+                $student->courses()->attach($courseId, [
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+
+                return redirect()->route('courses.listCourses')->with('success', 'Payment successful. You now have access to the course.');
             }
 
-            // If the payment was not completed, handle the error
             return redirect()->route('courses.listCourses')->withErrors('Payment failed. Please try again.');
         } catch (Exception $e) {
-            // Handle exceptions and display error messages
             return redirect()->route('courses.listCourses')->withErrors('An error occurred: ' . $e->getMessage());
         }
     }

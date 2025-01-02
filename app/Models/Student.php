@@ -30,6 +30,14 @@ class Student extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'course_student');
+    }
     use HasFactory;
 }

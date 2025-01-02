@@ -36,6 +36,15 @@ class Course extends Model
     {
         return $this->belongsTo(Module::class);
     }
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'course_student');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 
     use HasFactory;
 }

@@ -19,6 +19,11 @@ class CourseController extends Controller
         $courses = Course::where('institution_id', Auth::user()->institution_id)->get();
         return view('courses.index', compact('courses'));
     }
+    public function listCourses()
+    {
+        $courses = Course::where('institution_id', Auth::user()->institution_id)->get();
+        return view('courses.listcourses', compact('courses'));
+    }
 
     // Show form to create a new course
     public function create()
@@ -181,5 +186,11 @@ class CourseController extends Controller
         }
     }
 
+    public function enroll($id)
+    {
+        $course = Course::where('institution_id', Auth::user()->institution_id)
+            ->findOrFail($id);
 
+        return view('courses.enroll', compact('course'));
+    }
 }

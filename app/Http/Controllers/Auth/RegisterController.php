@@ -66,7 +66,7 @@ class RegisterController extends Controller
 
     /**
      * Create a new user instance after a valid registration.
-     * TODO hard code institution and roles..... 
+     * TODO hard code institution and roles.....
      * @param  array  $data
      * @return \App\Models\User
      */
@@ -81,11 +81,9 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
                 'institution_id' => 1,
             ]);
-            $role = Role::where('name', 'student')->first();
-            if (!$role) {
-                throw new Exception('Role not found');
-            }
-            $user->roles()->attach($role->id);
+            //   $role = Role::where('name', 'student')->first();
+            //    $user->roles()->attach($role->id);
+            $user->roles()->attach(2);  // Student
 
             Student::create([
                 'user_id' => $user->id,

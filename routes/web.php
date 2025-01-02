@@ -8,6 +8,7 @@ use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\AccessController;
+use App\Http\Controllers\PaypalController;
 use Illuminate\Support\Facades\Storage;
 use Aws\S3\S3Client;
 
@@ -55,6 +56,7 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     Route::delete('/modules/{id}', [ModuleController::class, 'destroy'])->name('modules.destroy');
     // Courses
     Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+    Route::get('/listcourses', [CourseController::class, 'listCourses'])->name('courses.listCourses');
     Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
     Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
     Route::get('/courses/{id}', [CourseController::class, 'show'])->name('courses.show');
@@ -71,6 +73,20 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
 
     // Access
     Route::resource('access', AccessController::class)->only(['index', 'destroy']);
+
+    // Paypall
+    Route::get('paypal/payment/{id}', [PayPalController::class, 'createPayment'])->name('paypal.payment');
+    Route::get('paypal/capture', [PayPalController::class, 'capturePayment'])->name('paypal.capture');
+    Route::get('payment/success', function () {
+        return view('paypal.payment-success');
+    })->name('success');
+    Route::get('payment/error', function () {
+        return view('paypal.payment-failed');
+    })->name('error');
+    Route::get('test/paypal', function () {
+        return view('paypal.test-paypal');
+    })->name('test.paypal');
+
 });
 
 Route::middleware('auth')->group(function () {

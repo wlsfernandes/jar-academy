@@ -25,4 +25,5 @@ return [
     'price' => 'Price',
     'manager_resources' => 'Manage Course Resources',
     'resource' => 'Resource',
+    'enroll' => 'Click here to Enroll',
 ];

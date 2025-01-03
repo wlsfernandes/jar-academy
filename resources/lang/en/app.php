@@ -26,4 +26,10 @@ return [
     'manager_resources' => 'Manage Course Resources',
     'resource' => 'Resource',
     'enroll' => 'Click here to Enroll',
+    'my_courses' => 'My Courses',
+    'amid_courses' => 'Amid Courses',
+    'docs' => 'Documents',
+    'download' => 'Download',
+    'tasks' => 'Tasks',
+    'tests' => 'Tests',
 ];

@@ -25,6 +25,15 @@ class CourseController extends Controller
         return view('courses.listcourses', compact('courses'));
     }
 
+    public function myCourses()
+    {
+        $courses = Course::where('institution_id', Auth::user()->institution_id)
+            ->whereHas('students') // Ensures there are associated students in the course_student table
+            ->get();
+
+        return view('courses.mycourses', compact('courses'));
+    }
+
     // Show form to create a new course
     public function create()
     {

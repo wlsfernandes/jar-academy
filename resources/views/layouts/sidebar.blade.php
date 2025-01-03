@@ -46,7 +46,7 @@
                     <li>
                         <a href="{{url('listcourses')}}" class="waves-effect">
                             <i class="fas fa-graduation-cap icon"></i>
-                            <span>@lang('app.courses')</span>
+                            <span>@lang('app.amid_courses')</span>
                         </a>
                     </li>
                 @endcan
@@ -91,7 +91,14 @@
                     </li>
                 @endcan
                 <li class="menu-title">@lang('translation.Apps')</li>
-
+                @can('access-student')
+                    <li>
+                        <a href="{{url('mycourses')}}" class="waves-effect">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>@lang('app.my_courses')</span>
+                        </a>
+                    </li>
+                @endcan
                 <li>
                     <a href="{{url('index')}}" class=" waves-effect">
                         <i class="uil-microphone"></i>

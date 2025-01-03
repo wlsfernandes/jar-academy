@@ -83,6 +83,11 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     });
     // Student access
     Route::get('/listcourses', [CourseController::class, 'listCourses'])->name('courses.listCourses');
+    Route::get('/mycourses', [CourseController::class, 'myCourses'])->name('courses.myCourses');
+    Route::get('/resources/{id}/docs', [ResourceController::class, 'docs'])->name('resources.docs');
+    Route::get('/resources/{id}/tasks', [ResourceController::class, 'tasks'])->name('resources.tasks');
+    Route::get('/resources/{id}/test', [ResourceController::class, 'test'])->name('resources.test');
+
 
     // Paypall
     Route::get('paypal/payment/{id}', [PayPalController::class, 'createPayment'])->name('paypal.payment');

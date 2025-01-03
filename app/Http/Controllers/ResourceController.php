@@ -22,6 +22,14 @@ class ResourceController extends Controller
         $types = Resource::getTypes();
         return view('resources.edit', compact('resource', 'resource_types', 'types'));
     }
+    public function docs($id)
+    {
+        $resources = Resource::where('course_id', $id)
+            ->where('resource_type', 'documento')
+            ->get();
+
+        return view('resources.docs', compact('resources'));
+    }
 
 
     public function destroy($id)

@@ -83,6 +83,12 @@
                             <span>@lang('app.users')</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{url('payments')}}" class="waves-effect">
+                            <i class="uil-money-bill"></i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
                 @endcan
                 <li class="menu-title">@lang('translation.Apps')</li>
 

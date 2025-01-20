@@ -31,6 +31,24 @@ class ResourceController extends Controller
         return view('resources.docs', compact('resources'));
     }
 
+    public function tasks($id)
+    {
+        $resources = Resource::where('course_id', $id)
+            ->where('resource_type', 'tarefa')
+            ->get();
+
+        return view('resources.tasks', compact('resources'));
+    }
+
+    public function tests($id)
+    {
+        $resources = Resource::where('course_id', $id)
+            ->where('resource_type', 'prova')
+            ->get();
+
+        return view('resources.tests', compact('resources'));
+    }
+
 
     public function destroy($id)
     {

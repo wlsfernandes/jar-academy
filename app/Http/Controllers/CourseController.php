@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Module;
+use App\Models\Task;
+use App\Models\Test;
 use App\Models\Resource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -155,29 +157,40 @@ class CourseController extends Controller
         return view('courses.resources', compact('course', 'resources', 'resource_types', 'types'));
     }
 
-
     public function addResource(Request $request, $id)
     {
-
         try {
             DB::beginTransaction();
 
+            // Find the course by ID
             $course = Course::findOrFail($id);
 
+            // Handle file upload
             $file = $request->file('document');
-
             $url = StorageS3::uploadToS3($file);
 
             if ($url) {
-
-                Resource::create([
+                $resourceData = [
                     'course_id' => $course->id,
                     'title' => $request->input('title'),
                     'description' => $request->input('description'),
                     'type' => $request->input('type'),
                     'resource_type' => $request->input('resource_type'),
                     'url' => $url,
-                ]);
+                ];
+
+                $resource = Resource::create($resourceData);
+
+                $resourceType = $request->input('resource_type');
+                if ($resourceType === 'tarefa') {
+                    Task::create([
+                        'resource_id' => $resource->id, // Set the resource ID
+                    ]);
+                } elseif ($resourceType === 'prova') {
+                    Test::create([
+                        'resource_id' => $resource->id, // Set the resource ID
+                    ]);
+                }
 
                 DB::commit();
                 session()->flash('success', 'Resource added successfully.');
@@ -194,6 +207,8 @@ class CourseController extends Controller
             return redirect()->route('courses.index');
         }
     }
+
+
 
     public function enroll($id)
     {

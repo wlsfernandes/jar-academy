@@ -34,5 +34,8 @@ class Resource extends Model
     {
         return ['audio', 'docx', 'pdf', 'power-point', 'video'];
     }
-
+    public function resourceable()
+    {
+        return $this->morphTo();
+    }
 }

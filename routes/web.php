@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StudentTaskController;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -71,13 +72,14 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');
         Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
         Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
-        Route::get('/courses/{id}/resources', [CourseController::class, 'resources'])->name('courses.resources');
-        Route::post('/courses/{id}/addResource', [CourseController::class, 'addResource'])->name('courses.addResource');
+
 
         // Resources
         Route::get('/resources/{id}/edit', [ResourceController::class, 'edit'])->name('resources.edit');
         Route::put('/resources/{id}', [ResourceController::class, 'update'])->name('resources.update');
         Route::delete('/resources/{id}', [ResourceController::class, 'destroy'])->name('resources.destroy');
+
+
 
         Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
     });
@@ -86,7 +88,10 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     Route::get('/mycourses', [CourseController::class, 'myCourses'])->name('courses.myCourses');
     Route::get('/resources/{id}/docs', [ResourceController::class, 'docs'])->name('resources.docs');
     Route::get('/resources/{id}/tasks', [ResourceController::class, 'tasks'])->name('resources.tasks');
-    Route::get('/resources/{id}/test', [ResourceController::class, 'test'])->name('resources.test');
+    Route::get('/resources/{id}/test', [ResourceController::class, 'tests'])->name('resources.tests');
+    Route::get('/task/{id}/edit', [StudentTaskController::class, 'edit'])->name('edit');
+    Route::post('/task/{id}/addTask', [StudentTaskController::class, 'addTask'])->name('addTask');
+
 
 
     // Paypall

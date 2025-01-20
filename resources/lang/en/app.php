@@ -32,4 +32,5 @@ return [
     'download' => 'Download',
     'tasks' => 'Tasks',
     'tests' => 'Tests',
+    'upload_task' => 'Upload Your Answer',
 ];

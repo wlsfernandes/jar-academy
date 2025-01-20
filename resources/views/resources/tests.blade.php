@@ -17,7 +17,8 @@
     <div class="col-lg-12">
         <div class="card border border-primary">
             <div class="card-header bg-transparent border-primary">
-                <h5 class="my-0 text-primary"><i class="uil uil-file-plus"></i> @lang('app.docs')</b></h5>
+                <h5 class="my-0 text-primary"><i class="uil uil-file-plus"></i> @lang('app.test')</b></h5>
+                <p>@lang('app.test_desc')</p>
             </div>
             @if ($resources->isEmpty())
                 <div class="alert alert-warning" role="alert">
@@ -33,8 +34,7 @@
                                 <th>@lang('app.title')</th>
                                 <th>@lang('app.description')</th>
                                 <th>@lang('app.resource_type')</th>
-                                <th>@lang('app.media_type')</th>
-                                <th class="text-center align-middle">@lang('app.download')</th>
+                                <th class="text-center align-middle">@lang('app.start_test')</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,12 +44,11 @@
 
                                     <td>{{ $resource->title ?? ''}}</td>
                                     <td>{{ $resource->description ?? ''}}</td>
-                                    <td>{{ $resource->resource_type ?? ''}}</td>
                                     <td>{{ $resource->type ?? ''}}</td>
-                                    <td class="text-center align-middle"> <a class="px-3 text-danger"
-                                            href="{{ $resource->url }}" target="_blank" class="me-2"
-                                            style="font-size: 22px; text-decoration: none;">
-                                            <i class="uil uil-file-plus"></i>
+                                    <td class="text-center align-middle"> <a
+                                            href="{{ url('/test/' . $resource->id . '/edit') }}" class="px-3 text-primary"><i
+                                                class="uil uil-stopwatch font-size-18"></i></a>
+
                                         </a></td>
 
                                     </td>

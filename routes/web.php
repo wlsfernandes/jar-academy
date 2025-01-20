@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\StudentTaskController;
+
 use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +12,8 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\StudentTaskController;
+use App\Http\Controllers\StudentTestController;
 use Illuminate\Support\Facades\Storage;
 use Aws\S3\S3Client;
 
@@ -79,8 +81,6 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::put('/resources/{id}', [ResourceController::class, 'update'])->name('resources.update');
         Route::delete('/resources/{id}', [ResourceController::class, 'destroy'])->name('resources.destroy');
 
-
-
         Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
     });
     // Student access
@@ -90,7 +90,11 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     Route::get('/resources/{id}/tasks', [ResourceController::class, 'tasks'])->name('resources.tasks');
     Route::get('/resources/{id}/test', [ResourceController::class, 'tests'])->name('resources.tests');
     Route::get('/task/{id}/edit', [StudentTaskController::class, 'edit'])->name('edit');
-    Route::post('/task/{id}/addTask', [StudentTaskController::class, 'addTask'])->name('addTask');
+    Route::post('/studentTasks', [StudentTaskController::class, 'addTask'])->name('addTask');
+    Route::get('/test/{id}/edit', [StudentTestController::class, 'edit'])->name('edit');
+    Route::post('/tests/submit', [StudentTestController::class, 'submitTest'])->name('submitTest');
+
+
 
 
 

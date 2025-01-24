@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-@lang('translation.Form_File_Upload')
+@lang('app.test')
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
     <div class="col-lg-12">
         <div class="card border border-primary">
             <div class="card-header bg-transparent border-primary">
-                <h5 class="my-0 text-primary"><i class="uil uil-file-plus"></i> @lang('app.test')</b></h5>
+                <h5 class="my-0 text-primary"><i class="uil uil-stopwatch font-size-24"></i> @lang('app.test')</b></h5>
                 <p>@lang('app.test_desc')</p>
             </div>
             @if ($resources->isEmpty())
@@ -33,7 +33,6 @@
                                 <th>#</th>
                                 <th>@lang('app.title')</th>
                                 <th>@lang('app.description')</th>
-                                <th>@lang('app.resource_type')</th>
                                 <th class="text-center align-middle">@lang('app.start_test')</th>
                             </tr>
                         </thead>
@@ -44,10 +43,9 @@
 
                                     <td>{{ $resource->title ?? ''}}</td>
                                     <td>{{ $resource->description ?? ''}}</td>
-                                    <td>{{ $resource->type ?? ''}}</td>
                                     <td class="text-center align-middle"> <a
                                             href="{{ url('/test/' . $resource->id . '/edit') }}" class="px-3 text-primary"><i
-                                                class="uil uil-stopwatch font-size-18"></i></a>
+                                                class="uil uil-stopwatch font-size-24"></i></a>
 
                                         </a></td>
 

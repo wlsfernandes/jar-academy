@@ -70,16 +70,16 @@ AMID
 
                                 <td class="text-center align-middle">
 
-                                    <a href="{{ url('/resources/' . $course->id . '/docs') }}" class="px-3 text-danger"><i
+                                    <a href="{{ url('/resources/' . $course->id . '/docs') }}" class="px-3 text-primary"><i
                                             class="uil uil uil-file-plus font-size-24"></i></a>
                                 </td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ url('/resources/' . $course->id . '/tasks') }}" class="px-3 text-success"><i
+                                    <a href="{{ url('/resources/' . $course->id . '/tasks') }}" class="px-3 text-primary"><i
                                             class="uil uil-apps font-size-24"></i></a>
                                 </td>
                                 <td class="text-center align-middle">
                                     <a href="{{ url('/resources/' . $course->id . '/test') }}" class="px-3 text-primary"><i
-                                            class="uil uil-pen font-size-18"></i></a>
+                                            class="uil uil-pen font-size-24"></i></a>
                                 </td>
                             </tr>
                         @endforeach

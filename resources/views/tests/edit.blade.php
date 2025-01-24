@@ -2,7 +2,7 @@
 @extends('layouts.master')
 
 @section('title')
-@lang('translation.Form_File_Upload')
+@lang('app.test')
 @endsection
 
 @section('content')
@@ -61,7 +61,7 @@
                             <div class="col-md-6 d-flex align-items-center">
                                 <a href="{{ $resource->url }}" target="_blank" class="me-2"
                                     style="font-size: 18px; text-decoration: none;">
-                                    <i class="uil uil-file-plus"></i>
+                                    <i class="uil uil-file-plus font-size-24"></i>
                                 </a>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                             </a>
                         </button>
                         <button type="submit"
-                            class="btn btn-primary waves-effect waves-light">@lang('app.update_task')</button>
+                            class="btn btn-primary waves-effect waves-light">@lang('app.finish_test')</button>
                     </div>
                 </form>
             </div>
@@ -106,8 +106,14 @@
 @section('script')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        let countdown = 50 * 60; // 50 minutes in seconds
         const timerDisplay = document.getElementById('timer');
+        const countdownKey = 'countdown_timer';
+        const defaultCountdown = 50 * 60; // 50 minutes in seconds
+
+        // Retrieve the countdown value from localStorage or initialize it
+        let countdown = localStorage.getItem(countdownKey)
+            ? parseInt(localStorage.getItem(countdownKey), 10)
+            : defaultCountdown;
 
         function updateTimer() {
             const minutes = Math.floor(countdown / 60);
@@ -115,17 +121,42 @@
             timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
             countdown--;
 
+            // Save the remaining time to localStorage
+            localStorage.setItem(countdownKey, countdown);
+
             if (countdown < 0) {
                 clearInterval(timerInterval);
+                localStorage.removeItem(countdownKey); // Clear storage when timer ends
                 alert('Time is up!');
-                document.querySelector('form').submit(); // Auto-submit the form
+                submitForm(); // Auto-submit the form
             }
+        }
+
+        function submitForm() {
+            const form = document.querySelector('form');
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Form submitted successfully:', data);
+                })
+                .catch(error => {
+                    console.error('Error submitting the form:', error);
+                });
         }
 
         const timerInterval = setInterval(updateTimer, 1000);
         updateTimer();
     });
 </script>
+
 <script src="{{ asset('/assets/libs/tinymce/tinymce.min.js') }}"></script>
 <script>
     const editorConfig = {

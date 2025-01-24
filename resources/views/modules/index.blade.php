@@ -21,7 +21,7 @@ Modules
     <div class="col-lg-12">
         <div class="card border border-primary">
             <div class="card-header bg-transparent border-primary">
-                <h5 class="my-0 text-primary"><i class="uil-money-bill"></i> Modules</b></h5>
+                <h5 class="my-0 text-primary"></i> Modules</b></h5>
             </div>
             <div class="card-body">
                 @if (session()->has('success'))
@@ -65,18 +65,17 @@ Modules
                                 <td>{{ $module->name ?? ''}}</td>
                                 <td>
                                     <a href="{{ url('/modules/' . $module->id) }}" class="px-3 text-primary"><i
-                                            class="fas fa-eye"></i></a>
+                                            class="fas fa-eye font-size-20"></i></a>
                                     <a href="{{ url('/modules/' . $module->id . '/edit') }}" class="px-3 text-primary"><i
-                                            class="uil uil-pen font-size-18"></i></a>
+                                            class="uil uil-pen font-size-20"></i></a>
 
                                     <a href="javascript:void(0);" class="px-3 text-danger"
                                         onclick="event.preventDefault(); if(confirm('Confirm delete?')) { document.getElementById('delete-form-{{ $module->id }}').submit(); }">
-                                        <i class="uil uil-trash-alt font-size-18"></i>
+                                        <i class="uil uil-trash-alt font-size-20"></i>
                                     </a>
 
-                                    <form id="delete-form-{{ $module->id }}"
-                                        action="{{ url('/modules/' . $module->id) }}" method="POST"
-                                        style="display: none;">
+                                    <form id="delete-form-{{ $module->id }}" action="{{ url('/modules/' . $module->id) }}"
+                                        method="POST" style="display: none;">
                                         @method('DELETE')
                                         @csrf
                                     </form>

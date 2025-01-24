@@ -31,7 +31,14 @@ use Aws\S3\S3Client;
 Route::get('/', function () {
     return view('site.welcome');
 });
-
+Route::get('/test-db', function () {
+    try {
+        DB::connection()->getPdo();
+        return 'Database connection is successful!';
+    } catch (\Exception $e) {
+        return 'Database connection error: ' . $e->getMessage();
+    }
+});
 Auth::routes();
 
 Route::middleware(['auth', 'institution.scope'])->group(function () {

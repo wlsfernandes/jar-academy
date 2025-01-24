@@ -15,7 +15,7 @@ class InstitutionSeeder extends Seeder
         DB::table('institutions')->insert([
             [
                 'name' => 'Amid Learning',
-                'email' => 'paranastate@gmail.com',
+                'email' => 'joao@gmail.com',
                 'address' => '1240 Power Ferris Rd - Marietta - GA',
                 'phone' => '(678) 523-3172',
                 'created_at' => now(),

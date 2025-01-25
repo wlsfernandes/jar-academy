@@ -43,4 +43,5 @@ return [
     'finish_test' => 'Finish Test',
     'disciplines' => 'Disciplines',
     'certifications' => 'Certifications',
+    'certification' => 'Certification',
 ];

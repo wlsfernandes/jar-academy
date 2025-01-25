@@ -31,9 +31,9 @@ class Student extends Model
         return $this->hasMany(Payment::class);
     }
 
-    public function disciplines()
+    public function certifications()
     {
-        return $this->belongsToMany(Discipline::class, 'discipline_student');
+        return $this->belongsToMany(Certification::class, 'certification_student');
     }
     use HasFactory;
 }

@@ -57,6 +57,32 @@ AMID
 
                 <form action="{{ url('/disciplines') }}" method="post">
                     @csrf
+                    <div class="mb-3 row">
+                        <label for="certification" class="col-md-2 col-form-label">@lang('app.certification'):</label>
+                        <div class="col-md-6">
+                            <select class="form-control" id="certification" name="certification" required>
+                                <option value="">@lang('app.select')</option>
+                                @foreach($certifications as $certification)
+                                    <option value="{{ $certification->id }}" {{ old('certification') == $certification->id ? 'selected' : '' }}>
+                                        {{ $certification->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="module" class="col-md-2 col-form-label">@lang('app.modules'):</label>
+                        <div class="col-md-6">
+                            <select class="form-control" id="module" name="module" required>
+                                <option value="">@lang('app.select')</option>
+                                @foreach($modules as $module)
+                                    <option value="{{ $module->id }}" {{ old('module') == $module->id ? 'selected' : '' }}>
+                                        {{ $module->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
 
                     <div class="mb-3 row">
                         <label for="title" class="col-md-2 col-form-label">@lang('app.title'):</label>
@@ -77,6 +103,7 @@ AMID
                         </div>
 
                     </div> -->
+
                     <div class="mb-3 row">
                         <label for="small_description"
                             class="col-md-2 col-form-label">@lang('app.small_description'):</label>
@@ -93,19 +120,8 @@ AMID
                         </div>
                     </div>
 
-                    <div class="mb-3 row">
-                        <label for="module" class="col-md-2 col-form-label">@lang('app.modules'):</label>
-                        <div class="col-md-6">
-                            <select class="form-control" id="module" name="module" required>
-                                <option value="">@lang('app.select')</option>
-                                @foreach($modules as $module)
-                                    <option value="{{ $module->id }}" {{ old('module') == $module->id ? 'selected' : '' }}>
-                                        {{ $module->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+
+
 
                     <div class="d-flex flex-wrap gap-3">
                         <button type="submit" class="btn btn-secondary waves-effect">

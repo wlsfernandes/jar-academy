@@ -95,6 +95,8 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     });
     // Student access
     Route::get('/listdisciplines', [DisciplineController::class, 'listDisciplines'])->name('disciplines.listDisciplines');
+    Route::get('/list-certifications', [CertificationController::class, 'listCertifications'])->name('certifications.listCertifications');
+    Route::get('/mycertifications', [CertificationController::class, 'myCertifications'])->name('certifications.myCertifications');
     Route::get('/mydisciplines', [DisciplineController::class, 'myDisciplines'])->name('disciplines.myDisciplines');
     Route::get('/resources/{id}/docs', [ResourceController::class, 'docs'])->name('resources.docs');
     Route::get('/resources/{id}/tasks', [ResourceController::class, 'tasks'])->name('resources.tasks');

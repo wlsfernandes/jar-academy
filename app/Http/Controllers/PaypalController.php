@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Models\Discipline;
+use App\Models\Certification;
 use App\Models\Student;
 use App\Models\Payment;
 
@@ -21,9 +21,9 @@ class PayPalController extends Controller
     public function createPayment($id)
     {
 
-        $discipline = Discipline::where('institution_id', Auth::user()->institution_id)
+        $certification = Certification::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
-        $amount = $discipline->amount;
+        $amount = $certification->amount;
 
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
@@ -41,7 +41,7 @@ class PayPalController extends Controller
                 ]
             ],
             "application_context" => [
-                "return_url" => route('paypal.capture', ['discipline_id' => $id, 'amount' => $amount]),
+                "return_url" => route('paypal.capture', ['certification_id' => $id, 'amount' => $amount]),
                 "cancel_url" => route('test.paypal')
             ]
         ]);
@@ -80,12 +80,12 @@ class PayPalController extends Controller
                 $user = auth()->user();
                 $student = $user->student;
                 $studentId = $student->id;
-                $disciplineId = $request->query('discipline_id');
+                $certificationId = $request->query('certification_id');
 
                 // Save payment data
                 Payment::create([
                     'student_id' => $studentId,
-                    'discipline_id' => $disciplineId,
+                    'certification_id' => $certificationId,
                     'transaction_id' => $transactionId,
                     'status' => 'COMPLETED',
                     'amount' => $amount,
@@ -94,17 +94,17 @@ class PayPalController extends Controller
 
                 // Associate student with the discipline
                 $student = Student::find($studentId);
-                $student->disciplines()->attach($disciplineId, [
+                $student->certifications()->attach($certificationId, [
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
 
-                return redirect()->route('disciplines.listDisciplines')->with('success', 'Payment successful. You now have access to the discipline.');
+                return redirect()->route('certifications.listCertifications')->with('success', 'Payment successful. You now have access to this Certification.');
             }
 
-            return redirect()->route('disciplines.listDisciplines')->withErrors('Payment failed. Please try again.');
+            return redirect()->route('certifications.listCertifications')->withErrors('Payment failed. Please try again.');
         } catch (Exception $e) {
-            return redirect()->route('disciplines.listDisciplines')->withErrors('An error occurred: ' . $e->getMessage());
+            return redirect()->route('certifications.listCertifications')->withErrors('An error occurred: ' . $e->getMessage());
         }
     }
 }

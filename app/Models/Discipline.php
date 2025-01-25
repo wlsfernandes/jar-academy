@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Discipline extends Model
 {
 
-    protected $fillable = ['title', 'small_description', 'description', 'module_id', 'institution_id', 'amount', 'currency'];
+    protected $fillable = ['title', 'small_description', 'description', 'module_id', 'institution_id', 'amount', 'currency', 'certification_id'];
 
 
 
@@ -32,10 +32,7 @@ class Discipline extends Model
     {
         return $this->belongsTo(Module::class);
     }
-    public function students()
-    {
-        return $this->belongsToMany(Student::class, 'discipline_student');
-    }
+
 
     public function payments()
     {

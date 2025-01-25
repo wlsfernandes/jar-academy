@@ -44,9 +44,9 @@
                 </li>
                 @can('access-student')
                     <li>
-                        <a href="{{url('listdisciplines')}}" class="waves-effect">
-                            <i class="fas fa-graduation-cap icon"></i>
-                            <span>@lang('app.amid_courses')</span>
+                        <a href="{{url('list-certifications')}}" class="waves-effect">
+                            <i class="uil uil-award icon"></i>
+                            <span>@lang('app.certifications')</span>
                         </a>
                     </li>
                 @endcan
@@ -99,9 +99,9 @@
                 <li class="menu-title">@lang('translation.Apps')</li>
                 @can('access-student')
                     <li>
-                        <a href="{{url('mydisciplines')}}" class="waves-effect">
+                        <a href="{{url('mycertifications')}}" class="waves-effect">
                             <i class="fas fa-user-graduate"></i>
-                            <span>@lang('app.my_disciplines')</span>
+                            <span>@lang('app.my_certifications')</span>
                         </a>
                     </li>
                 @endcan
@@ -111,6 +111,7 @@
                         <span>@lang('app.announcement')</span>
                     </a>
                 </li>
+                <!--
                 <li>
                     <a href="calendar" class="waves-effect">
                         <i class="uil-calender"></i>
@@ -145,7 +146,7 @@
                         <li><a href="contacts-profile">@lang('translation.Profile')</a></li>
                     </ul>
                 </li>
-                <!--
+
                 <li>
                     <a href="file-manager" class=" waves-effect">
                         <i class="uil-comments-alt"></i>

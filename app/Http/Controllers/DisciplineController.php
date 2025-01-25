@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Discipline;
 use App\Models\Module;
+use App\Models\Certification;
 use App\Models\Task;
 use App\Models\Test;
 use App\Models\Resource;
@@ -42,7 +43,8 @@ class DisciplineController extends Controller
     public function create()
     {
         $modules = Module::where('institution_id', Auth::user()->institution_id)->get();
-        return view('disciplines.create', compact('modules'));
+        $certifications = Certification::where('institution_id', Auth::user()->institution_id)->get();
+        return view('disciplines.create', compact('modules', 'certifications'));
     }
     // Show form to edit a discipline
     public function edit($id)
@@ -50,7 +52,8 @@ class DisciplineController extends Controller
         $discipline = Discipline::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
         $modules = Module::where('institution_id', Auth::user()->institution_id)->get();
-        return view('disciplines.edit', compact('discipline', 'modules'));
+        $certifications = Certification::where('instituions_id', Auth::user()->institution_id)->get();
+        return view('disciplines.edit', compact('discipline', 'modules', 'certifications'));
     }
 
 
@@ -92,6 +95,7 @@ class DisciplineController extends Controller
                 'description' => $request->description,
                 'small_description' => $request->small_description,
                 'module_id' => $request->module,
+                'certification_id' => $request->certification,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
                 'amount' => $request->amount ?? 0.00,
                 'currency' => 'BRL',
@@ -128,6 +132,7 @@ class DisciplineController extends Controller
                 'description' => $request->description,
                 'small_description' => $request->small_description,
                 'module_id' => $request->module,
+                'certification_id' => $request->certification,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
                 'amount' => $request->amount ?? 0.00,
                 'currency' => 'BRL',

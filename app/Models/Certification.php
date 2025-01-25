@@ -18,4 +18,9 @@ class Certification extends Model
     {
         return $this->hasMany(Discipline::class);
     }
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'certification_student');
+    }
+
 }

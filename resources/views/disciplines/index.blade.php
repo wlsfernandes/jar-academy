@@ -56,6 +56,7 @@ AMID
                         <tr>
                             <th>#</th>
                             <th>@lang('app.title')</th>
+                            <th>@lang('app.certification')</th>
                             <th>@lang('app.modules')</th>
 
                             <th class="text-center align-middle">@lang('app.manager_resources')</th>
@@ -67,6 +68,7 @@ AMID
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $discipline->title ?? ''}}</td>
+                                <td>{{ $discipline->certification->name ?? ''}}</td>
                                 <td>{{ $discipline->module->name ?? ''}}</td>
                                 <td class="text-center align-middle"> <a
                                         href="{{ url('/disciplines/' . $discipline->id . '/resources') }}"

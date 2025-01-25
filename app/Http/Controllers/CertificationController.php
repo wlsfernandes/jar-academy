@@ -18,6 +18,20 @@ class CertificationController extends Controller
             ->get();
         return view('certifications.index', compact('certifications'));
     }
+    public function listCertifications()
+    {
+        $certifications = Certification::where('institution_id', Auth::user()->institution_id)->get();
+        return view('certifications.list-certifications', compact('certifications'));
+    }
+
+    public function myCertifications()
+    {
+        $certifications = Certification::where('institution_id', Auth::user()->institution_id)
+            ->whereHas('students') // Ensures there are associated students in the discipline_student table
+            ->get();
+
+        return view('certifications.mycertifications', compact('certifications'));
+    }
 
     // Show form to create a new certification
     public function create()

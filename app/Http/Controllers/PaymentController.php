@@ -12,7 +12,7 @@ class PaymentController extends Controller
     // Display a list of payments
     public function index()
     {
-        $payments = Payment::with(['student.user', 'course'])->get();
+        $payments = Payment::with(['student.user', 'certification'])->get();
         return view('payments.index', compact('payments'));
     }
 

@@ -35,7 +35,7 @@
                 <p class="card-title-desc"></p>
 
                 <form method="POST" enctype="multipart/form-data"
-                    action="{{ route('courses.addResource', $course->id) }}" accept-charset="UTF-8"
+                    action="{{ route('disciplines.addResource', $discipline->id) }}" accept-charset="UTF-8"
                     style="display:inline">
                     @csrf
 

@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Course;
+use App\Models\Discipline;
 use App\Models\Module;
 use App\Models\Task;
 use App\Models\Test;
@@ -13,81 +13,81 @@ use Illuminate\Support\Facades\Log;
 use App\Helpers\StorageS3;
 use Exception;
 
-class CourseController extends Controller
+class DisciplineController extends Controller
 {
-    // Display a list of courses
+    // Display a list of disciplines
     public function index()
     {
-        $courses = Course::where('institution_id', Auth::user()->institution_id)
+        $disciplines = Discipline::where('institution_id', Auth::user()->institution_id)
             ->orderBy('title')
             ->get();
-        return view('courses.index', compact('courses'));
+        return view('disciplines.index', compact('disciplines'));
     }
-    public function listCourses()
+    public function listDisciplines()
     {
-        $courses = Course::where('institution_id', Auth::user()->institution_id)->get();
-        return view('courses.listcourses', compact('courses'));
+        $disciplines = Discipline::where('institution_id', Auth::user()->institution_id)->get();
+        return view('disciplines.listdisciplines', compact('disciplines'));
     }
 
-    public function myCourses()
+    public function myDisciplines()
     {
-        $courses = Course::where('institution_id', Auth::user()->institution_id)
-            ->whereHas('students') // Ensures there are associated students in the course_student table
+        $disciplines = Discipline::where('institution_id', Auth::user()->institution_id)
+            ->whereHas('students') // Ensures there are associated students in the discipline_student table
             ->get();
 
-        return view('courses.mycourses', compact('courses'));
+        return view('disciplines.mydisciplines', compact('disciplines'));
     }
 
-    // Show form to create a new course
+    // Show form to create a new discipline
     public function create()
     {
         $modules = Module::where('institution_id', Auth::user()->institution_id)->get();
-        return view('courses.create', compact('modules'));
+        return view('disciplines.create', compact('modules'));
     }
-    // Show form to edit a course
+    // Show form to edit a discipline
     public function edit($id)
     {
-        $course = Course::where('institution_id', Auth::user()->institution_id)
+        $discipline = Discipline::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
         $modules = Module::where('institution_id', Auth::user()->institution_id)->get();
-        return view('courses.edit', compact('course', 'modules'));
+        return view('disciplines.edit', compact('discipline', 'modules'));
     }
 
 
 
-    // Show details of a specific course
+    // Show details of a specific discipline
     public function show($id)
     {
-        $course = Course::where('institution_id', Auth::user()->institution_id)
+        $discipline = Discipline::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
         $modules = Module::where('institution_id', Auth::user()->institution_id)->get();
-        return view('courses.show', compact('course', 'modules'));
+        return view('disciplines.show', compact('discipline', 'modules'));
     }
 
     public function destroy($id)
     {
         DB::beginTransaction();
         try {
-            $course = Course::where('institution_id', Auth::user()->institution_id)->findOrFail($id);
-            $course->delete();
+            $discipline = Discipline::where('institution_id', Auth::user()->institution_id)->findOrFail($id);
+            $discipline->delete();
             DB::commit();
-            return redirect()->route('courses.index')->with('success', 'Course deleted successfully!');
+            return redirect()->route('disciplines.index')->with('success', 'Discipline deleted successfully!');
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error('Error deleting course: ' . $e->getMessage());
+            Log::error('Error deleting discipline: ' . $e->getMessage());
 
-            return redirect()->route('courses.index')->with('error', 'An error occurred while deleting the course. Please try again.');
+            return redirect()->route('disciplines.index')->with('error', 'An error occurred while deleting the discipline. Please try again.');
         }
     }
 
 
-    // Store a new course in the database
+    // Store a new discipline in the database
     public function store(Request $request)
     {
         DB::beginTransaction();
 
         try {
-            Course::create([
+            Discipline::create([
                 'title' => $request->title,
                 'description' => $request->description,
                 'small_description' => $request->small_description,
@@ -97,11 +97,11 @@ class CourseController extends Controller
                 'currency' => 'BRL',
             ]);
             DB::commit();
-            return redirect()->route('courses.index')->with('success', 'Course created successfully!');
+            return redirect()->route('disciplines.index')->with('success', 'Discipline created successfully!');
 
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error('Error creating course and user: ' . $e->getMessage(), [
+            Log::error('Error creating discipline and user: ' . $e->getMessage(), [
                 'exception' => $e,
                 'title' => $request->title,
                 'description' => $request->description,
@@ -111,19 +111,19 @@ class CourseController extends Controller
                 'amount' => $request->amount ?? 0.00,
                 'currency' => 'BRL',
             ]);
-            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while creating the course. Please try again.']);
+            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while creating the discipline. Please try again.']);
         }
     }
 
-    // Update course details in the database
+    // Update discipline details in the database
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
 
         try {
-            $course = Course::findOrFail($id);
+            $discipline = Discipline::findOrFail($id);
 
-            $course->update([
+            $discipline->update([
                 'title' => $request->title,
                 'description' => $request->description,
                 'small_description' => $request->small_description,
@@ -133,11 +133,11 @@ class CourseController extends Controller
                 'currency' => 'BRL',
             ]);
             DB::commit();
-            return redirect()->route('courses.index')->with('success', 'Course updated successfully!');
+            return redirect()->route('disciplines.index')->with('success', 'Discipline updated successfully!');
 
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error('Error updating course and user: ' . $e->getMessage(), [
+            Log::error('Error updating discipline and user: ' . $e->getMessage(), [
                 'exception' => $e,
                 'title' => $request->title,
                 'description' => $request->description,
@@ -145,18 +145,18 @@ class CourseController extends Controller
                 'module_id' => $request->module,
                 'institution_id' => Auth::user()->institution_id,
             ]);
-            return redirect()->back()->withInput()->withErrors(['error' => 'Failed to Update course: ']);
+            return redirect()->back()->withInput()->withErrors(['error' => 'Failed to Update discipline: ']);
         }
     }
 
     public function resources($id)
     {
-        $course = Course::where('institution_id', Auth::user()->institution_id)
+        $discipline = Discipline::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
-        $resources = $course->resources;
+        $resources = $discipline->resources;
         $resource_types = Resource::getResourceTypes();
         $types = Resource::getTypes();
-        return view('courses.resources', compact('course', 'resources', 'resource_types', 'types'));
+        return view('disciplines.resources', compact('discipline', 'resources', 'resource_types', 'types'));
     }
 
     public function addResource(Request $request, $id)
@@ -164,8 +164,8 @@ class CourseController extends Controller
         try {
             DB::beginTransaction();
 
-            // Find the course by ID
-            $course = Course::findOrFail($id);
+            // Find the discipline by ID
+            $discipline = Discipline::findOrFail($id);
 
             // Handle file upload
             $file = $request->file('document');
@@ -173,7 +173,7 @@ class CourseController extends Controller
 
             if ($url) {
                 $resourceData = [
-                    'course_id' => $course->id,
+                    'discipline_id' => $discipline->id,
                     'title' => $request->input('title'),
                     'description' => $request->input('description'),
                     'type' => $request->input('type'),
@@ -206,7 +206,7 @@ class CourseController extends Controller
             DB::rollBack();
             session()->flash('error', 'Failed to upload file: ' . $e->getMessage());
             Log::error('Error uploading file: ' . $e->getMessage());
-            return redirect()->route('courses.index');
+            return redirect()->route('disciplines.index');
         }
     }
 
@@ -214,9 +214,9 @@ class CourseController extends Controller
 
     public function enroll($id)
     {
-        $course = Course::where('institution_id', Auth::user()->institution_id)
+        $discipline = Discipline::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
 
-        return view('courses.enroll', compact('course'));
+        return view('disciplines.enroll', compact('discipline'));
     }
 }

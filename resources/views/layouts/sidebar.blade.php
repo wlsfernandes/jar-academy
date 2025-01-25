@@ -58,9 +58,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{url('courses')}}" class="waves-effect">
+                        <a href="{{url('disciplines')}}" class="waves-effect">
                             <i class="fas fa-graduation-cap icon"></i>
-                            <span>@lang('app.courses')</span>
+                            <span>@lang('app.disciplines')</span>
                         </a>
                     </li>
 

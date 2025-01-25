@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Course extends Model
+class Discipline extends Model
 {
 
     protected $fillable = ['title', 'small_description', 'description', 'module_id', 'institution_id', 'amount', 'currency'];
@@ -27,10 +27,6 @@ class Course extends Model
     }
 
     // Define the relationship for one or many classrooms
-    public function classrooms()
-    {
-        return $this->hasMany(Classroom::class);
-    }
 
     public function module()
     {
@@ -38,7 +34,7 @@ class Course extends Model
     }
     public function students()
     {
-        return $this->belongsToMany(Student::class, 'course_student');
+        return $this->belongsToMany(Student::class, 'discipline_student');
     }
 
     public function payments()

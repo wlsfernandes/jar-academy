@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
 {
-   
-    protected $fillable =  ['name', 'institution_id'];
+
+    protected $fillable = ['name', 'institution_id'];
 
     public function institution()
     {
         return $this->belongsTo(Institution::class);
     }
-    public function courses()
+    public function disciplines()
     {
-        return $this->hasMany(Course::class);
+        return $this->hasMany(Discipline::class);
     }
     use HasFactory;
-    
+
 }

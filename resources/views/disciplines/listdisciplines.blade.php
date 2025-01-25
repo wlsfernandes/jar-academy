@@ -10,7 +10,7 @@ AMID
 @section('content')
 @component('common-components.breadcrumb')
 @slot('pagetitle')
-@lang('app.courses')
+@lang('app.disciplines')
 @endslot
 @slot('title')
 @endslot
@@ -21,7 +21,8 @@ AMID
     <div class="col-lg-12">
         <div class="card border border-primary">
             <div class="card-header bg-transparent border-primary">
-                <h5 class="my-0 text-primary"><i class="fas fa-graduation-cap icon"></i> @lang('app.courses')</b></h5>
+                <h5 class="my-0 text-primary"><i class="fas fa-graduation-cap icon"></i> @lang('app.disciplines')</b>
+                </h5>
             </div>
             <div class="card-body">
                 <div class="card-body">
@@ -53,13 +54,14 @@ AMID
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($courses as $course)
+                        @foreach ($disciplines as $discipline)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $course->title ?? ''}}</td>
-                                <td>{{ $course->module->name ?? ''}}</td>
-                                <td>{{ $course->amount ?? ''}}</td>
-                                <td class="text-center align-middle"> <a href="{{ url('/paypal/payment/' . $course->id) }}"
+                                <td>{{ $discipline->title ?? ''}}</td>
+                                <td>{{ $discipline->module->name ?? ''}}</td>
+                                <td>{{ $discipline->amount ?? ''}}</td>
+                                <td class="text-center align-middle"> <a
+                                        href="{{ url('/paypal/payment/' . $discipline->id) }}"
                                         class="px-3 text-success"><img src="assets/images/paypal.png" style="width:64px;">
                                         </img></a></td>
 

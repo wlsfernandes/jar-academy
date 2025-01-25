@@ -21,17 +21,7 @@ class Teacher extends Model
 
     public function courses()
     {
-        return $this->hasMany(Course::class);
-    }
-
-    public function classrooms()
-    {
-        return $this->hasMany(Classroom::class);
-    }
-
-    public function assignments()
-    {
-        return $this->hasManyThrough(Assignment::class, Classroom::class);
+        return $this->hasMany(Discipline::class);
     }
 
     use HasFactory;

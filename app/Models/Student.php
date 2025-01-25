@@ -21,10 +21,6 @@ class Student extends Model
         return $this->hasMany(Assignment::class);
     }
 
-    public function classrooms()
-    {
-        return $this->belongsToMany(Classroom::class, 'student_class');
-    }
 
     public function user()
     {
@@ -35,9 +31,9 @@ class Student extends Model
         return $this->hasMany(Payment::class);
     }
 
-    public function courses()
+    public function disciplines()
     {
-        return $this->belongsToMany(Course::class, 'course_student');
+        return $this->belongsToMany(Discipline::class, 'discipline_student');
     }
     use HasFactory;
 }

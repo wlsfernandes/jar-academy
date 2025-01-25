@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ModuleController;
-use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\PaypalController;
@@ -31,14 +31,7 @@ use Aws\S3\S3Client;
 Route::get('/', function () {
     return view('site.welcome');
 });
-Route::get('/test-db', function () {
-    try {
-        DB::connection()->getPdo();
-        return 'Database connection is successful!';
-    } catch (\Exception $e) {
-        return 'Database connection error: ' . $e->getMessage();
-    }
-});
+
 Auth::routes();
 
 Route::middleware(['auth', 'institution.scope'])->group(function () {
@@ -73,15 +66,16 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::get('/modules/{id}/edit', [ModuleController::class, 'edit'])->name('modules.edit');
         Route::put('/modules/{id}', [ModuleController::class, 'update'])->name('modules.update');
         Route::delete('/modules/{id}', [ModuleController::class, 'destroy'])->name('modules.destroy');
-        // Courses
-        Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
-        Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
-        Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
-        Route::get('/courses/{id}', [CourseController::class, 'show'])->name('courses.show');
-        Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');
-        Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
-        Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
-
+        // Disciplines
+        Route::get('/disciplines', [DisciplineController::class, 'index'])->name('disciplines.index');
+        Route::get('/disciplines/create', [DisciplineController::class, 'create'])->name('disciplines.create');
+        Route::post('/disciplines', [DisciplineController::class, 'store'])->name('disciplines.store');
+        Route::get('/disciplines/{id}', [DisciplineController::class, 'show'])->name('disciplines.show');
+        Route::get('/disciplines/{id}/edit', [DisciplineController::class, 'edit'])->name('disciplines.edit');
+        Route::put('/disciplines/{id}', [DisciplineController::class, 'update'])->name('disciplines.update');
+        Route::delete('/disciplines/{id}', [DisciplineController::class, 'destroy'])->name('disciplines.destroy');
+        Route::get('/disciplines/{id}/resources', [DisciplineController::class, 'resources'])->name('disciplines.resources');
+        Route::post('/disciplines/{id}/add-resource', [DisciplineController::class, 'addResource'])->name('disciplines.addResource');
 
         // Resources
         Route::get('/resources/{id}/edit', [ResourceController::class, 'edit'])->name('resources.edit');
@@ -91,8 +85,8 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
     });
     // Student access
-    Route::get('/listcourses', [CourseController::class, 'listCourses'])->name('courses.listCourses');
-    Route::get('/mycourses', [CourseController::class, 'myCourses'])->name('courses.myCourses');
+    Route::get('/listdisciplines', [DisciplineController::class, 'listDisciplines'])->name('disciplines.listDisciplines');
+    Route::get('/mydisciplines', [DisciplineController::class, 'myDisciplines'])->name('disciplines.myDisciplines');
     Route::get('/resources/{id}/docs', [ResourceController::class, 'docs'])->name('resources.docs');
     Route::get('/resources/{id}/tasks', [ResourceController::class, 'tasks'])->name('resources.tasks');
     Route::get('/resources/{id}/test', [ResourceController::class, 'tests'])->name('resources.tests');
@@ -100,10 +94,6 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     Route::post('/studentTasks', [StudentTaskController::class, 'addTask'])->name('addTask');
     Route::get('/test/{id}/edit', [StudentTestController::class, 'edit'])->name('edit');
     Route::post('/tests/submit', [StudentTestController::class, 'submitTest'])->name('submitTest');
-
-
-
-
 
     // Paypall
     Route::get('paypal/payment/{id}', [PayPalController::class, 'createPayment'])->name('paypal.payment');

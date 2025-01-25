@@ -9,12 +9,7 @@ class Assignment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'class_id'];
-
-    public function classroom()
-    {
-        return $this->belongsTo(Classroom::class);
-    }
+    protected $fillable = ['title', 'description'];
 
     public function institution()
     {

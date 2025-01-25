@@ -10,7 +10,7 @@ AMID
 @section('content')
 @component('common-components.breadcrumb')
 @slot('pagetitle')
-@lang('app.courses')
+@lang('app.disciplines')
 @endslot
 @slot('title')
 @endslot
@@ -21,7 +21,8 @@ AMID
     <div class="col-lg-12">
         <div class="card border border-primary">
             <div class="card-header bg-transparent border-primary">
-                <h5 class="my-0 text-primary"><i class="fas fa-graduation-cap icon"></i> @lang('app.courses')</b></h5>
+                <h5 class="my-0 text-primary"><i class="fas fa-graduation-cap icon"></i> @lang('app.disciplines')</b>
+                </h5>
             </div>
             <div class="card-body">
                 @if (session()->has('success'))
@@ -42,7 +43,7 @@ AMID
 
                 <div>
 
-                    <a href="{{ url('courses/create') }}">
+                    <a href="{{ url('disciplines/create') }}">
                         <button type="button" class="btn btn-success waves-effect waves-light mb-3"><i
                                 class="fas fa-plus"></i> Add New</button> </a>
                 </div>
@@ -62,30 +63,31 @@ AMID
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($courses as $course)
+                        @foreach ($disciplines as $discipline)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $course->title ?? ''}}</td>
-                                <td>{{ $course->module->name ?? ''}}</td>
-                                <td>{{ $course->amount ?? ''}}</td>
+                                <td>{{ $discipline->title ?? ''}}</td>
+                                <td>{{ $discipline->module->name ?? ''}}</td>
+                                <td>{{ $discipline->amount ?? ''}}</td>
                                 <td class="text-center align-middle"> <a
-                                        href="{{ url('/courses/' . $course->id . '/resources') }}"
+                                        href="{{ url('/disciplines/' . $discipline->id . '/resources') }}"
                                         class="px-3 text-primary"><i class="uil uil-apps font-size-22"></i></a></td>
                                 <td class="text-center align-middle">
 
 
-                                    <a href="{{ url('/courses/' . $course->id) }}" class="px-3 text-primary"><i
+                                    <a href="{{ url('/disciplines/' . $discipline->id) }}" class="px-3 text-primary"><i
                                             class="fas fa-eye font-size-20"></i></a>
-                                    <a href="{{ url('/courses/' . $course->id . '/edit') }}" class="px-3 text-primary"><i
-                                            class="uil uil-pen font-size-20"></i></a>
+                                    <a href="{{ url('/disciplines/' . $discipline->id . '/edit') }}"
+                                        class="px-3 text-primary"><i class="uil uil-pen font-size-20"></i></a>
 
                                     <a href="javascript:void(0);" class="px-3 text-danger"
-                                        onclick="event.preventDefault(); if(confirm('Confirm delete?')) { document.getElementById('delete-form-{{ $course->id }}').submit(); }">
+                                        onclick="event.preventDefault(); if(confirm('Confirm delete?')) { document.getElementById('delete-form-{{ $discipline->id }}').submit(); }">
                                         <i class="uil uil-trash-alt font-size-20"></i>
                                     </a>
 
-                                    <form id="delete-form-{{ $course->id }}" action="{{ url('/courses/' . $course->id) }}"
-                                        method="POST" style="display: none;">
+                                    <form id="delete-form-{{ $discipline->id }}"
+                                        action="{{ url('/disciplines/' . $discipline->id) }}" method="POST"
+                                        style="display: none;">
                                         @method('DELETE')
                                         @csrf
                                     </form>

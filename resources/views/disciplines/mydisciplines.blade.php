@@ -10,7 +10,7 @@ AMID
 @section('content')
 @component('common-components.breadcrumb')
 @slot('pagetitle')
-@lang('app.courses')
+@lang('app.disciplines')
 @endslot
 @slot('title')
 @endslot
@@ -21,7 +21,8 @@ AMID
     <div class="col-lg-12">
         <div class="card border border-primary">
             <div class="card-header bg-transparent border-primary">
-                <h5 class="my-0 text-primary"><i class="fas fa-graduation-cap icon"></i> @lang('app.courses')</b></h5>
+                <h5 class="my-0 text-primary"><i class="fas fa-graduation-cap icon"></i> @lang('app.disciplines')</b>
+                </h5>
             </div>
             <div class="card-body">
                 @if (session()->has('success'))
@@ -42,7 +43,7 @@ AMID
 
                 <div>
 
-                    <a href="{{ url('courses/create') }}">
+                    <a href="{{ url('disciplines/create') }}">
                         <button type="button" class="btn btn-success waves-effect waves-light mb-3"><i
                                 class="fas fa-plus"></i> Add New</button> </a>
                 </div>
@@ -62,24 +63,24 @@ AMID
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($courses as $course)
+                        @foreach ($disciplines as $discipline)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $course->title ?? ''}}</td>
-                                <td>{{ $course->module->name ?? ''}}</td>
+                                <td>{{ $discipline->title ?? ''}}</td>
+                                <td>{{ $discipline->module->name ?? ''}}</td>
 
                                 <td class="text-center align-middle">
 
-                                    <a href="{{ url('/resources/' . $course->id . '/docs') }}" class="px-3 text-primary"><i
-                                            class="uil uil uil-file-plus font-size-24"></i></a>
+                                    <a href="{{ url('/resources/' . $discipline->id . '/docs') }}"
+                                        class="px-3 text-primary"><i class="uil uil uil-file-plus font-size-24"></i></a>
                                 </td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ url('/resources/' . $course->id . '/tasks') }}" class="px-3 text-primary"><i
-                                            class="uil uil-apps font-size-24"></i></a>
+                                    <a href="{{ url('/resources/' . $discipline->id . '/tasks') }}"
+                                        class="px-3 text-primary"><i class="uil uil-apps font-size-24"></i></a>
                                 </td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ url('/resources/' . $course->id . '/test') }}" class="px-3 text-primary"><i
-                                            class="uil uil-pen font-size-24"></i></a>
+                                    <a href="{{ url('/resources/' . $discipline->id . '/test') }}"
+                                        class="px-3 text-primary"><i class="uil uil-pen font-size-24"></i></a>
                                 </td>
                             </tr>
                         @endforeach

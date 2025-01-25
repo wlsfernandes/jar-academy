@@ -8,11 +8,11 @@ class Resource extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['course_id', 'title', 'description', 'resource_type', 'type', 'url', 'created_at', 'updated_at'];
+    protected $fillable = ['discipline_id', 'title', 'description', 'resource_type', 'type', 'url', 'created_at', 'updated_at'];
 
-    public function course()
+    public function discipline()
     {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Discipline::class);
     }
 
     /**

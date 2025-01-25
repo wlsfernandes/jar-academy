@@ -34,9 +34,9 @@ class User extends Authenticatable
         return $this->belongsTo(Institution::class);
     }
 
-    public function courses()
+    public function disciplines()
     {
-        return $this->hasMany(Course::class, 'teacher_id');
+        return $this->hasMany(Discipline::class, 'teacher_id');
     }
 
     public function roles()

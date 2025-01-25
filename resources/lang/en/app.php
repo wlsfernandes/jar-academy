@@ -3,7 +3,7 @@
 return [
     'teachers' => 'Professores',
     'students' => 'Estudantes',
-    'modules' => 'Módulos',
+    'modules' => 'Categoria',
     'add_new' => 'Adicionar Novo',
     'name' => 'Nome',
     'password' => 'Senha',

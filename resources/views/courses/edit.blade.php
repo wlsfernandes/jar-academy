@@ -67,6 +67,18 @@ AMID
                         </div>
                     </div>
                     <div class="mb-3 row">
+                        <label for="amount" class="col-md-2 col-form-label">@lang('app.price'):</label>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input class="form-control" type="number" step="0.01" min="0"
+                                    value="{{ old('amount') }}" id="amount" name="amount" placeholder="Enter amount"
+                                    required>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="mb-3 row">
                         <label for="small_description"
                             class="col-md-2 col-form-label">@lang('app.small_description'):</label>
                         <div class="col-md-6">

@@ -70,18 +70,18 @@ AMID
                                 <td>{{ $course->amount ?? ''}}</td>
                                 <td class="text-center align-middle"> <a
                                         href="{{ url('/courses/' . $course->id . '/resources') }}"
-                                        class="px-3 text-success"><i class="uil uil-apps font-size-24"></i></a></td>
+                                        class="px-3 text-primary"><i class="uil uil-apps font-size-22"></i></a></td>
                                 <td class="text-center align-middle">
 
 
                                     <a href="{{ url('/courses/' . $course->id) }}" class="px-3 text-primary"><i
-                                            class="fas fa-eye"></i></a>
+                                            class="fas fa-eye font-size-20"></i></a>
                                     <a href="{{ url('/courses/' . $course->id . '/edit') }}" class="px-3 text-primary"><i
-                                            class="uil uil-pen font-size-24"></i></a>
+                                            class="uil uil-pen font-size-20"></i></a>
 
                                     <a href="javascript:void(0);" class="px-3 text-danger"
                                         onclick="event.preventDefault(); if(confirm('Confirm delete?')) { document.getElementById('delete-form-{{ $course->id }}').submit(); }">
-                                        <i class="uil uil-trash-alt font-size-24"></i>
+                                        <i class="uil uil-trash-alt font-size-20"></i>
                                     </a>
 
                                     <form id="delete-form-{{ $course->id }}" action="{{ url('/courses/' . $course->id) }}"

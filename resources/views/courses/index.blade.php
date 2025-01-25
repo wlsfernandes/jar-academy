@@ -77,11 +77,11 @@ AMID
                                     <a href="{{ url('/courses/' . $course->id) }}" class="px-3 text-primary"><i
                                             class="fas fa-eye"></i></a>
                                     <a href="{{ url('/courses/' . $course->id . '/edit') }}" class="px-3 text-primary"><i
-                                            class="uil uil-pen font-size-18"></i></a>
+                                            class="uil uil-pen font-size-24"></i></a>
 
                                     <a href="javascript:void(0);" class="px-3 text-danger"
                                         onclick="event.preventDefault(); if(confirm('Confirm delete?')) { document.getElementById('delete-form-{{ $course->id }}').submit(); }">
-                                        <i class="uil uil-trash-alt font-size-18"></i>
+                                        <i class="uil uil-trash-alt font-size-24"></i>
                                     </a>
 
                                     <form id="delete-form-{{ $course->id }}" action="{{ url('/courses/' . $course->id) }}"

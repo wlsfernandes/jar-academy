@@ -18,7 +18,9 @@ class CourseController extends Controller
     // Display a list of courses
     public function index()
     {
-        $courses = Course::where('institution_id', Auth::user()->institution_id)->get();
+        $courses = Course::where('institution_id', Auth::user()->institution_id)
+            ->orderBy('title')
+            ->get();
         return view('courses.index', compact('courses'));
     }
     public function listCourses()

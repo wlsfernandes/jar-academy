@@ -68,6 +68,7 @@ class CertificationController extends Controller
 
             Certification::create([
                 'name' => $request->name,
+                'amount' => $request->amount,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
             ]);
             DB::commit();
@@ -94,6 +95,7 @@ class CertificationController extends Controller
 
             $certification->update([
                 'name' => $request->name,
+                'amount' => $request->amount,
                 'institution_id' => Auth::user()->institution_id,
             ]);
             DB::commit();

@@ -57,7 +57,7 @@ AMID
                             <th>#</th>
                             <th>@lang('app.title')</th>
                             <th>@lang('app.modules')</th>
-                            <th>@lang('app.price')</th>
+
                             <th class="text-center align-middle">@lang('app.manager_resources')</th>
                             <th class="text-center align-middle">Actions</th>
                         </tr>
@@ -68,7 +68,6 @@ AMID
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $discipline->title ?? ''}}</td>
                                 <td>{{ $discipline->module->name ?? ''}}</td>
-                                <td>{{ $discipline->amount ?? ''}}</td>
                                 <td class="text-center align-middle"> <a
                                         href="{{ url('/disciplines/' . $discipline->id . '/resources') }}"
                                         class="px-3 text-primary"><i class="uil uil-apps font-size-22"></i></a></td>

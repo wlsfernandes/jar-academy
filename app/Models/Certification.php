@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Certification extends Model
 {
-    protected $fillable = ['name', 'institution_id'];
+    protected $fillable = ['name', 'amount', 'institution_id'];
     use HasFactory;
 
     public function institution()

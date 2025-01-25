@@ -55,6 +55,7 @@ certifications
                         <tr>
                             <th>#</th>
                             <th>name</th>
+                            <th>@lang('app.price')</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -63,6 +64,7 @@ certifications
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $certification->name ?? ''}}</td>
+                                <td>{{ $certification->amount ?? ''}}</td>
                                 <td>
                                     <a href="{{ url('/certifications/' . $certification->id) }}"
                                         class="px-3 text-primary"><i class="fas fa-eye font-size-20"></i></a>

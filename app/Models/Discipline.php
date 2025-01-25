@@ -41,6 +41,10 @@ class Discipline extends Model
     {
         return $this->hasMany(Payment::class);
     }
+    public function certification()
+    {
+        return $this->belongsTo(Certification::class);
+    }
 
     use HasFactory;
 }

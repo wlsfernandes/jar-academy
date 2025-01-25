@@ -14,7 +14,9 @@ class ModuleController extends Controller
     // Display a list of modules
     public function index()
     {
-        $modules = Module::where('institution_id', Auth::user()->institution_id)->get();
+        $modules = Module::where('institution_id', Auth::user()->institution_id)
+            ->orderBy('name')
+            ->get();
         return view('modules.index', compact('modules'));
     }
 

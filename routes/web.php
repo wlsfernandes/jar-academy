@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\CertificationController;
 use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\AccessController;
@@ -66,6 +67,14 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::get('/modules/{id}/edit', [ModuleController::class, 'edit'])->name('modules.edit');
         Route::put('/modules/{id}', [ModuleController::class, 'update'])->name('modules.update');
         Route::delete('/modules/{id}', [ModuleController::class, 'destroy'])->name('modules.destroy');
+        //Certifications
+        Route::get('/certifications', [CertificationController::class, 'index'])->name('certifications.index');
+        Route::get('/certifications/create', [CertificationController::class, 'create'])->name('certifications.create');
+        Route::post('/certifications', [CertificationController::class, 'store'])->name('certifications.store');
+        Route::get('/certifications/{id}', [CertificationController::class, 'show'])->name('certifications.show');
+        Route::get('/certifications/{id}/edit', [CertificationController::class, 'edit'])->name('certifications.edit');
+        Route::put('/certifications/{id}', [CertificationController::class, 'update'])->name('certifications.update');
+        Route::delete('/certifications/{id}', [CertificationController::class, 'destroy'])->name('certifications.destroy');
         // Disciplines
         Route::get('/disciplines', [DisciplineController::class, 'index'])->name('disciplines.index');
         Route::get('/disciplines/create', [DisciplineController::class, 'create'])->name('disciplines.create');

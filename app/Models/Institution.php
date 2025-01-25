@@ -35,4 +35,8 @@ class Institution extends Model
     {
         return $this->hasMany(Module::class);
     }
+    public function certifications()
+    {
+        return $this->hasMany(Certification::class);
+    }
 }

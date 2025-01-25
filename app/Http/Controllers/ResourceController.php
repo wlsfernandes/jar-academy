@@ -24,7 +24,7 @@ class ResourceController extends Controller
     }
     public function docs($id)
     {
-        $resources = Resource::where('course_id', $id)
+        $resources = Resource::where('discipline_id', $id)
             ->where('resource_type', 'documento')
             ->get();
 
@@ -33,7 +33,7 @@ class ResourceController extends Controller
 
     public function tasks($id)
     {
-        $resources = Resource::where('course_id', $id)
+        $resources = Resource::where('discipline_id', $id)
             ->where('resource_type', 'tarefa')
             ->get();
 
@@ -42,7 +42,7 @@ class ResourceController extends Controller
 
     public function tests($id)
     {
-        $resources = Resource::where('course_id', $id)
+        $resources = Resource::where('discipline_id', $id)
             ->where('resource_type', 'prova')
             ->get();
 

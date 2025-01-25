@@ -27,12 +27,13 @@ return [
     'resource' => 'Resource',
     'enroll' => 'Click here to Enroll',
     'my_courses' => 'My Courses',
+    'my_disciplines' => 'My Disciplines',
     'amid_courses' => 'Amid Courses',
     'docs' => 'Documents',
     'download' => 'Download',
     'tasks' => 'Tasks',
     'tests' => 'Tests',
-    'upload_task' => 'Upload Your Answer',
+    'upload_task' => 'Complete Your Task',
     'test' => 'Test',
     'test_desc' => '<p><b>Attention!</b>  You have 50 minutes to complete your test. Once you begin, the system will automatically start the countdown. Please note:</p><p>The timer will continue running even if you refresh the page or leave the system.</p><p>Failing to submit answers before the timer expires will result in an incomplete test, and it will be marked as failed.</p><p>Make sure to stay focused and submit your answers on time.</p><p>Good luck!</p>
 
@@ -41,4 +42,5 @@ return [
     'test_instructions' => '<p><b>Instructions for the Test</b></p><p>Dear Student,</p><p>Please download the attached file to review the detailed requirements for the test. The file contains all the necessary information you will need to successfully complete the task.</p><p><b>Important Details:</b></p><p>1. <b>Time Limit:</b> The test duration is <b>50 minutes</b>. Once you start, the timer will begin counting down, so plan your time wisely.</p><p>2. <b>Submission:</b> After reviewing the file, please use the <b>textarea below</b> to provide your answers. Ensure all responses are clear and complete.</p><p><b>Steps to Begin:</b></p><p>1. Download and carefully read the file with the test requirements.</p><p>2. When ready, start the test and provide your answers in the textarea below.</p><p>3. Submit your work before the 50-minute timer expires.</p><p>Good luck, and if you have any questions, feel free to reach out before starting the test.</p>',
     'finish_test' => 'Finish Test',
     'disciplines' => 'Disciplines',
+    'certifications' => 'Certifications',
 ];

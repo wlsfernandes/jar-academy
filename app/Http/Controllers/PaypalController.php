@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Models\Course;
+use App\Models\Discipline;
 use App\Models\Student;
 use App\Models\Payment;
 
@@ -21,9 +21,9 @@ class PayPalController extends Controller
     public function createPayment($id)
     {
 
-        $course = Course::where('institution_id', Auth::user()->institution_id)
+        $discipline = Discipline::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
-        $amount = $course->amount;
+        $amount = $discipline->amount;
 
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
@@ -41,7 +41,7 @@ class PayPalController extends Controller
                 ]
             ],
             "application_context" => [
-                "return_url" => route('paypal.capture', ['course_id' => $id, 'amount' => $amount]),
+                "return_url" => route('paypal.capture', ['discipline_id' => $id, 'amount' => $amount]),
                 "cancel_url" => route('test.paypal')
             ]
         ]);
@@ -80,31 +80,31 @@ class PayPalController extends Controller
                 $user = auth()->user();
                 $student = $user->student;
                 $studentId = $student->id;
-                $courseId = $request->query('course_id');
+                $disciplineId = $request->query('discipline_id');
 
                 // Save payment data
                 Payment::create([
                     'student_id' => $studentId,
-                    'course_id' => $courseId,
+                    'discipline_id' => $disciplineId,
                     'transaction_id' => $transactionId,
                     'status' => 'COMPLETED',
                     'amount' => $amount,
                     'currency' => $currency,
                 ]);
 
-                // Associate student with the course
+                // Associate student with the discipline
                 $student = Student::find($studentId);
-                $student->courses()->attach($courseId, [
+                $student->disciplines()->attach($disciplineId, [
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
 
-                return redirect()->route('courses.listCourses')->with('success', 'Payment successful. You now have access to the course.');
+                return redirect()->route('disciplines.listDisciplines')->with('success', 'Payment successful. You now have access to the discipline.');
             }
 
-            return redirect()->route('courses.listCourses')->withErrors('Payment failed. Please try again.');
+            return redirect()->route('disciplines.listDisciplines')->withErrors('Payment failed. Please try again.');
         } catch (Exception $e) {
-            return redirect()->route('courses.listCourses')->withErrors('An error occurred: ' . $e->getMessage());
+            return redirect()->route('disciplines.listDisciplines')->withErrors('An error occurred: ' . $e->getMessage());
         }
     }
 }

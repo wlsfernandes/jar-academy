@@ -44,13 +44,19 @@
                 </li>
                 @can('access-student')
                     <li>
-                        <a href="{{url('listcourses')}}" class="waves-effect">
+                        <a href="{{url('listdisciplines')}}" class="waves-effect">
                             <i class="fas fa-graduation-cap icon"></i>
                             <span>@lang('app.amid_courses')</span>
                         </a>
                     </li>
                 @endcan
                 @can('access-admin')
+                    <li>
+                        <a href="{{url('certifications')}}" class="waves-effect">
+                            <i class="uil-award"></i>
+                            <span>@lang('app.certifications')</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="{{url('modules')}}" class="waves-effect">
                             <i class="uil-books"></i>
@@ -93,9 +99,9 @@
                 <li class="menu-title">@lang('translation.Apps')</li>
                 @can('access-student')
                     <li>
-                        <a href="{{url('mycourses')}}" class="waves-effect">
+                        <a href="{{url('mydisciplines')}}" class="waves-effect">
                             <i class="fas fa-user-graduate"></i>
-                            <span>@lang('app.my_courses')</span>
+                            <span>@lang('app.my_disciplines')</span>
                         </a>
                     </li>
                 @endcan

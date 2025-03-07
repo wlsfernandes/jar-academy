@@ -1,16 +1,16 @@
 @extends('layouts.master')
 @section('title')
-AMID
+    AMID
 @endsection
 
 @section('css')
-<!-- plugin css -->
-<link href="{{ asset('/assets/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('/assets/libs/spectrum-colorpicker/spectrum-colorpicker.min.css') }}" rel="stylesheet">
-<link href="{{ asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet">
-<link href="{{ asset('/assets/libs/bootstrap-touchspin/bootstrap-touchspin.min.css') }}" rel="stylesheet" />
-<link rel="stylesheet" href="{{ asset('/assets/libs/datepicker/datepicker.min.css') }}">
-<link rel="stylesheet" href="{{ asset('/assets/libs/flatpickr/flatpickr.min.css') }}">
+    <!-- plugin css -->
+    <link href="{{ asset('/assets/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/assets/libs/spectrum-colorpicker/spectrum-colorpicker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/libs/bootstrap-touchspin/bootstrap-touchspin.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('/assets/libs/datepicker/datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/libs/flatpickr/flatpickr.min.css') }}">
 @endsection
 
 
@@ -67,17 +67,17 @@ AMID
                         </div>
                     </div>
                     <!--   <div class="mb-3 row">
-                        <label for="amount" class="col-md-2 col-form-label">@lang('app.price'):</label>
-                        <div class="col-md-6">
-                            <div class="input-group">
-                                <span class="input-group-text">$</span>
-                                <input class="form-control" type="number" step="0.01" min="0"
-                                    value="{{ old('amount', $discipline->amount ?? 0.00) }}" id="amount" name="amount"
-                                    placeholder="Enter amount" required>
-                            </div>
-                        </div>
+                                                                                                                <label for="amount" class="col-md-2 col-form-label">@lang('app.price'):</label>
+                                                                                                                <div class="col-md-6">
+                                                                                                                    <div class="input-group">
+                                                                                                                        <span class="input-group-text">$</span>
+                                                                                                                        <input class="form-control" type="number" step="0.01" min="0"
+                                                                                                                            value="{{ old('amount', $discipline->amount ?? 0.00) }}" id="amount" name="amount"
+                                                                                                                            placeholder="Enter amount" required>
+                                                                                                                    </div>
+                                                                                                                </div>
 
-            </div>-->
+                                                                                                    </div>-->
                     <div class="mb-3 row">
                         <label for="small_description"
                             class="col-md-2 col-form-label">@lang('app.small_description'):</label>
@@ -107,6 +107,19 @@ AMID
                                         {{ $module->name }}
                                     </option>
                                 @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="certification" class="col-md-2 col-form-label">@lang('app.certification'):</label>
+                        <div class="col-md-6">
+                            <select class="form-control" id="certification" name="certification" required>
+                                <option value="">@lang('app.select')</option>
+                                @foreach($certifications as $certification)
+                                <option value="{{ $certification->id }}" {{ old('certification', optional($discipline->certification)->id) == $certification->id ? 'selected' : '' }}>
+                                    {{ $certification->name }}
+                                </option>
+                                @endforeacH
                             </select>
                         </div>
                     </div>

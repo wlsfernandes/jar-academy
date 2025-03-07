@@ -52,7 +52,7 @@ class DisciplineController extends Controller
         $discipline = Discipline::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
         $modules = Module::where('institution_id', Auth::user()->institution_id)->get();
-        $certifications = Certification::where('instituions_id', Auth::user()->institution_id)->get();
+        $certifications = Certification::where('institution_id', Auth::user()->institution_id)->get();
         return view('disciplines.edit', compact('discipline', 'modules', 'certifications'));
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'update_task' => 'Finalizar Tarefa',
     'access' => 'Accesse',
     'teachers' => 'Professores',
     'students' => 'Estudantes',

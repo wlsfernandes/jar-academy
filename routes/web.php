@@ -94,6 +94,7 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
     });
     // Student access
+    Route::get('/view-content/{id}', [ResourceController::class, 'showContent'])->name('view-content');
     Route::get('/listdisciplines', [DisciplineController::class, 'listDisciplines'])->name('disciplines.listDisciplines');
     Route::get('/list-certifications', [CertificationController::class, 'listCertifications'])->name('certifications.listCertifications');
     Route::get('/mycertifications', [CertificationController::class, 'myCertifications'])->name('certifications.myCertifications');

@@ -169,48 +169,54 @@ class DisciplineController extends Controller
         try {
             DB::beginTransaction();
 
-            // Find the discipline by ID
             $discipline = Discipline::findOrFail($id);
 
-            // Handle file upload
-            $file = $request->file('document');
-            $url = StorageS3::uploadToS3($file);
+            $url = null;
 
-            if ($url) {
-                $resourceData = [
-                    'discipline_id' => $discipline->id,
-                    'title' => $request->input('title'),
-                    'description' => $request->input('description'),
-                    'type' => $request->input('type'),
-                    'resource_type' => $request->input('resource_type'),
-                    'url' => $url,
-                ];
+            if ($request->hasFile('document')) {
+                $file = $request->file('document');
+                $url = StorageS3::uploadToS3($file);
 
-                $resource = Resource::create($resourceData);
-
-                $resourceType = $request->input('resource_type');
-                if ($resourceType === 'tarefa') {
-                    Task::create([
-                        'resource_id' => $resource->id, // Set the resource ID
-                    ]);
-                } elseif ($resourceType === 'prova') {
-                    Test::create([
-                        'resource_id' => $resource->id, // Set the resource ID
-                    ]);
+                if (!$url) {
+                    DB::rollBack();
+                    return back()->withErrors(['document' => 'File upload failed.']);
                 }
-
-                DB::commit();
-                session()->flash('success', 'Resource added successfully.');
-                Log::info('Resource uploaded successfully.');
-                return redirect()->back()->with('success', 'Resources updated successfully!');
+            } elseif ($request->filled('resource_url')) {
+                $url = $request->input('resource_url');
             } else {
                 DB::rollBack();
-                return back()->withErrors(['document' => 'File upload error: ' . $file->getError()]);
+                return back()->withErrors(['resource_url' => 'You must provide either a file or a URL.']);
             }
+
+            $resourceData = [
+                'discipline_id' => $discipline->id,
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'type' => $request->input('type'),
+                'resource_type' => $request->input('resource_type'),
+                'url' => $url,
+            ];
+
+            $resource = Resource::create($resourceData);
+
+            $resourceType = $request->input('resource_type');
+            if ($resourceType === 'tarefa') {
+                Task::create(['resource_id' => $resource->id]);
+            } elseif ($resourceType === 'prova') {
+                Test::create(['resource_id' => $resource->id]);
+            }
+
+            DB::commit();
+
+            session()->flash('success', 'Resource added successfully.');
+            Log::info('Resource uploaded successfully.');
+
+            return redirect()->back()->with('success', 'Resource created successfully!');
         } catch (Exception $e) {
             DB::rollBack();
-            session()->flash('error', 'Failed to upload file: ' . $e->getMessage());
-            Log::error('Error uploading file: ' . $e->getMessage());
+            session()->flash('error', 'Failed to upload resource: ' . $e->getMessage());
+            Log::error('Error uploading resource: ' . $e->getMessage());
+
             return redirect()->route('disciplines.index');
         }
     }

@@ -8,13 +8,14 @@
 
 @section('body')
 
-    <body>
+<body>
     @show
 
     <!-- Begin page -->
     <div id="layout-wrapper">
         @include('layouts.topbar')
         @include('layouts.sidebar')
+
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
@@ -38,6 +39,10 @@
 
     <!-- JAVASCRIPT -->
     @include('layouts.vendor-scripts')
+
+    <!-- Place this before closing </body> -->
+    @yield('scripts')
+
 </body>
 
 </html>

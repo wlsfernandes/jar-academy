@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'access' => 'Accesse',
     'teachers' => 'Professores',
     'students' => 'Estudantes',
     'modules' => 'Categoria',

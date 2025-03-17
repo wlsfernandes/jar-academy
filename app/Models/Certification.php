@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Certification extends Model
 {
-    protected $fillable = ['name', 'amount', 'institution_id'];
     use HasFactory;
 
+    protected $fillable = ['name', 'amount', 'institution_id', 'isFree'];
+    protected $casts = [
+        'isFree' => 'boolean',
+    ];
     public function institution()
     {
         return $this->belongsTo(Institution::class);

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Certification;
+use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -76,14 +77,24 @@ class CertificationController extends Controller
     // Store a new certification in the database
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'amount' => 'required_if:isFree,false|numeric|min:0',
+            'isFree' => 'sometimes|boolean',
+        ]);
+
+        if (!$request->has('isFree') && floatval($request->amount) == 0) {
+            return redirect()->back()->withInput()->withErrors(['amount' => 'Certification cannot have a price of 0 unless marked as free.']);
+        }
         DB::beginTransaction();
 
         try {
 
             Certification::create([
                 'name' => $request->name,
-                'amount' => $request->amount,
+                'amount' => $request->isFree ? 0 : $request->amount,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
+                'isFree' => $request->has('isFree'), // set true or false based on checkbox
             ]);
             DB::commit();
             return redirect()->route('certifications.index')->with('success', 'Certification created successfully!');
@@ -102,6 +113,15 @@ class CertificationController extends Controller
     // Update certification details in the database
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'amount' => 'required_if:isFree,false|numeric|min:0',
+            'isFree' => 'sometimes|boolean',
+        ]);
+
+        if (!$request->has('isFree') && floatval($request->amount) == 0) {
+            return redirect()->back()->withInput()->withErrors(['amount' => 'Certification cannot have a price of 0 unless marked as free.']);
+        }
         DB::beginTransaction();
 
         try {
@@ -109,8 +129,9 @@ class CertificationController extends Controller
 
             $certification->update([
                 'name' => $request->name,
-                'amount' => $request->amount,
+                'amount' => $request->isFree ? 0 : $request->amount,
                 'institution_id' => Auth::user()->institution_id,
+                'isFree' => $request->has('isFree'),
             ]);
             DB::commit();
             return redirect()->route('certifications.index')->with('success', 'Certification updated successfully!');
@@ -126,4 +147,34 @@ class CertificationController extends Controller
             return redirect()->back()->withInput()->withErrors(['error' => 'Failed to Update certification: ']);
         }
     }
+
+    public function registerFreeCertification(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            $user = auth()->user();
+            $student = $user->student;
+            $studentId = $student->id;
+            $certificationId = $id;
+
+            // Associate student with the discipline
+            $student = Student::find($studentId);
+            $student->certifications()->attach($certificationId, [
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            DB::commit();
+            return redirect()->route('certifications.listCertifications')->with('success', 'Register successful. You now have access to this Certification.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error('Error creating certification and user: ' . $e->getMessage(), [
+                'exception' => $e,
+                'certification_name' => $request->name,
+                'certification_email' => $request->email,
+                'institution_id' => Auth::user()->institution_id,
+            ]);
+            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while creating the certification. Please try again.']);
+        }
+    }
+
 }

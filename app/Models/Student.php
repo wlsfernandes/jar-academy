@@ -35,5 +35,13 @@ class Student extends Model
     {
         return $this->belongsToMany(Certification::class, 'certification_student');
     }
+
+    public function resources()
+    {
+        return $this->belongsToMany(Resource::class)
+            ->withPivot(['views', 'last_viewed_at'])
+            ->withTimestamps();
+    }
+
     use HasFactory;
 }

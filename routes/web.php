@@ -59,6 +59,8 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::get('/students/{id}/edit', [StudentController::class, 'edit'])->name('studentss.edit');
         Route::put('/students/{id}', [StudentController::class, 'update'])->name('students.update');
         Route::delete('/students/{id}', [StudentController::class, 'destroy'])->name('students.destroy');
+        Route::get('/students/{id}/progress', [StudentController::class, 'progress'])->name('progress');
+
         // Modules
         Route::get('/modules', [ModuleController::class, 'index'])->name('modules.index');
         Route::get('/modules/create', [ModuleController::class, 'create'])->name('modules.create');
@@ -100,6 +102,9 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     Route::get('certifications/{id}/free', [CertificationController::class, 'registerFreeCertification'])->name('registerFreeCertification');
     Route::get('/mycertifications', [CertificationController::class, 'myCertifications'])->name('certifications.myCertifications');
     Route::get('/mydisciplines', [DisciplineController::class, 'myDisciplines'])->name('disciplines.myDisciplines');
+    Route::get('/resources/{resource}/view', [ResourceController::class, 'view'])
+        ->name('resources.view')
+        ->middleware('auth'); // make sure student is logged in
     Route::get('/resources/{id}/docs', [ResourceController::class, 'docs'])->name('resources.docs');
     Route::get('/resources/{id}/tasks', [ResourceController::class, 'tasks'])->name('resources.tasks');
     Route::get('/resources/{id}/test', [ResourceController::class, 'tests'])->name('resources.tests');

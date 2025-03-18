@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Resource;
+use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -12,7 +13,33 @@ use Exception;
 
 class ResourceController extends Controller
 {
-    // Display a list of resourcess
+    //$student->resources()->find($resource_id)->pivot->views;
+    //$resources = $student->resources()->withPivot('views', 'last_viewed_at')->get();
+
+    public function view(Resource $resource)
+    {
+        $student = Student::where('user_id', Auth::id())->firstOrFail();
+        // Check if the student already viewed the resource
+        $studentResource = $student->resources()->where('resource_id', $resource->id)->first();
+
+        if ($studentResource) {
+            // If exists, increment views
+            $student->resources()->updateExistingPivot($resource->id, [
+                'views' => $studentResource->pivot->views + 1,
+                'last_viewed_at' => now()
+            ]);
+        } else {
+            // First view, attach pivot with views = 1
+            $student->resources()->attach($resource->id, [
+                'views' => 1,
+                'last_viewed_at' => now()
+            ]);
+        }
+
+        return view('resources.content-view', compact('resource'));
+        // redirect to actual URL
+        // return redirect()->away($resource->url);
+    }
 
     // Show form to edit a resources
     public function edit($id)

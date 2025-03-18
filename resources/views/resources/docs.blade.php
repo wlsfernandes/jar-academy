@@ -46,12 +46,11 @@
                                         <td>{{ $resource->description ?? ''}}</td>
                                         <td>{{ $resource->resource_type ?? ''}}</td>
                                         <td>{{ $resource->type ?? ''}}</td>
-                                        <td class="text-center align-middle"> <a class="px-3"
-                                                href="{{ $resource->url }}" target="_blank" class="me-2"
+                                        <td class="text-center align-middle">
+                                            <a class="px-3" href="{{ route('resources.view', $resource->id) }}" target="_blank"
                                                 style="font-size: 22px; text-decoration: none;">
                                                 <i class="fas fa-eye"></i>
-                                            </a></td>
-
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

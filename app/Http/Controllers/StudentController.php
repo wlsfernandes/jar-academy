@@ -19,6 +19,21 @@ class StudentController extends Controller
         return view('students.index', compact('students'));
     }
 
+    public function progress($id)
+    {
+        $student = Student::with([
+            'certifications.disciplines.resources', // Load related models
+        ])
+            ->where('id', $id)
+            ->where('institution_id', Auth::user()->institution_id)
+            ->firstOrFail();
+
+        // Load pivot data for resources separately
+        $resources = $student->resources()->withPivot('views', 'last_viewed_at')->get();
+
+        return view('students.progress', compact('student', 'resources'));
+    }
+
     // Show form to create a new student
     public function create()
     {
@@ -77,10 +92,10 @@ class StudentController extends Controller
                 'password' => bcrypt($request->password),
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
             ]);
-            
+
             $role = Role::where('name', 'student')->first();
             $user->roles()->attach($role->id);
-            
+
             Student::create([
                 'user_id' => $user->id,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID

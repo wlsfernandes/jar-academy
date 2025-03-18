@@ -38,4 +38,11 @@ class Resource extends Model
     {
         return $this->morphTo();
     }
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class)
+            ->withPivot(['views', 'last_viewed_at'])
+            ->withTimestamps();
+    }
 }

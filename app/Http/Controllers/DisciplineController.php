@@ -87,6 +87,17 @@ class DisciplineController extends Controller
     // Store a new discipline in the database
     public function store(Request $request)
     {
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'amount' => 'required_if:isFree,false|numeric|min:0',
+            'isFree' => 'sometimes|boolean',
+        ]);
+
+        if (!$request->has('isFree') && floatval($request->amount) == 0) {
+            return redirect()->back()->withInput()->withErrors(['amount' => 'Certification cannot have a price of 0 unless marked as free.']);
+        }
+
         DB::beginTransaction();
 
         try {
@@ -97,8 +108,9 @@ class DisciplineController extends Controller
                 'module_id' => $request->module,
                 'certification_id' => $request->certification,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
-                'amount' => $request->amount ?? 0.00,
-                'currency' => 'BRL',
+                'amount' => $request->isFree ? 0 : $request->amount,
+                'isFree' => $request->has('isFree'),
+                'currency' => 'USD',
             ]);
             DB::commit();
             return redirect()->route('disciplines.index')->with('success', 'Discipline created successfully!');
@@ -122,6 +134,17 @@ class DisciplineController extends Controller
     // Update discipline details in the database
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'amount' => 'required_if:isFree,false|numeric|min:0',
+            'isFree' => 'sometimes|boolean',
+        ]);
+
+        if (!$request->has('isFree') && floatval($request->amount) == 0) {
+            return redirect()->back()->withInput()->withErrors(['amount' => 'Certification cannot have a price of 0 unless marked as free.']);
+        }
+
         DB::beginTransaction();
 
         try {
@@ -135,6 +158,7 @@ class DisciplineController extends Controller
                 'certification_id' => $request->certification,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
                 'amount' => $request->amount ?? 0.00,
+                'isFree' => $request->has('isFree'),
                 'currency' => 'BRL',
             ]);
             DB::commit();
@@ -149,6 +173,9 @@ class DisciplineController extends Controller
                 'small_description' => $request->small_description,
                 'module_id' => $request->module,
                 'institution_id' => Auth::user()->institution_id,
+                'amount' => $request->isFree ? 0 : $request->amount,
+                'isFree' => $request->has('isFree'),
+
             ]);
             return redirect()->back()->withInput()->withErrors(['error' => 'Failed to Update discipline: ']);
         }

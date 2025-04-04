@@ -58,6 +58,8 @@ AMID
                             <th>@lang('app.title')</th>
                             <th>@lang('app.certification')</th>
                             <th>@lang('app.modules')</th>
+                            <th>@lang('app.price')</th>
+                            <th>Gratuíto?</th>
 
                             <th class="text-center align-middle">@lang('app.manager_resources')</th>
                             <th class="text-center align-middle">Actions</th>
@@ -70,6 +72,14 @@ AMID
                                 <td>{{ $discipline->title ?? ''}}</td>
                                 <td>{{ $discipline->certification->name ?? ''}}</td>
                                 <td>{{ $discipline->module->name ?? ''}}</td>
+                                <td>{{ $discipline->amount ?? ''}}</td>
+                                    <td>
+                                        @if ($discipline->isFree)
+                                            <div class="badge bg-pill bg-info-subtle text-info font-size-12">Yes</div>
+                                        @else
+                                            <div class="badge bg-pill bg-warning-subtle text-warning font-size-12">No</div>
+                                        @endif
+                                    </td>
                                 <td class="text-center align-middle"> <a
                                         href="{{ url('/disciplines/' . $discipline->id . '/resources') }}"
                                         class="px-3 text-primary"><i class="uil uil-apps font-size-22"></i></a></td>

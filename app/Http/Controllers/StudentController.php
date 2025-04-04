@@ -20,19 +20,19 @@ class StudentController extends Controller
     }
 
     public function progress($id)
-    {
-        $student = Student::with([
-            'certifications.disciplines.resources', // Load related models
-        ])
-            ->where('id', $id)
-            ->where('institution_id', Auth::user()->institution_id)
-            ->firstOrFail();
+{
+    $student = Student::with([
+        'certifications.disciplines.resources',
+        'disciplines.resources',
+    ])
+    ->where('id', $id)
+    ->where('institution_id', Auth::user()->institution_id)
+    ->firstOrFail();
 
-        // Load pivot data for resources separately
-        $resources = $student->resources()->withPivot('views', 'last_viewed_at')->get();
+    $resources = $student->resources()->withPivot('views', 'last_viewed_at')->get();
 
-        return view('students.progress', compact('student', 'resources'));
-    }
+    return view('students.progress', compact('student', 'resources'));
+}
 
     // Show form to create a new student
     public function create()

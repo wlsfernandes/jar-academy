@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Discipline;
 use App\Models\Module;
 use App\Models\Certification;
+use App\Models\Student;
 use App\Models\Task;
 use App\Models\Test;
 use App\Models\Resource;
@@ -257,4 +258,29 @@ class DisciplineController extends Controller
 
         return view('disciplines.enroll', compact('discipline'));
     }
+
+    public function registerFreeCertification(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            $user = auth()->user();
+            $student = $user->student;
+            $studentId = $student->id;
+            $disciplineId = $id;
+
+            // Associate student with the discipline
+            $student = Student::find($studentId);
+            $student->disciplines()->attach($disciplineId, [
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            DB::commit();
+            return redirect()->route('disciplines.listDisciplines')->with('success', 'Register successful. You now have access to this Discipline.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error('Error creating certification and user: ' . $e->getMessage(), ['exception' => $e]);
+            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while creating the discipline. Please try again.']);
+        }
+    }
+
 }

@@ -100,6 +100,7 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     Route::get('/listdisciplines', [DisciplineController::class, 'listDisciplines'])->name('disciplines.listDisciplines');
     Route::get('/list-certifications', [CertificationController::class, 'listCertifications'])->name('certifications.listCertifications');
     Route::get('certifications/{id}/free', [CertificationController::class, 'registerFreeCertification'])->name('registerFreeCertification');
+    Route::get('disciplines/{id}/free', [DisciplineController::class, 'registerFreeCertification'])->name('registerFreeCertification');
     Route::get('/mycertifications', [CertificationController::class, 'myCertifications'])->name('certifications.myCertifications');
     Route::get('/mydisciplines', [DisciplineController::class, 'myDisciplines'])->name('disciplines.myDisciplines');
     Route::get('/resources/{resource}/view', [ResourceController::class, 'view'])
@@ -116,6 +117,8 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     // Paypall
     Route::get('paypal/payment/{id}', [PayPalController::class, 'createPayment'])->name('paypal.payment');
     Route::get('paypal/capture', [PayPalController::class, 'capturePayment'])->name('paypal.capture');
+    Route::get('paypal/discipline/{id}', [PayPalController::class, 'disciplinePayment'])->name('discipline.payment');
+    Route::get('paypal/capture/discipline', [PayPalController::class, 'captureDiscipline'])->name('paypal.capture.discipline');
     Route::get('payment/success', function () {
         return view('paypal.payment-success');
     })->name('success');

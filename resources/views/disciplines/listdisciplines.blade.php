@@ -47,24 +47,36 @@ AMID
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th class="text-center align-middle">@lang('app.enroll')</th>
+                            <th>@lang('app.price')</th>
                             <th>@lang('app.title')</th>
                             <th>@lang('app.modules')</th>
-                            <th>@lang('app.price')</th>
-                            <th class="text-center align-middle">@lang('app.enroll')</th>
+                          
+                       
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($disciplines as $discipline)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                              
+                                <td class="text-center align-middle">
+                                      @if ( $discipline->isFree )
+                                            <a href="{{ url('/disciplines/' . $discipline->id . '/free') }}"
+                                                class="btn btn-sm btn-info rounded-pill"><i class="bi bi-pencil-square me-1"></i>
+                                                Inscreva-se</a>
+                                        @else
+                                            <a href="{{ url('/paypal/discipline/' . $discipline->id) }}"
+                                                class="px-3 text-success"><img src="assets/images/paypal.png" style="width:60px;">
+                                                </img></a>
+                                        @endif
+                                    </td>
+                                <td>{{ $discipline->amount ?? ''}}</td>
                                 <td>{{ $discipline->title ?? ''}}</td>
                                 <td>{{ $discipline->module->name ?? ''}}</td>
-                                <td>{{ $discipline->amount ?? ''}}</td>
-                                <td class="text-center align-middle"> <a
-                                        href="{{ url('/paypal/payment/' . $discipline->id) }}"
-                                        class="px-3 text-success"><img src="assets/images/paypal.png" style="width:64px;">
-                                        </img></a></td>
-
+                              
+                                
+                                
                             </tr>
                         @endforeach
                     </tbody>

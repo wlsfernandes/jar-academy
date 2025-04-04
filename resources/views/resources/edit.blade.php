@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-@lang('translation.Form_File_Upload')
+Resources
 @endsection
 
 @section('content')

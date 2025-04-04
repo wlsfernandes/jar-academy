@@ -17,29 +17,30 @@ class ResourceController extends Controller
     //$resources = $student->resources()->withPivot('views', 'last_viewed_at')->get();
 
     public function view(Resource $resource)
-    {
-        $student = Student::where('user_id', Auth::id())->firstOrFail();
-        // Check if the student already viewed the resource
-        $studentResource = $student->resources()->where('resource_id', $resource->id)->first();
+{
+    $student = Student::where('user_id', Auth::id())->firstOrFail();
 
-        if ($studentResource) {
-            // If exists, increment views
-            $student->resources()->updateExistingPivot($resource->id, [
-                'views' => $studentResource->pivot->views + 1,
-                'last_viewed_at' => now()
-            ]);
-        } else {
-            // First view, attach pivot with views = 1
-            $student->resources()->attach($resource->id, [
-                'views' => 1,
-                'last_viewed_at' => now()
-            ]);
-        }
+    // Check if the student already viewed the resource
+    $viewedResource = $student->resources()->where('resource_id', $resource->id)->first();
 
-        return view('resources.content-view', compact('resource'));
-        // redirect to actual URL
-        // return redirect()->away($resource->url);
+    if ($viewedResource) {
+        // If exists, increment views
+        $student->resources()->updateExistingPivot($resource->id, [
+            'views' => $viewedResource->pivot->views + 1,
+            'last_viewed_at' => now()
+        ]);
+    } else {
+        // First view, attach pivot with views = 1
+        $student->resources()->attach($resource->id, [
+            'views' => 1,
+            'last_viewed_at' => now()
+        ]);
     }
+
+    return view('resources.content-view', compact('resource'));
+
+}
+
 
     // Show form to edit a resources
     public function edit($id)

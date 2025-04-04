@@ -47,23 +47,17 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>@lang('app.title')</th>
-                                <th>@lang('app.price')</th>
-                                <th>@lang('app.disciplines')</th>
                                 <th class="text-center align-middle">@lang('app.enroll')</th>
+                                <th>@lang('app.price')</th>
+                                <th>@lang('app.title')</th>
+                                <th>@lang('app.disciplines')</th>
+                             
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($certifications as $certification)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $certification->name ?? ''}}</td>
-                                    <td>{{ $certification->amount ?? ''}}</td>
-                                    <td>
-                                        @foreach ($certification->disciplines as $discipline)
-                                            <small>{{ $discipline->title }}</small>
-                                        @endforeach
-                                    </td>
                                     <td>
                                         @if ($certification->isFree)
                                             <a href="{{ url('/certifications/' . $certification->id . '/free') }}"
@@ -75,6 +69,15 @@
                                                 </img></a>
                                         @endif
                                     </td>
+                                    <td>{{ $certification->amount ?? ''}}</td>
+                                    <td>{{ $certification->name ?? ''}}</td>
+                                    
+                                    <td>
+                                        @foreach ($certification->disciplines as $discipline)
+                                        <small>{{ $discipline->title }}</small><br>
+                                        @endforeach
+                                    </td>
+                                   
                                 </tr>
                             @endforeach
                         </tbody>

@@ -36,6 +36,11 @@ class Student extends Model
         return $this->belongsToMany(Certification::class, 'certification_student');
     }
 
+    public function disciplines()
+    {
+        return $this->belongsToMany(Discipline::class, 'discipline_student');
+    }
+
     public function resources()
     {
         return $this->belongsToMany(Resource::class)

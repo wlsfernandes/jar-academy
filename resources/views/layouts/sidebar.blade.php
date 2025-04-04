@@ -49,6 +49,12 @@
                             <span>@lang('app.certifications')</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{url('listdisciplines')}}" class="waves-effect">
+                            <i class="uil uil-award icon"></i>
+                            <span>@lang('app.disciplines')</span>
+                        </a>
+                    </li>
                 @endcan
                 @can('access-admin')
                     <li>
@@ -102,6 +108,12 @@
                         <a href="{{url('mycertifications')}}" class="waves-effect">
                             <i class="fas fa-user-graduate"></i>
                             <span>@lang('app.my_certifications')</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url('mydisciplines')}}" class="waves-effect">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>@lang('app.my_disciplines')</span>
                         </a>
                     </li>
                 @endcan

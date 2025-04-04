@@ -45,5 +45,10 @@ class Discipline extends Model
         return $this->belongsTo(Certification::class);
     }
 
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'discipline_student');
+    }
+
     use HasFactory;
 }

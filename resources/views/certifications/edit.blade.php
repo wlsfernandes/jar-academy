@@ -75,6 +75,7 @@
                                     <input class="form-check-input" type="checkbox" id="isFree" name="isFree" value="1" {{ old('isFree', $certification->isFree) ? 'checked' : '' }}>
                                 </div>
                             </div>
+                            <small>Se o curso é gratuíto o valor cadastrado deve ser igual a 0</small>
                         </div>
                         <div class="d-flex flex-wrap gap-3">
                             <button type="submit" class="btn btn-secondary waves-effect">

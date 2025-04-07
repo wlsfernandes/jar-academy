@@ -135,12 +135,25 @@ class DisciplineController extends Controller
     // Update discipline details in the database
     public function update(Request $request, $id)
     {
-
         $request->validate([
             'title' => 'required|string|max:255',
-            'amount' => 'required_if:isFree,false|numeric|min:0',
             'isFree' => 'sometimes|boolean',
+            'amount' => [
+                'nullable',
+                'numeric',
+                'min:0',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request->boolean('isFree') && !is_null($value) && $value > 0) {
+                        $fail('You cannot set an amount when the item is marked as free.');
+                    }
+        
+                    if (!$request->boolean('isFree') && (is_null($value) || $value <= 0)) {
+                        $fail('Amount is required when the item is not free.');
+                    }
+                },
+            ],
         ]);
+        
 
         if (!$request->has('isFree') && floatval($request->amount) == 0) {
             return redirect()->back()->withInput()->withErrors(['amount' => 'Certification cannot have a price of 0 unless marked as free.']);

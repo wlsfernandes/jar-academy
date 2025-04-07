@@ -130,7 +130,7 @@
                                     <span class="input-group-text">$</span>
                                     <input class="form-control" type="number" step="0.01" min="0"
                                         value="{{ old('amount', $discipline->amount ?? 0.00) }}" id="amount"
-                                        name="amount" placeholder="Enter amount" required>
+                                        name="amount" placeholder="Enter amount">
                                 </div>
                             </div>
 
@@ -142,6 +142,7 @@
                                     <input class="form-check-input" type="checkbox" id="isFree" name="isFree" value="1" {{ old('isFree', $discipline->isFree) ? 'checked' : '' }}>
                                 </div>
                             </div>
+                            <small>Se o curso é gratuíto o valor cadastrado deve ser igual a 0</small>
                         </div>
                     <div class="d-flex flex-wrap gap-3">
                         <button type="submit" class="btn btn-secondary waves-effect">

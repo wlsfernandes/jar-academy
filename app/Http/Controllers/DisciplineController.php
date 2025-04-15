@@ -65,7 +65,8 @@ class DisciplineController extends Controller
         $discipline = Discipline::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
         $modules = Module::where('institution_id', Auth::user()->institution_id)->get();
-        return view('disciplines.show', compact('discipline', 'modules'));
+        $certifications = Certification::where('institution_id', Auth::user()->institution_id)->get();
+        return view('disciplines.show', compact('discipline', 'modules', 'certifications'));
     }
 
     public function destroy($id)
@@ -112,6 +113,7 @@ class DisciplineController extends Controller
                 'amount' => $request->isFree ? 0 : $request->amount,
                 'isFree' => $request->has('isFree'),
                 'currency' => 'USD',
+                'order' => $request->order ?? 1,
             ]);
             DB::commit();
             return redirect()->route('disciplines.index')->with('success', 'Discipline created successfully!');
@@ -126,7 +128,8 @@ class DisciplineController extends Controller
                 'module_id' => $request->module,
                 'institution_id' => Auth::user()->institution_id,
                 'amount' => $request->amount ?? 0.00,
-                'currency' => 'BRL',
+                'currency' => 'USD',
+                'order' => $request->order ?? 1,
             ]);
             return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while creating the discipline. Please try again.']);
         }
@@ -173,7 +176,8 @@ class DisciplineController extends Controller
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
                 'amount' => $request->amount ?? 0.00,
                 'isFree' => $request->has('isFree'),
-                'currency' => 'BRL',
+                'currency' => 'USD',
+                'order' => $request->order ?? 1,
             ]);
             DB::commit();
             return redirect()->route('disciplines.index')->with('success', 'Discipline updated successfully!');
@@ -189,6 +193,7 @@ class DisciplineController extends Controller
                 'institution_id' => Auth::user()->institution_id,
                 'amount' => $request->isFree ? 0 : $request->amount,
                 'isFree' => $request->has('isFree'),
+                'order' => $request->order ?? 1,
 
             ]);
             return redirect()->back()->withInput()->withErrors(['error' => 'Failed to Update discipline: ']);

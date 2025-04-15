@@ -57,10 +57,10 @@ AMID
                             <th>#</th>
                             <th>@lang('app.title')</th>
                             <th>@lang('app.certification')</th>
+                            <th>@lang('app.order')</th>
                             <th>@lang('app.modules')</th>
                             <th>@lang('app.price')</th>
                             <th>Gratuíto?</th>
-
                             <th class="text-center align-middle">@lang('app.manager_resources')</th>
                             <th class="text-center align-middle">Actions</th>
                         </tr>
@@ -71,6 +71,7 @@ AMID
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $discipline->title ?? ''}}</td>
                                 <td>{{ $discipline->certification->name ?? ''}}</td>
+                                <td>{{ $discipline->order ?? ''}}</td>
                                 <td>{{ $discipline->module->name ?? ''}}</td>
                                 <td>{{ $discipline->amount ?? ''}}</td>
                                     <td>

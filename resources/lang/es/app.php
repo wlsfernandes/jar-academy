@@ -5,4 +5,5 @@ return [
     'students' => 'Students',
     'modules' => 'Modules',
     'add_new' => 'add_new',
+    'order' => 'Order',
 ];

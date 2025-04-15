@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Discipline extends Model
 {
 
-    protected $fillable = ['title', 'small_description', 'description', 'module_id', 'institution_id', 'amount', 'currency', 'certification_id', 'isFree'];
+    protected $fillable = ['title', 'small_description', 'description', 'module_id', 'institution_id', 'amount', 'currency', 'certification_id', 'isFree', 'order'];
 
     protected $casts = [
         'isFree' => 'boolean',

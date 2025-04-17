@@ -45,4 +45,5 @@ return [
     'certifications' => 'Certificações',
     'certification' => 'Certificação',
     'my_certifications' => 'Minhas Certificações',
+    'order'=>'Order',
 ];

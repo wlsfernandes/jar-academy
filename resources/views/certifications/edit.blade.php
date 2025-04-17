@@ -69,6 +69,15 @@
 
                         </div>
                         <div class="mb-3 row">
+                            <label for="order" class="col-md-2 col-form-label">@lang('app.order'):</label>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                                                     <input class="form-control" type="number" step="1" min="0"
+                                        value="{{ old('order', $certification->order) }}" id="order" name="order" placeholder="Enter order of the discipline">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Gratuíto?:</label>
                             <div class="col-md-6 d-flex align-items-center">
                                 <div class="form-check form-switch">

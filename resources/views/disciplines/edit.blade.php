@@ -125,7 +125,7 @@
 
                         </div>
                         <div class="mb-3 row">
-                            <label for="order" class="col-md-2 col-form-label">@lang('app.price'):</label>
+                            <label for="order" class="col-md-2 col-form-label">@lang('app.order'):</label>
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <input class="form-control" type="number" step="0.01" min="0"

@@ -9,7 +9,7 @@ class Certification extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'amount', 'institution_id', 'isFree'];
+    protected $fillable = ['name', 'amount', 'institution_id', 'isFree', 'order'];
     protected $casts = [
         'isFree' => 'boolean',
     ];
@@ -19,7 +19,7 @@ class Certification extends Model
     }
     public function disciplines()
     {
-        return $this->hasMany(Discipline::class);
+        return $this->hasMany(Discipline::class)->orderBy('order');
     }
     public function students()
     {

@@ -1,111 +1,166 @@
 @extends('layouts.master')
-@section('title')
-    AMID
-@endsection
-@section('css')
-    <!-- DataTables -->
-    <link href="{{ asset('/assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
-@endsection
+
+@section('title', 'AMID')
 
 @section('content')
     @component('common-components.breadcrumb')
-    @slot('pagetitle')
-    certifications
-    @endslot
-    @slot('title')
-    @endslot
+    @slot('pagetitle') Certifications @endslot
+    @slot('title') Certifications @endslot
     @endcomponent
-
 
     <div class="row">
         <div class="col-lg-12">
             <div class="card border border-primary">
                 <div class="card-header bg-transparent border-primary">
-                    <h5 class="my-0 text-primary"></i> certifications</b></h5>
+                    <h5 class="my-0 text-primary">Certifications</h5>
                 </div>
                 <div class="card-body">
                     @if (session()->has('success'))
-                        <div class="alert alert-success" role="alert">
-                            <i class="fas fa-check-circle"></i> <!-- Success icon -->
-                            {{ session('success') }}
-                        </div>
+                        <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
+
                     @if ($errors->any())
-                        <div class="alert alert-danger" role="alert">
-                            <ul>
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
                                 @foreach ($errors->all() as $error)
-                                    <li><i class="bx bx-error"></i> {{ $error }}</li>
+                                    <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
                         </div>
                     @endif
 
-                    <div>
+                    <a href="{{ url('certifications/create') }}" class="btn btn-success mb-3">
+                        <i class="fas fa-plus"></i> Add New
+                    </a>
 
-                        <a href="{{ url('certifications/create') }}">
-                            <button type="button" class="btn btn-success waves-effect waves-light mb-3"><i
-                                    class="fas fa-plus"></i> Add New</button> </a>
-                    </div>
-
-                    <h4 class="card-title">certifications</h4>
-                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
-                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>name</th>
-                                <th>@lang('app.price')</th>
-                                <th>Gratuíto?</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($certifications as $certification)
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead class="table-primary">
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $certification->name ?? ''}}</td>
-                                    <td>{{ $certification->amount ?? ''}}</td>
-                                    <td>
-                                        @if ($certification->isFree)
-                                            <div class="badge bg-pill bg-info-subtle text-info font-size-12">Yes</div>
-                                        @else
-                                            <div class="badge bg-pill bg-warning-subtle text-warning font-size-12">No</div>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <a href="{{ url('/certifications/' . $certification->id) }}"
-                                            class="px-3 text-primary"><i class="fas fa-eye font-size-20"></i></a>
-                                        <a href="{{ url('/certifications/' . $certification->id . '/edit') }}"
-                                            class="px-3 text-primary"><i class="uil uil-pen font-size-20"></i></a>
-
-                                        <a href="javascript:void(0);" class="px-3 text-danger"
-                                            onclick="event.preventDefault(); if(confirm('Confirm delete?')) { document.getElementById('delete-form-{{ $certification->id }}').submit(); }">
-                                            <i class="uil uil-trash-alt font-size-20"></i>
-                                        </a>
-
-                                        <form id="delete-form-{{ $certification->id }}"
-                                            action="{{ url('/certifications/' . $certification->id) }}" method="POST"
-                                            style="display: none;">
-                                            @method('DELETE')
-                                            @csrf
-                                        </form>
-                                    </td>
+                                    <th>Ordem</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Gratuíto?</th>
+                                    <th>Actions</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
+                            </thead>
+                            <tbody>
+                                @foreach ($certifications as $certification)
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" type="button"
+                                                onclick="toggleDisciplines('disciplines-{{ $certification->id }}')">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                              <b>{{ $certification->order }}</b> 
+                                        </td>
+                                        <td>{{ $certification->name ?? '' }}</td>
+                                        <td>{{ $certification->amount ?? '' }}</td>
+                                        <td>
+                                            @if ($certification->isFree)
+                                                <span class="badge bg-info text-dark">Yes</span>
+                                            @else
+                                                <span class="badge bg-warning text-dark">No</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ url('/certifications/' . $certification->id) }}"
+                                                class="text-primary me-2">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ url('/certifications/' . $certification->id . '/edit') }}"
+                                                class="text-primary me-2">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="#" class="text-danger"
+                                                onclick="event.preventDefault(); if(confirm('Confirm delete?')) document.getElementById('delete-form-{{ $certification->id }}').submit();">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                            <form id="delete-form-{{ $certification->id }}" method="POST"
+                                                action="{{ url('/certifications/' . $certification->id) }}"
+                                                style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </td>
+                                    </tr>
 
-                    </table>
+                                    @if($certification->disciplines && $certification->disciplines->count())
+                                        <tr id="disciplines-{{ $certification->id }}" style="display: none;">
+                                            <td></td>
+                                            <td colspan="4">
+                                                <div class="table-responsive ps-4">
+                                                    <table class="table table-sm table-bordered mb-0">
+                                                        <thead class="table-light">
+                                                            <tr>
+                                                                <th>Ordem</th>
+                                                                <th>Discipline</th>
+                                                                <th>Price</th>
+                                                                <th>Gratuíto?</th>
+                                                                <th>Actions</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach($certification->disciplines as $discipline)
+                                                                <tr>
+                                                                    <td>{{ $discipline->order }}</td>
+                                                                    <td>{{ $discipline->title }}</td>
+                                                                    <td>{{ $discipline->amount ?? '-' }}</td>
+                                                                    <td>
+                                                                        @if ($discipline->isFree)
+                                                                            <span class="badge bg-info text-dark">Yes</span>
+                                                                        @else
+                                                                            <span class="badge bg-warning text-dark">No</span>
+                                                                        @endif
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="{{ url('/disciplines/' . $discipline->id) }}"
+                                                                            class="text-primary me-2">
+                                                                            <i class="fas fa-eye"></i>
+                                                                        </a>
+                                                                        <a href="{{ url('/disciplines/' . $discipline->id . '/edit') }}"
+                                                                            class="text-primary me-2">
+                                                                            <i class="fas fa-edit"></i>
+                                                                        </a>
+                                                                        <a href="#" class="text-danger"
+                                                                            onclick="event.preventDefault(); if(confirm('Confirm delete?')) document.getElementById('delete-discipline-{{ $discipline->id }}').submit();">
+                                                                            <i class="fas fa-trash-alt"></i>
+                                                                        </a>
+                                                                        <form id="delete-discipline-{{ $discipline->id }}" method="POST"
+                                                                            action="{{ url('/disciplines/' . $discipline->id) }}"
+                                                                            style="display: none;">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                        </form>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
             </div>
-        </div> <!-- end col -->
-    </div> <!-- end row -->
+        </div>
+    </div>
 @endsection
 @section('script')
-    <script src="{{ asset('/assets/libs/datatables/datatables.min.js') }}"></script>
-    <script src="{{ asset('/assets/libs/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/pages/datatables.init.js') }}"></script>
-
+    <script>
+        function toggleDisciplines(id) {
+            const row = document.getElementById(id);
+            if (row.style.display === 'none') {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        }
+    </script>
 @endsection

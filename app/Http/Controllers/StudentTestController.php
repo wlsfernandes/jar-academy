@@ -85,7 +85,7 @@ class StudentTestController extends Controller
             session()->flash('success', 'Test submitted and resource marked as viewed.');
             Log::info('Test submitted successfully for student ID: ' . Auth::id() . ' within time: ' . ($isWithinTime ? 'Yes' : 'No'));
 
-            return redirect()->back()->with('success', 'Test submitted successfully!');
+            return redirect()->route('courses.myCourses')->with('success', 'Test submitted successfully!');
 
         } catch (Exception $e) {
             DB::rollBack();

@@ -15,13 +15,15 @@ class CertificationController extends Controller
     public function index()
     {
         $certifications = Certification::where('institution_id', Auth::user()->institution_id)
-            ->orderBy('name')
+            ->orderBy('order')
             ->get();
         return view('certifications.index', compact('certifications'));
     }
     public function listCertifications()
     {
-        $certifications = Certification::where('institution_id', Auth::user()->institution_id)->get();
+        $certifications = Certification::where('institution_id', Auth::user()->institution_id)
+        ->orderBy('order')
+        ->get();
         return view('certifications.list-certifications', compact('certifications'));
     }
 
@@ -29,6 +31,7 @@ class CertificationController extends Controller
     {
         $certifications = Certification::where('institution_id', Auth::user()->institution_id)
             ->whereHas('students') // Ensures there are associated students in the discipline_student table
+            ->orderBy('order')
             ->get();
 
         return view('certifications.mycertifications', compact('certifications'));
@@ -104,6 +107,7 @@ class CertificationController extends Controller
                 'amount' => $request->isFree ? 0 : $request->amount,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
                 'isFree' => $request->has('isFree'), // set true or false based on checkbox
+                'order' => $request->order,
             ]);
             DB::commit();
             return redirect()->route('certifications.index')->with('success', 'Certification created successfully!');
@@ -150,6 +154,7 @@ class CertificationController extends Controller
                 'amount' => $request->isFree ? 0 : $request->amount,
                 'institution_id' => Auth::user()->institution_id,
                 'isFree' => $request->has('isFree'),
+                'order' => $request->order,
             ]);
             DB::commit();
             return redirect()->route('certifications.index')->with('success', 'Certification updated successfully!');

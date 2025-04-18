@@ -16,15 +16,29 @@ class StudentTestController extends Controller
 
     public function edit($id)
     {
-        $resource = Resource::findOrFail($id);
-        $test = Test::where('resource_id', $id)->first();
-        // start count student time
+        $test = Test::findOrFail($id);
+
+        // Get the student model (assuming the logged-in user has a student profile)
+        $student = Auth::user()->student;
+
+        if (!$student) {
+            abort(403, 'Only students can take tests.');
+        }
+
+        // Ensure there's a StudentTest entry for this student/test
         $studentTest = StudentTest::firstOrCreate(
-            ['test_id' => $test->id, 'student_id' => Auth::user()->id, 'answer' => ' '],
-            ['start_time' => now()]
+            [
+                'test_id' => $test->id,
+                'student_id' => $student->id,
+            ],
+            [
+                'start_time' => now(),
+            ]
         );
-        return view('tests.edit', compact('resource', 'test', 'studentTest'));
+// aqui 
+        return view('tests.edit', compact('test', 'studentTest'));
     }
+
 
 
     public function submitTest(Request $request)

@@ -11,7 +11,7 @@
     @slot('title') Test @endslot
     @endcomponent
 
-    <!-- add Resource -->
+    <!-- add test -->
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -45,18 +45,17 @@
 
                     <form action="{{ route('submitTest') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="resource_id" value="{{$resource->id}}" />
                         <input type="hidden" name="test_id" value="{{$test->id}}" />
                         <div class="mb-3 row">
                             <label for="title" class="col-md-2 col-form-label">@lang('app.title'):</label>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" value="{{ old('title', $resource->title ?? '') }}"
+                                <input class="form-control" type="text" value="{{ old('title', $test->title ?? '') }}"
                                     id="title" name="title" required>
                             </div>
                         </div>
 
-                        @if($resource->url)
-                            <iframe src="{{ $resource->url }}#toolbar=0" allowfullscreen loading="lazy"
+                        @if($test->url)
+                            <iframe src="{{ $test->url }}#toolbar=0" allowfullscreen loading="lazy"
                                 style="width: 100%; max-width: 1200px; height: 800px; border: none;">
                             </iframe>
                         @endif

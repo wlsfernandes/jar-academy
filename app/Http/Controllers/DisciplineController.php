@@ -23,7 +23,7 @@ class DisciplineController extends Controller
         $disciplines = Discipline::where('institution_id', Auth::user()->institution_id)
             ->orderBy('title')
             ->get();
-        return view('disciplines.index', compact('disciplines'));
+        return view('certifications.index', compact('disciplines'));
     }
     public function listDisciplines()
     {
@@ -47,6 +47,20 @@ class DisciplineController extends Controller
         $certifications = Certification::where('institution_id', Auth::user()->institution_id)->get();
         return view('disciplines.create', compact('modules', 'certifications'));
     }
+
+    public function newDiscipline($id)
+    {
+        $modules = Module::where('institution_id', Auth::user()->institution_id)->get();
+
+        // Only fetch the certification that matches the $id and belongs to the user's institution
+        $certification = Certification::where('institution_id', Auth::user()->institution_id)
+            ->where('id', $id)
+            ->firstOrFail();
+
+        return view('certifications.new-discipline', compact('modules', 'certification'));
+    }
+
+
     // Show form to edit a discipline
     public function edit($id)
     {
@@ -76,17 +90,55 @@ class DisciplineController extends Controller
             $discipline = Discipline::where('institution_id', Auth::user()->institution_id)->findOrFail($id);
             $discipline->delete();
             DB::commit();
-            return redirect()->route('disciplines.index')->with('success', 'Discipline deleted successfully!');
+            return redirect()->route('certifications.index')->with('success', 'Discipline deleted successfully!');
         } catch (Exception $e) {
             DB::rollBack();
             Log::error('Error deleting discipline: ' . $e->getMessage());
 
-            return redirect()->route('disciplines.index')->with('error', 'An error occurred while deleting the discipline. Please try again.');
+            return redirect()->route('certifications.index')->with('error', 'An error occurred while deleting the discipline. Please try again.');
         }
     }
 
 
     // Store a new discipline in the database
+    public function storeDiscipline(Request $request)
+    {
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'certification_id' => 'required|exists:certifications,id',
+        ]);
+
+
+        DB::beginTransaction();
+
+        try {
+            Discipline::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'small_description' => $request->small_description,
+                'module_id' => $request->module,
+                'certification_id' => $request->certification_id,
+                'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
+                'order' => $request->order ?? 1,
+            ]);
+            DB::commit();
+            return redirect()->route('certifications.index')->with('success', 'Discipline created successfully!');
+
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error('Error creating discipline and user: ' . $e->getMessage(), [
+                'exception' => $e,
+                'title' => $request->title,
+                'description' => $request->description,
+                'small_description' => $request->small_description,
+                'module_id' => $request->module,
+                'institution_id' => Auth::user()->institution_id,
+                'order' => $request->order ?? 1,
+            ]);
+            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while creating the discipline. Please try again.']);
+        }
+    }
     public function store(Request $request)
     {
 
@@ -116,7 +168,7 @@ class DisciplineController extends Controller
                 'order' => $request->order ?? 1,
             ]);
             DB::commit();
-            return redirect()->route('disciplines.index')->with('success', 'Discipline created successfully!');
+            return redirect()->route('certifications.index')->with('success', 'Discipline created successfully!');
 
         } catch (Exception $e) {
             DB::rollBack();
@@ -134,33 +186,12 @@ class DisciplineController extends Controller
             return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while creating the discipline. Please try again.']);
         }
     }
-
     // Update discipline details in the database
     public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'isFree' => 'sometimes|boolean',
-            'amount' => [
-                'nullable',
-                'numeric',
-                'min:0',
-                function ($attribute, $value, $fail) use ($request) {
-                    if ($request->boolean('isFree') && !is_null($value) && $value > 0) {
-                        $fail('You cannot set an amount when the item is marked as free.');
-                    }
-
-                    if (!$request->boolean('isFree') && (is_null($value) || $value <= 0)) {
-                        $fail('Amount is required when the item is not free.');
-                    }
-                },
-            ],
         ]);
-
-
-        if (!$request->has('isFree') && floatval($request->amount) == 0) {
-            return redirect()->back()->withInput()->withErrors(['amount' => 'Certification cannot have a price of 0 unless marked as free.']);
-        }
 
         DB::beginTransaction();
 
@@ -172,15 +203,11 @@ class DisciplineController extends Controller
                 'description' => $request->description,
                 'small_description' => $request->small_description,
                 'module_id' => $request->module,
-                'certification_id' => $request->certification,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
-                'amount' => $request->amount ?? 0.00,
-                'isFree' => $request->has('isFree'),
-                'currency' => 'USD',
                 'order' => $request->order ?? 1,
             ]);
             DB::commit();
-            return redirect()->route('disciplines.index')->with('success', 'Discipline updated successfully!');
+            return redirect()->route('certifications.index')->with('success', 'Discipline updated successfully!');
 
         } catch (Exception $e) {
             DB::rollBack();
@@ -208,6 +235,61 @@ class DisciplineController extends Controller
         $resource_types = Resource::getResourceTypes();
         $types = Resource::getTypes();
         return view('disciplines.resources', compact('discipline', 'resources', 'resource_types', 'types'));
+    }
+
+    public function tests($id)
+    {
+        $tests = Test::where('discipline_id', $id)->get();
+        return view('disciplines.tests', compact('tests'));
+    }
+
+
+    public function newTest($id)
+    {
+        $discipline = Discipline::where('institution_id', Auth::user()->institution_id)
+            ->findOrFail($id);
+        $types = Resource::getTypes();
+        $tests = Test::where('discipline_id', $id)->get();
+        return view('disciplines.new-test', compact('discipline', 'types', 'tests'));
+    }
+
+    public function addTest(Request $request, $id)
+    {
+        try {
+            DB::beginTransaction();
+            $discipline = Discipline::findOrFail($id);
+            $url = null;
+            if ($request->hasFile('document')) {
+                $file = $request->file('document');
+                $url = StorageS3::uploadToS3($file);
+                if (!$url) {
+                    DB::rollBack();
+                    return back()->withErrors(['document' => 'File upload failed.']);
+                }
+            } elseif ($request->filled('resource_url')) {
+                $url = $request->input('resource_url');
+            } else {
+                DB::rollBack();
+                return back()->withErrors(['resource_url' => 'You must provide either a file or a URL.']);
+            }
+            $test = Test::create([
+                'discipline_id' => $discipline->id,
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'instructions' => $request->input('instructions'),
+                'url' => $url,
+            ]);
+            DB::commit();
+            session()->flash('success', 'Resource added successfully.');
+            Log::info('Test uploaded successfully.');
+            return redirect()->back()->with('success', 'Resource created successfully!');
+        } catch (Exception $e) {
+            DB::rollBack();
+            session()->flash('error', 'Failed to upload resource: ' . $e->getMessage());
+            Log::error('Error uploading resource: ' . $e->getMessage());
+
+            return redirect()->back()->with('error', 'Error to create test!');
+        }
     }
 
     public function addResource(Request $request, $id)
@@ -277,7 +359,7 @@ class DisciplineController extends Controller
             session()->flash('error', 'Failed to upload resource: ' . $e->getMessage());
             Log::error('Error uploading resource: ' . $e->getMessage());
 
-            return redirect()->route('disciplines.index');
+            return redirect()->route('certifications.index');
         }
     }
 

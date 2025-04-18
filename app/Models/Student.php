@@ -50,4 +50,28 @@ class Student extends Model
             ->withPivot(['is_submitted', 'submitted_at', 'is_approved', 'approved_at', 'feedback'])
             ->withTimestamps();
     }
+
+    public function checkAndCompleteCertification($certificationId)
+    {
+        $certification = Certification::with('disciplines')->findOrFail($certificationId);
+
+        $disciplineIds = $certification->disciplines->pluck('id');
+
+        $submittedCount = $this->disciplines()
+            ->whereIn('discipline_id', $disciplineIds)
+            ->wherePivot('is_submitted', true)
+            ->count();
+
+        if ($submittedCount === $disciplineIds->count()) {
+            // Mark the certification as completed in the pivot table
+            $this->certifications()->updateExistingPivot($certificationId, [
+                'is_completed' => true,
+                'completed_at' => now(),
+            ]);
+            return true;
+        }
+
+        return false;
+    }
+
 }

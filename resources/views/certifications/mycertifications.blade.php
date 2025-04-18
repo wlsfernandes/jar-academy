@@ -60,7 +60,7 @@
             <a href="{{ url('/resources/' . $discipline->id . '/tasks') }}" class="text-primary" title="Tasks">
                 <i class="uil uil-apps font-size-18"></i>
             </a>
-            <a href="{{ url('/resources/' . $discipline->id . '/test') }}" class="text-primary" title="Tests">
+            <a href="{{ url('/disciplines/' . $discipline->id . '/test') }}" class="text-primary" title="Tests">
                 <i class="uil uil-pen font-size-18"></i>
             </a>
 

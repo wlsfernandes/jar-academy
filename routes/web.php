@@ -61,6 +61,7 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     Route::get('/resources/{id}/docs', [ResourceController::class, 'docs'])->name('resources.docs');
     Route::get('/resources/{id}/tasks', [ResourceController::class, 'tasks'])->name('resources.tasks');
     Route::get('/resources/{id}/test', [ResourceController::class, 'tests'])->name('resources.tests');
+    Route::get('/disciplines/{id}/test', [DisciplineController::class, 'tests'])->name('disciplines.tests');
     Route::get('/task/{id}/edit', [StudentTaskController::class, 'edit'])->name('edit');
     Route::post('/studentTasks', [StudentTaskController::class, 'addTask'])->name('addTask');
     Route::get('/test/{id}/edit', [StudentTestController::class, 'edit'])->name('edit');
@@ -113,6 +114,7 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::put('/modules/{id}', [ModuleController::class, 'update'])->name('modules.update');
         Route::delete('/modules/{id}', [ModuleController::class, 'destroy'])->name('modules.destroy');
         //Certifications
+        Route::get('/certifications/{id}/discipline', [DisciplineController::class, 'newDiscipline'])->name('newDiscipline');
         Route::get('/certifications', [CertificationController::class, 'index'])->name('certifications.index');
         Route::get('/certifications/create', [CertificationController::class, 'create'])->name('certifications.create');
         Route::post('/certifications', [CertificationController::class, 'store'])->name('certifications.store');
@@ -124,12 +126,15 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::get('/disciplines', [DisciplineController::class, 'index'])->name('disciplines.index');
         Route::get('/disciplines/create', [DisciplineController::class, 'create'])->name('disciplines.create');
         Route::post('/disciplines', [DisciplineController::class, 'store'])->name('disciplines.store');
+        Route::post('/store-discipline', [DisciplineController::class, 'storeDiscipline'])->name('storeDiscipline');
         Route::get('/disciplines/{id}', [DisciplineController::class, 'show'])->name('disciplines.show');
         Route::get('/disciplines/{id}/edit', [DisciplineController::class, 'edit'])->name('disciplines.edit');
         Route::put('/disciplines/{id}', [DisciplineController::class, 'update'])->name('disciplines.update');
         Route::delete('/disciplines/{id}', [DisciplineController::class, 'destroy'])->name('disciplines.destroy');
         Route::get('/disciplines/{id}/resources', [DisciplineController::class, 'resources'])->name('disciplines.resources');
+        Route::get('/disciplines/{id}/new-test', [DisciplineController::class, 'newTest'])->name('disciplines.newTest');
         Route::post('/disciplines/{id}/add-resource', [DisciplineController::class, 'addResource'])->name('disciplines.addResource');
+        Route::post('/disciplines/{id}/tests', [DisciplineController::class, 'addTest'])->name('disciplines.addTest');
 
         // Resources
         Route::get('/resources/{id}/edit', [ResourceController::class, 'edit'])->name('resources.edit');

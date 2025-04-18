@@ -22,7 +22,7 @@ class Resource extends Model
      */
     public static function getResourceTypes()
     {
-        return ['documento', 'prova', 'tarefa'];
+        return ['documento', 'tarefa'];
     }
 
     /**

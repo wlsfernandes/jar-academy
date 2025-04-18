@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Test extends Model
 {
     use HasFactory;
-    protected $fillable = ['discipline_id', 'title', 'description', 'instructions']; // add as needed
+    protected $fillable = ['discipline_id', 'title', 'description', 'instructions', 'url']; // add as needed
 
     public function discipline()
     {

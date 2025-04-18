@@ -170,17 +170,18 @@ class StudentController extends Controller
         })
             ->with([
                 'user',
-                'studentTests.test', // ✅ eager-load student's submitted tests + related test
+                'testSubmissions.test', // ✅ fixed
                 'certifications' => function ($q) {
                     $q->where('certification_student.is_completed', true)
                         ->with([
                             'disciplines' => function ($q2) {
-                                $q2->with('test'); // ✅ load test for each discipline
+                                $q2->with('tests');
                             }
                         ]);
                 }
             ])
             ->get();
+
 
         return view('students.completed-certifications', compact('students'));
     }

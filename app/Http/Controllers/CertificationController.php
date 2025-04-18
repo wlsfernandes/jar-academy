@@ -73,7 +73,7 @@ class CertificationController extends Controller
 
             $certification->delete();
             DB::commit();
-            return redirect()->route('certifications.index')->with('success', 'Certification and User deleted successfully!');
+            return redirect()->route('certifications.index')->with('success', 'Certification deleted successfully!');
 
         } catch (Exception $e) {
             Log::error('Error deleting certification and user: ' . $e->getMessage());

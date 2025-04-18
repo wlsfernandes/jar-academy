@@ -96,12 +96,6 @@
                             <span>@lang('app.teachers')</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{url('students')}}" class="waves-effect">
-                            <i class="dripicons-graduation"></i>
-                            <span>@lang('app.students')</span>
-                        </a>
-                    </li>
 
                     <li>
                         <a href="{{url('access')}}" class="waves-effect">

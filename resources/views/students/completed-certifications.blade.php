@@ -38,42 +38,43 @@
                                         <input type="hidden" name="status" value="rejected">
                                         <button class="btn btn-danger btn-sm">Reject</button>
                                     </form>
-                   s             @endif
+                                @endif
                             </div>
                         </div>
+
                         <ul class="mt-3">
-                        @foreach($certification->disciplines as $discipline)
-    <li>
-        <strong>{{ $discipline->title }}</strong>
+                            @foreach($certification->disciplines as $discipline)
+                                <li>
+                                    <strong>{{ $discipline->title }}</strong>
 
-        @if ($discipline->test && $discipline->test->resource)
-            <div class="ms-3">
-                <p><strong>Test:</strong> {{ $discipline->test->resource->title ?? 'Untitled Test' }}</p>
+                                    @if ($discipline->tests->count())
+                                        @foreach($discipline->tests as $test)
+                                            <div class="ms-3">
+                                                <p><strong>Test:</strong> {{ $test->title ?? 'Untitled Test' }}</p>
 
-                @php
-                    $studentTest = $student->studentTests
-                        ->where('test_id', $discipline->test->id)
-                        ->first();
-                @endphp
+                                                @php
+                                                    $studentTest = $student->testSubmissions
+                                                        ->where('test_id', $test->id)
+                                                        ->first();
+                                                @endphp
 
-                @if ($studentTest)
-                    <div class="text-success">
-                        <span class="badge bg-success mb-1">Submitted</span><br>
-                        <strong>Submitted at:</strong> {{ optional($studentTest->submitted_at)->format('Y-m-d H:i') ?? 'N/A' }}<br>
-                        <strong>On time?</strong> {{ $studentTest->submitted_within_time ? '✅ Yes' : '❌ No' }}
-                    </div>
-                @else
-                    <p class="text-warning"><span class="badge bg-warning text-dark">Test not submitted</span></p>
-                @endif
-            </div>
-        @else
-            <p class="text-muted ms-3">No test assigned to this discipline.</p>
-        @endif
-    </li>
-@endforeach
-
+                                                @if ($studentTest)
+                                                    <div class="text-success">
+                                                        <span class="badge bg-success mb-1">Submitted</span><br>
+                                                        <strong>Submitted at:</strong> {{ optional($studentTest->submitted_at)->format('Y-m-d H:i') ?? 'N/A' }}<br>
+                                                        <strong>On time?</strong> {{ $studentTest->submitted_within_time ? '✅ Yes' : '❌ No' }}
+                                                    </div>
+                                                @else
+                                                    <p class="text-warning"><span class="badge bg-warning text-dark">Test not submitted</span></p>
+                                                @endif
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <p class="text-muted ms-3">No test assigned to this discipline.</p>
+                                    @endif
+                                </li>
+                            @endforeach
                         </ul>
-
                     </div>
                 @endforeach
             </div>

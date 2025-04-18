@@ -15,6 +15,7 @@ use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StudentTaskController;
 use App\Http\Controllers\StudentTestController;
+use App\Http\Controllers\StudentDisciplineController;
 use Illuminate\Support\Facades\Storage;
 use Aws\S3\S3Client;
 
@@ -40,6 +41,47 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     // Access
     Route::resource('access', AccessController::class)->only(['index', 'destroy']);
 
+    // Student access
+   
+    Route::get('/view-content/{id}', [ResourceController::class, 'showContent'])->name('view-content');
+    Route::get('/listdisciplines', [DisciplineController::class, 'listDisciplines'])->name('disciplines.listDisciplines');
+    Route::get('/list-certifications', [CertificationController::class, 'listCertifications'])->name('certifications.listCertifications');
+    Route::get('certifications/{id}/free', [CertificationController::class, 'registerFreeCertification'])->name('registerFreeCertification');
+    Route::get('disciplines/{id}/free', [DisciplineController::class, 'registerFreeCertification'])->name('registerFreeCertification');
+    Route::get('/mycertifications', [CertificationController::class, 'myCertifications'])->name('certifications.myCertifications');
+    Route::get('/mydisciplines', [DisciplineController::class, 'myDisciplines'])->name('disciplines.myDisciplines');
+    Route::get('/resources/{resource}/view', [ResourceController::class, 'view'])
+        ->name('resources.view')
+        ->middleware('auth'); // make sure student is logged in
+    Route::post('/student/mark-discipline-done', [StudentDisciplineController::class, 'markDone'])
+        ->name('student.markDisciplineDone');
+    Route::post('/student/certification-approval', [StudentController::class, 'handleApproval'])
+        ->name('student.certification.approval');
+
+    Route::get('/resources/{id}/docs', [ResourceController::class, 'docs'])->name('resources.docs');
+    Route::get('/resources/{id}/tasks', [ResourceController::class, 'tasks'])->name('resources.tasks');
+    Route::get('/resources/{id}/test', [ResourceController::class, 'tests'])->name('resources.tests');
+    Route::get('/task/{id}/edit', [StudentTaskController::class, 'edit'])->name('edit');
+    Route::post('/studentTasks', [StudentTaskController::class, 'addTask'])->name('addTask');
+    Route::get('/test/{id}/edit', [StudentTestController::class, 'edit'])->name('edit');
+    Route::post('/tests/submit', [StudentTestController::class, 'submitTest'])->name('submitTest');
+
+    // Paypall
+    Route::get('paypal/payment/{id}', [PayPalController::class, 'createPayment'])->name('paypal.payment');
+    Route::get('paypal/capture', [PayPalController::class, 'capturePayment'])->name('paypal.capture');
+    Route::get('paypal/discipline/{id}', [PayPalController::class, 'disciplinePayment'])->name('discipline.payment');
+    Route::get('paypal/capture/discipline', [PayPalController::class, 'captureDiscipline'])->name('paypal.capture.discipline');
+    Route::get('payment/success', function () {
+        return view('paypal.payment-success');
+    })->name('success');
+    Route::get('payment/error', function () {
+        return view('paypal.payment-failed');
+    })->name('error');
+    Route::get('test/paypal', function () {
+        return view('paypal.test-paypal');
+    })->name('test.paypal');
+
+
     // ADMIN
     Route::middleware('can:access-admin')->group(function () {
 
@@ -52,6 +94,7 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::put('/teachers/{id}', [TeacherController::class, 'update'])->name('teachers.update');
         Route::delete('/teachers/{id}', [TeacherController::class, 'destroy'])->name('teachers.destroy');
         // Students
+        Route::get('/students/completed-certifications', [StudentController::class, 'showCompletedCertifications'])->name('showCompletedCertifications');
         Route::get('/students', [StudentController::class, 'index'])->name('students.index');
         Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
         Route::post('/students', [StudentController::class, 'store'])->name('students.store');
@@ -95,39 +138,7 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
 
         Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
     });
-    // Student access
-    Route::get('/view-content/{id}', [ResourceController::class, 'showContent'])->name('view-content');
-    Route::get('/listdisciplines', [DisciplineController::class, 'listDisciplines'])->name('disciplines.listDisciplines');
-    Route::get('/list-certifications', [CertificationController::class, 'listCertifications'])->name('certifications.listCertifications');
-    Route::get('certifications/{id}/free', [CertificationController::class, 'registerFreeCertification'])->name('registerFreeCertification');
-    Route::get('disciplines/{id}/free', [DisciplineController::class, 'registerFreeCertification'])->name('registerFreeCertification');
-    Route::get('/mycertifications', [CertificationController::class, 'myCertifications'])->name('certifications.myCertifications');
-    Route::get('/mydisciplines', [DisciplineController::class, 'myDisciplines'])->name('disciplines.myDisciplines');
-    Route::get('/resources/{resource}/view', [ResourceController::class, 'view'])
-        ->name('resources.view')
-        ->middleware('auth'); // make sure student is logged in
-    Route::get('/resources/{id}/docs', [ResourceController::class, 'docs'])->name('resources.docs');
-    Route::get('/resources/{id}/tasks', [ResourceController::class, 'tasks'])->name('resources.tasks');
-    Route::get('/resources/{id}/test', [ResourceController::class, 'tests'])->name('resources.tests');
-    Route::get('/task/{id}/edit', [StudentTaskController::class, 'edit'])->name('edit');
-    Route::post('/studentTasks', [StudentTaskController::class, 'addTask'])->name('addTask');
-    Route::get('/test/{id}/edit', [StudentTestController::class, 'edit'])->name('edit');
-    Route::post('/tests/submit', [StudentTestController::class, 'submitTest'])->name('submitTest');
 
-    // Paypall
-    Route::get('paypal/payment/{id}', [PayPalController::class, 'createPayment'])->name('paypal.payment');
-    Route::get('paypal/capture', [PayPalController::class, 'capturePayment'])->name('paypal.capture');
-    Route::get('paypal/discipline/{id}', [PayPalController::class, 'disciplinePayment'])->name('discipline.payment');
-    Route::get('paypal/capture/discipline', [PayPalController::class, 'captureDiscipline'])->name('paypal.capture.discipline');
-    Route::get('payment/success', function () {
-        return view('paypal.payment-success');
-    })->name('success');
-    Route::get('payment/error', function () {
-        return view('paypal.payment-failed');
-    })->name('error');
-    Route::get('test/paypal', function () {
-        return view('paypal.test-paypal');
-    })->name('test.paypal');
 
 });
 

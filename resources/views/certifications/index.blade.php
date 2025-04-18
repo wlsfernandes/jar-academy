@@ -33,46 +33,36 @@
                         <i class="fas fa-plus"></i> Add New
                     </a>
 
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <thead class="table-primary">
-                                <tr>
-                                    <th>Ordem</th>
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                    <th>Gratuíto?</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($certifications as $certification)
-                                    <tr>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary" type="button"
-                                                onclick="toggleDisciplines('disciplines-{{ $certification->id }}')">
-                                                <i class="fas fa-plus"></i>
+                    <div class="row">
+                        @foreach ($certifications as $certification)
+                            <div class="col-md-12 col-lg-12 mb-12">
+                                <div class="card border border-primary h-100">
+                                    <div
+                                        class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>#{{ $certification->order }}</strong> - {{ $certification->name }}
+                                            <br>
+                                            <small>${{ $certification->amount ?? '0.00' }}</small>
+                                            <br>
+                                            <span
+                                                class="badge {{ $certification->isFree ? 'bg-info text-dark' : 'bg-warning text-dark' }}">
+                                                {{ $certification->isFree ? 'Gratuito' : 'Pago' }}
+                                            </span>
+                                        </div>
+                                        @if($certification->disciplines->count())
+                                            <button class="btn btn-sm btn-light" onclick="toggleCard(this)">
+                                                <i class="fas fa-chevron-down"></i>
                                             </button>
-                                              <b>{{ $certification->order }}</b> 
-                                        </td>
-                                        <td>{{ $certification->name ?? '' }}</td>
-                                        <td>{{ $certification->amount ?? '' }}</td>
-                                        <td>
-                                            @if ($certification->isFree)
-                                                <span class="badge bg-info text-dark">Yes</span>
-                                            @else
-                                                <span class="badge bg-warning text-dark">No</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a href="{{ url('/certifications/' . $certification->id) }}"
-                                                class="text-primary me-2">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
+                                        @endif
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-end gap-3">
+                                            <a href="{{ url('/certifications/' . $certification->id) }}" class="text-primary"
+                                                title="View"><i class="fas fa-eye"></i></a>
                                             <a href="{{ url('/certifications/' . $certification->id . '/edit') }}"
-                                                class="text-primary me-2">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="#" class="text-danger"
+                                                class="text-primary" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <a href="#" class="text-danger" title="Delete"
                                                 onclick="event.preventDefault(); if(confirm('Confirm delete?')) document.getElementById('delete-form-{{ $certification->id }}').submit();">
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
@@ -82,70 +72,51 @@
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
-                                        </td>
-                                    </tr>
+                                        </div>
+                                    </div>
 
-                                    @if($certification->disciplines && $certification->disciplines->count())
-                                        <tr id="disciplines-{{ $certification->id }}" style="display: none;">
-                                            <td></td>
-                                            <td colspan="4">
-                                                <div class="table-responsive ps-4">
-                                                    <table class="table table-sm table-bordered mb-0">
-                                                        <thead class="table-light">
-                                                            <tr>
-                                                                <th>Ordem</th>
-                                                                <th>Discipline</th>
-                                                                <th>Price</th>
-                                                                <th>Gratuíto?</th>
-                                                                <th>Actions</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach($certification->disciplines as $discipline)
-                                                                <tr>
-                                                                    <td>{{ $discipline->order }}</td>
-                                                                    <td>{{ $discipline->title }}</td>
-                                                                    <td>{{ $discipline->amount ?? '-' }}</td>
-                                                                    <td>
-                                                                        @if ($discipline->isFree)
-                                                                            <span class="badge bg-info text-dark">Yes</span>
-                                                                        @else
-                                                                            <span class="badge bg-warning text-dark">No</span>
-                                                                        @endif
-                                                                    </td>
-                                                                    <td>
-                                                                        <a href="{{ url('/disciplines/' . $discipline->id) }}"
-                                                                            class="text-primary me-2">
-                                                                            <i class="fas fa-eye"></i>
-                                                                        </a>
-                                                                        <a href="{{ url('/disciplines/' . $discipline->id . '/edit') }}"
-                                                                            class="text-primary me-2">
-                                                                            <i class="fas fa-edit"></i>
-                                                                        </a>
-                                                                        <a href="#" class="text-danger"
-                                                                            onclick="event.preventDefault(); if(confirm('Confirm delete?')) document.getElementById('delete-discipline-{{ $discipline->id }}').submit();">
-                                                                            <i class="fas fa-trash-alt"></i>
-                                                                        </a>
-                                                                        <form id="delete-discipline-{{ $discipline->id }}" method="POST"
-                                                                            action="{{ url('/disciplines/' . $discipline->id) }}"
-                                                                            style="display: none;">
-                                                                            @csrf
-                                                                            @method('DELETE')
-                                                                        </form>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
+                                    @if($certification->disciplines->count())
+                                        <div class="card-body border-top" style="display: none;">
+                                            <h6 class="text-muted mb-3">Disciplinas:</h6>
+                                            @foreach($certification->disciplines as $discipline)
+                                                <div class="border rounded p-2 mb-2">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div>
+                                                            <strong>#{{ $discipline->order }}</strong> - {{ $discipline->title }}
+                                                            <br>
+                                                            <small>${{ $discipline->amount ?? '0.00' }}</small>
+                                                            <br>
+                                                            <span
+                                                                class="badge {{ $discipline->isFree ? 'bg-info text-dark' : 'bg-warning text-dark' }}">
+                                                                {{ $discipline->isFree ? 'Gratuito' : 'Pago' }}
+                                                            </span>
+                                                        </div>
+                                                        <div class="d-flex gap-2 align-items-start pt-2">
+                                                            <a href="{{ url('/disciplines/' . $discipline->id) }}" class="text-primary"
+                                                                title="View"><i class="fas fa-eye"></i></a>
+                                                            <a href="{{ url('/disciplines/' . $discipline->id . '/edit') }}"
+                                                                class="text-primary" title="Edit"><i class="fas fa-edit"></i></a>
+                                                            <a href="#" class="text-danger" title="Delete"
+                                                                onclick="event.preventDefault(); if(confirm('Confirm delete?')) document.getElementById('delete-discipline-{{ $discipline->id }}').submit();">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                            <form id="delete-discipline-{{ $discipline->id }}" method="POST"
+                                                                action="{{ url('/disciplines/' . $discipline->id) }}"
+                                                                style="display: none;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </td>
-                                        </tr>
+                                            @endforeach
+                                        </div>
                                     @endif
-                                @endforeach
-
-                            </tbody>
-                        </table>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
+
 
                 </div>
             </div>
@@ -154,12 +125,17 @@
 @endsection
 @section('script')
     <script>
-        function toggleDisciplines(id) {
-            const row = document.getElementById(id);
-            if (row.style.display === 'none') {
-                row.style.display = '';
+        function toggleCard(btn) {
+            const cardBody = btn.closest('.card').querySelectorAll('.card-body')[1];
+            const icon = btn.querySelector('i');
+            if (cardBody.style.display === 'none') {
+                cardBody.style.display = 'block';
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
             } else {
-                row.style.display = 'none';
+                cardBody.style.display = 'none';
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
             }
         }
     </script>

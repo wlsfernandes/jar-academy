@@ -20,19 +20,19 @@ class StudentController extends Controller
     }
 
     public function progress($id)
-{
-    $student = Student::with([
-        'certifications.disciplines.resources',
-        'disciplines.resources',
-    ])
-    ->where('id', $id)
-    ->where('institution_id', Auth::user()->institution_id)
-    ->firstOrFail();
+    {
+        $student = Student::with([
+            'certifications.disciplines.resources',
+            'disciplines.resources',
+        ])
+            ->where('id', $id)
+            ->where('institution_id', Auth::user()->institution_id)
+            ->firstOrFail();
 
-    $resources = $student->resources()->withPivot('views', 'last_viewed_at')->get();
+        $resources = $student->resources()->withPivot('views', 'last_viewed_at')->get();
 
-    return view('students.progress', compact('student', 'resources'));
-}
+        return view('students.progress', compact('student', 'resources'));
+    }
 
     // Show form to create a new student
     public function create()
@@ -161,6 +161,48 @@ class StudentController extends Controller
             ]);
             return redirect()->back()->withInput()->withErrors(['error' => 'Failed to Update student: ']);
         }
+    }
+
+    public function showCompletedCertifications()
+    {
+        $students = Student::whereHas('certifications', function ($q) {
+            $q->where('certification_student.is_completed', true);
+        })
+            ->with([
+                'user',
+                'studentTests.test', // ✅ eager-load student's submitted tests + related test
+                'certifications' => function ($q) {
+                    $q->where('certification_student.is_completed', true)
+                        ->with([
+                            'disciplines' => function ($q2) {
+                                $q2->with('test'); // ✅ load test for each discipline
+                            }
+                        ]);
+                }
+            ])
+            ->get();
+
+        return view('students.completed-certifications', compact('students'));
+    }
+
+
+    public function handleApproval(Request $request)
+    {
+        $request->validate([
+            'student_id' => 'required|exists:students,id',
+            'certification_id' => 'required|exists:certifications,id',
+            'status' => 'required|in:approved,rejected',
+        ]);
+
+        $student = Student::findOrFail($request->student_id);
+        $status = $request->status === 'approved';
+
+        $student->certifications()->updateExistingPivot($request->certification_id, [
+            'is_approved' => $status,
+            'approved_at' => $status ? now() : null,
+        ]);
+
+        return back()->with('success', 'Certification ' . ($status ? 'approved' : 'disapproved') . ' successfully.');
     }
 
 

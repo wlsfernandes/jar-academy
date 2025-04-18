@@ -82,35 +82,43 @@ class PayPalController extends Controller
                 $transactionId = $response['id'] ?? 'unknown';
                 $amount = $request->query('amount');
                 $currency = 'USD';
-                $user = auth()->user();
-                $student = $user->student;
-                $studentId = $student->id;
                 $certificationId = $request->query('certification_id');
 
-                // Save payment data
+                $user = auth()->user();
+                $student = $user->student;
+
+                // Save payment
                 Payment::create([
-                    'student_id' => $studentId,
+                    'student_id' => $student->id,
                     'transaction_id' => $transactionId,
                     'status' => 'COMPLETED',
                     'amount' => $amount,
                     'currency' => $currency,
                 ]);
 
-                // Associate student with the discipline
-                $student = Student::find($studentId);
-                $student->certifications()->attach($certificationId, [
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+                // Attach student to certification
+                $student->certifications()->syncWithoutDetaching([$certificationId]);
 
-                return redirect()->route('certifications.listCertifications')->with('success', 'Payment successful. You now have access to this Certification.');
+                // Also attach to all disciplines inside this certification
+                $certification = Certification::with('disciplines')->findOrFail($certificationId);
+                foreach ($certification->disciplines as $discipline) {
+                    $student->disciplines()->syncWithoutDetaching([$discipline->id]);
+                }
+
+                Log::info("Student {$student->id} linked to certification {$certificationId} and its disciplines.");
+
+                return redirect()
+                    ->route('certifications.listCertifications')
+                    ->with('success', 'Payment successful. You now have access to this Certification.');
             }
 
             return redirect()->route('certifications.listCertifications')->withErrors('Payment failed. Please try again.');
         } catch (Exception $e) {
+            Log::error('PayPal payment capture error: ' . $e->getMessage());
             return redirect()->route('certifications.listCertifications')->withErrors('An error occurred: ' . $e->getMessage());
         }
     }
+
 
 
     public function disciplinePayment($id)

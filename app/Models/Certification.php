@@ -23,7 +23,9 @@ class Certification extends Model
     }
     public function students()
     {
-        return $this->belongsToMany(Student::class, 'certification_student');
+        return $this->belongsToMany(Student::class, 'certification_student')
+            ->withPivot(['is_completed', 'completed_at'])
+            ->withTimestamps();
     }
 
 }

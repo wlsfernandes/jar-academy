@@ -149,14 +149,14 @@ class DisciplineController extends Controller
                     if ($request->boolean('isFree') && !is_null($value) && $value > 0) {
                         $fail('You cannot set an amount when the item is marked as free.');
                     }
-        
+
                     if (!$request->boolean('isFree') && (is_null($value) || $value <= 0)) {
                         $fail('Amount is required when the item is not free.');
                     }
                 },
             ],
         ]);
-        
+
 
         if (!$request->has('isFree') && floatval($request->amount) == 0) {
             return redirect()->back()->withInput()->withErrors(['amount' => 'Certification cannot have a price of 0 unless marked as free.']);
@@ -234,23 +234,37 @@ class DisciplineController extends Controller
                 return back()->withErrors(['resource_url' => 'You must provide either a file or a URL.']);
             }
 
+            $resourceType = $request->input('resource_type');
+
+            // Prepare resource data (excluding discipline_id for now, it will go through the relationship)
             $resourceData = [
-                'discipline_id' => $discipline->id,
                 'title' => $request->input('title'),
                 'description' => $request->input('description'),
                 'type' => $request->input('type'),
-                'resource_type' => $request->input('resource_type'),
+                'resource_type' => $resourceType,
                 'url' => $url,
             ];
 
-            $resource = Resource::create($resourceData);
-
-            $resourceType = $request->input('resource_type');
+            // Handle different resourceable types
             if ($resourceType === 'tarefa') {
-                Task::create(['resource_id' => $resource->id]);
+                $task = Task::create([]);
+                $task->resource()->create(array_merge($resourceData, [
+                    'discipline_id' => $discipline->id,
+                ]));
             } elseif ($resourceType === 'prova') {
-                Test::create(['resource_id' => $resource->id]);
+                $test = Test::create([
+                    'discipline_id' => $discipline->id,
+                ]);
+                $test->resource()->create(array_merge($resourceData, [
+                    'discipline_id' => $discipline->id,
+                ]));
+            } else {
+                // Non-polymorphic resource (e.g., a generic PDF, audio, etc.)
+                Resource::create(array_merge($resourceData, [
+                    'discipline_id' => $discipline->id,
+                ]));
             }
+
 
             DB::commit();
 

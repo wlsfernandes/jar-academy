@@ -23,10 +23,12 @@ class Discipline extends Model
         return $this->hasMany(Resource::class);
 
     }
-    public function assignments()
+    public function tests()
     {
-        return $this->hasMany(Assignment::class);
+        return $this->hasMany(Test::class);
     }
+   
+    
 
     // Define the relationship for one or many classrooms
 
@@ -47,8 +49,11 @@ class Discipline extends Model
 
     public function students()
     {
-        return $this->belongsToMany(Student::class, 'discipline_student');
+        return $this->belongsToMany(Student::class, 'discipline_student')
+            ->withPivot(['is_submitted', 'submitted_at', 'is_approved', 'approved_at', 'feedback'])
+            ->withTimestamps();
     }
+
 
     use HasFactory;
 }

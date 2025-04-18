@@ -22,18 +22,22 @@ class CertificationController extends Controller
     public function listCertifications()
     {
         $certifications = Certification::where('institution_id', Auth::user()->institution_id)
-        ->orderBy('order')
-        ->get();
+            ->orderBy('order')
+            ->get();
         return view('certifications.list-certifications', compact('certifications'));
     }
 
     public function myCertifications()
     {
-        $certifications = Certification::where('institution_id', Auth::user()->institution_id)
-            ->whereHas('students') // Ensures there are associated students in the discipline_student table
+        $student = Auth::user()->student;
+        $certifications = $student->certifications()
+            ->with([
+                'disciplines' => function ($query) {
+                    $query->orderBy('order');
+                }
+            ])
             ->orderBy('order')
             ->get();
-
         return view('certifications.mycertifications', compact('certifications'));
     }
 
@@ -91,7 +95,7 @@ class CertificationController extends Controller
                     if ($request->boolean('isFree') && !is_null($value) && $value > 0) {
                         $fail('You cannot set an amount when the item is marked as free.');
                     }
-        
+
                     if (!$request->boolean('isFree') && (is_null($value) || $value <= 0)) {
                         $fail('Amount is required when the item is not free.');
                     }
@@ -137,7 +141,7 @@ class CertificationController extends Controller
                     if ($request->boolean('isFree') && !is_null($value) && $value > 0) {
                         $fail('You cannot set an amount when the item is marked as free.');
                     }
-        
+
                     if (!$request->boolean('isFree') && (is_null($value) || $value <= 0)) {
                         $fail('Amount is required when the item is not free.');
                     }
@@ -174,30 +178,40 @@ class CertificationController extends Controller
     public function registerFreeCertification(Request $request, $id)
     {
         DB::beginTransaction();
+
         try {
             $user = auth()->user();
             $student = $user->student;
-            $studentId = $student->id;
             $certificationId = $id;
 
-            // Associate student with the discipline
-            $student = Student::find($studentId);
-            $student->certifications()->attach($certificationId, [
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            // Attach student to certification
+            $student->certifications()->syncWithoutDetaching([$certificationId]);
+
+            // Attach student to all disciplines in the certification
+            $certification = Certification::with('disciplines')->findOrFail($certificationId);
+            foreach ($certification->disciplines as $discipline) {
+                $student->disciplines()->syncWithoutDetaching([$discipline->id]);
+            }
+
             DB::commit();
-            return redirect()->route('certifications.listCertifications')->with('success', 'Register successful. You now have access to this Certification.');
+
+            return redirect()
+                ->route('certifications.listCertifications')
+                ->with('success', 'Registration successful. You now have access to this Certification.');
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error('Error creating certification and user: ' . $e->getMessage(), [
+
+            Log::error('Error registering free certification: ' . $e->getMessage(), [
                 'exception' => $e,
-                'certification_name' => $request->name,
-                'certification_email' => $request->email,
-                'institution_id' => Auth::user()->institution_id,
+                'user_id' => auth()->id(),
+                'certification_id' => $id,
             ]);
-            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while creating the certification. Please try again.']);
+
+            return redirect()->back()->withInput()->withErrors([
+                'error' => 'An error occurred while registering the certification. Please try again.'
+            ]);
         }
     }
+
 
 }

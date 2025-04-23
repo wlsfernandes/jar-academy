@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class StudentTest extends Model
 {
     use HasFactory;
-    protected $fillable = ['student_id', 'test_id', 'answer', 'submitted_at', 'submitted_within_time'];
+    protected $fillable = ['student_id', 'test_id', 'answer', 'submitted_at', 'submitted_within_time', 'start_time', 'grade'];
+
 
     protected $casts = [
+        'start_time' => 'datetime',
         'submitted_at' => 'datetime',
     ];
     

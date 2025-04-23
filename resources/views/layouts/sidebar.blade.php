@@ -82,8 +82,13 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('showCompletedCertifications') }}">
+                                <a href="{{ route('grade') }}">
                                     <i class="uil-books"></i> Avaliar
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('completedCertifications') }}">
+                                    <i class="uil-books"></i> Concluídos
                                 </a>
                             </li>
                         </ul>

@@ -95,7 +95,11 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::put('/teachers/{id}', [TeacherController::class, 'update'])->name('teachers.update');
         Route::delete('/teachers/{id}', [TeacherController::class, 'destroy'])->name('teachers.destroy');
         // Students
-        Route::get('/students/completed-certifications', [StudentController::class, 'showCompletedCertifications'])->name('showCompletedCertifications');
+        Route::post('/student-tests/{id}/grade', [StudentTestController::class, 'updateGrade'])->name('student-tests.grade');
+        Route::get('/student-tests/{id}/view', [StudentTestController::class, 'show'])->name('student-tests.show');
+
+        Route::get('/students/grade', [StudentController::class, 'grade'])->name('grade');
+        Route::get('/students/completed-certifications', [StudentController::class, 'completedCertifications'])->name('completedCertifications');
         Route::get('/students', [StudentController::class, 'index'])->name('students.index');
         Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
         Route::post('/students', [StudentController::class, 'store'])->name('students.store');

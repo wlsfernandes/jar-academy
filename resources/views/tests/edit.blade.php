@@ -82,7 +82,7 @@
 
                         <div class="text-center mt-4">
                             <button type="submit" class="btn btn-secondary waves-effect waves-light">
-                                <a href="{{ url('/mycourses') }}" style="color:white">
+                                <a href="{{ url('/mycertifications') }}" style="color:white">
                                     <i class="bx bx-arrow-back"></i> Go Back
                                 </a>
                             </button>

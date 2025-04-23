@@ -9,7 +9,7 @@ class Certification extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'amount', 'institution_id', 'isFree', 'order'];
+    protected $fillable = ['name', 'amount', 'institution_id', 'isFree', 'order', 'parent_id'];
     protected $casts = [
         'isFree' => 'boolean',
     ];
@@ -27,5 +27,13 @@ class Certification extends Model
             ->withPivot(['is_completed', 'completed_at'])
             ->withTimestamps();
     }
-
+    public function parent()
+    {
+        return $this->belongsTo(Certification::class, 'parent_id');
+    }
+    
+    public function children()
+    {
+        return $this->hasMany(Certification::class, 'parent_id');
+    }
 }

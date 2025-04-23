@@ -44,15 +44,16 @@ class CertificationController extends Controller
     // Show form to create a new certification
     public function create()
     {
-        return view('certifications.create');
+        $certifications = Certification::orderBy('order')->get();
+        return view('certifications.create', compact('certifications'));
     }
     // Show form to edit a certification
     public function edit($id)
     {
         $certification = Certification::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
-
-        return view('certifications.edit', compact('certification'));
+            $certifications = Certification::orderBy('order')->get();
+        return view('certifications.edit', compact('certification', 'certifications'));
     }
 
     // Show details of a specific certification
@@ -111,7 +112,8 @@ class CertificationController extends Controller
                 'amount' => $request->isFree ? 0 : $request->amount,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
                 'isFree' => $request->has('isFree'), // set true or false based on checkbox
-                'order' => $request->order,
+                'order' => $request->order ?? 1,
+                'parent_id' => $request->parent_id ?: null, // Optional parent
             ]);
             DB::commit();
             return redirect()->route('certifications.index')->with('success', 'Certification created successfully!');
@@ -159,6 +161,7 @@ class CertificationController extends Controller
                 'institution_id' => Auth::user()->institution_id,
                 'isFree' => $request->has('isFree'),
                 'order' => $request->order,
+                'parent_id' => $request->parent_id ?: null, // Optional parent
             ]);
             DB::commit();
             return redirect()->route('certifications.index')->with('success', 'Certification updated successfully!');

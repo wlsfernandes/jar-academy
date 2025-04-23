@@ -86,6 +86,20 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
+    <label for="parent_id" class="col-md-2 col-form-label">Prerequisite:</label>
+    <div class="col-md-6">
+        <select name="parent_id" id="parent_id" class="form-control select2">
+            <option value="">-- None --</option>
+            @foreach($certifications as $cert)
+                <option value="{{ $cert->id }}" {{ old('parent_id') == $cert->id ? 'selected' : '' }}>
+                    #{{ $cert->order }} - {{ $cert->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+    <small class="col-md-10 offset-md-2 text-muted">Select another certification this one depends on (optional).</small>
+</div>
+                        <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Gratuíto?:</label>
                             <div class="col-md-6 d-flex align-items-center">
                                 <div class="form-check form-switch">

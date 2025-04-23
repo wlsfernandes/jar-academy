@@ -73,5 +73,16 @@ class Student extends Model
 
         return false;
     }
+    public function canStartCertification(Certification $certification): bool
+    {
+        if (!$certification->parent_id) {
+            return true;
+        }
+    
+        return $this->certifications()
+            ->wherePivot('is_completed', true)
+            ->where('certification_id', $certification->parent_id)
+            ->exists();
+    }
 
 }

@@ -21,7 +21,7 @@ class PayPalController extends Controller
 
     public function createPayment($id)
     {
-
+        $student = Auth::user()->student;
         $certification = Certification::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
         $amount = $certification->amount;
@@ -29,7 +29,11 @@ class PayPalController extends Controller
         if (!$amount || $amount <= 0) {
             return redirect()->back()->with('error', 'An error occurred: The amount cannot be zero or empty.');
         }
-
+        
+        if (!$student->canStartCertification($certification)) {
+            return redirect()->back()->with('error', 'You must complete the required certification before proceeding.');
+        }
+        
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $provider->setAccessToken($provider->getAccessToken());

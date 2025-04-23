@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'there_no_test' => 'There is no test to this discipline',
     'update_task' => 'Finalizar Tarefa',
     'access' => 'Accesse',
     'teachers' => 'Professores',

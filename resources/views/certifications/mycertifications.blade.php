@@ -53,31 +53,39 @@
         <p class="mb-1">
             <strong>#{{ $discipline->order }}</strong> - {{ $discipline->title }}
         </p>
-        <div class="d-flex justify-content-start gap-3 align-items-center">
-            <a href="{{ url('/resources/' . $discipline->id . '/docs') }}" class="text-primary" title="Docs">
-                <i class="uil uil-file-plus font-size-18"></i>
-            </a>
-            <a href="{{ url('/resources/' . $discipline->id . '/tasks') }}" class="text-primary" title="Tasks">
-                <i class="uil uil-apps font-size-18"></i>
-            </a>
-            <a href="{{ url('/disciplines/' . $discipline->id . '/test') }}" class="text-primary" title="Tests">
-                <i class="uil uil-pen font-size-18"></i>
-            </a>
+        <div class="row g-2 mb-2">
+    <div class="col-sm-4">
+        <a href="{{ url('/resources/' . $discipline->id . '/docs') }}" class="text-decoration-none">
+            <div class="card text-center h-100 shadow-sm border">
+                <div class="card-body p-2">
+                    <i class="uil uil-file-plus font-size-24 text-primary"></i>
+                    <p class="mb-0 mt-1 text-muted">Docs</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-4">
+        <a href="{{ url('/resources/' . $discipline->id . '/tasks') }}" class="text-decoration-none">
+            <div class="card text-center h-100 shadow-sm border">
+                <div class="card-body p-2">
+                    <i class="uil uil-apps font-size-24 text-primary"></i>
+                    <p class="mb-0 mt-1 text-muted">Tasks</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-4">
+        <a href="{{ url('/disciplines/' . $discipline->id . '/test') }}" class="text-decoration-none">
+            <div class="card text-center h-100 shadow-sm border">
+                <div class="card-body p-2">
+                    <i class="uil uil-pen font-size-24 text-primary"></i>
+                    <p class="mb-0 mt-1 text-muted">Tests</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
 
-            @if (!$isSubmitted)
-                <form action="{{ route('student.markDisciplineDone') }}" method="POST" onsubmit="return confirm('Mark as done?')">
-                    @csrf
-                    <input type="hidden" name="discipline_id" value="{{ $discipline->id }}">
-                    <button class="btn btn-sm btn-outline-success" type="submit" title="Mark as Done">
-                        <i class="fas fa-check"></i>
-                    </button>
-                </form>
-            @else
-                <span class="text-success" title="Submitted">
-                    <i class="fas fa-check-circle"></i>
-                </span>
-            @endif
-        </div>
     </div>
 @endforeach
 

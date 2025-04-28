@@ -31,6 +31,7 @@
 
             @php
                 $url = $resource->url;
+                $extension = strtolower(pathinfo($url, PATHINFO_EXTENSION));
 
                 function getVideoEmbedUrl($url)
                 {
@@ -49,20 +50,29 @@
                     return null;
                 }
 
-                $isMp4 = str_ends_with(strtolower($url), '.mp4');
-                $embed_url = $resource->type === 'video' && !$isMp4 ? getVideoEmbedUrl($url) : null;
+                $isVideoFile = in_array($extension, ['mp4', 'm4v']);
+                $isPdf = $extension === 'pdf';
+                $isDocx = $extension === 'docx';
+                $isPpt = in_array($extension, ['ppt', 'pptx']);
+                $isImage = in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp']);
+                $embed_url = ($resource->type === 'video' && !$isVideoFile) ? getVideoEmbedUrl($url) : null;
             @endphp
 
             <section class="d-flex justify-content-center" style="min-height: 100vh;">
-                @if($resource->type === 'pdf' || $resource->type === 'docx')
+                @if($isPdf || $isDocx)
                     <iframe src="{{ $url }}#toolbar=0" allowfullscreen loading="lazy"
                         style="width: 100%; max-width: 1200px; height: 75vh; border: none;">
                     </iframe>
 
+                    @if($isPpt)
+                        <iframe src="https://docs.google.com/gview?url={{ urlencode($url) }}&embedded=true"
+                            style="width: 100%; max-width: 1200px; height: 75vh; border: none;"
+                            frameborder="0">
+                        </iframe>
                 @elseif($resource->type === 'video')
-                    @if($isMp4)
+                    @if($isVideoFile)
                         <video controls style="width: 100%; max-width: 800px; border-radius: 8px;" preload="metadata">
-                            <source src="{{ $url }}" type="video/mp4">
+                            <source src="{{ $url }}" type="video/{{ $extension }}">
                             Your browser does not support the video tag.
                         </video>
                     @elseif($embed_url)
@@ -75,7 +85,7 @@
                         <p class="text-danger">Invalid video URL</p>
                     @endif
 
-                @elseif(strtolower($resource->type) === 'image')
+                @elseif($isImage)
                     <img src="{{ $url }}" alt="Media Image"
                         style="width: 80%; max-width: 800px; height: auto; border-radius: 8px;">
 

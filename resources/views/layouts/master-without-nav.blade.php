@@ -12,6 +12,8 @@
     @show
     @yield('content')
     @include('layouts.vendor-scripts')
+    @yield('scripts')
+
 </body>
 
 </html>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Anhskohbo\NoCaptcha\Facades\NoCaptcha;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
 use App\Providers\RouteServiceProvider;

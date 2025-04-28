@@ -3,6 +3,9 @@
     Register
 @endsection
 @section('content')
+@php
+    use Anhskohbo\NoCaptcha\Facades\NoCaptcha;
+@endphp
     <div class="account-pages my-5 pt-sm-5">
         <div class="container">
             <div class="row">

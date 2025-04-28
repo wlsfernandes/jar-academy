@@ -88,7 +88,7 @@
                                                 <div class="border rounded p-2 mb-2">
                                                     <div class="d-flex justify-content-between">
                                                         <div class="text-secondary">
-                                                            <strong>#{{ $discipline->order }}</strong> - {{ $discipline->title }}
+                                                            <strong>#{{ $discipline->order }}</strong> - {{ $discipline->title }}  <strong>$ {{ $discipline->amount ?? 0.00 }}</strong>
                                                         </div>
                                                         <div class="d-flex gap-2 align-items-start pt-2">
                                                             <a href="{{ url('/disciplines/' . $discipline->id) }}" class="text-secondary"

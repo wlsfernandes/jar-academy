@@ -28,7 +28,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="d-flex justify-content-between" style="margin:15px">
-                    <a href="{{ url('/disciplines') }}" class="btn btn-secondary waves-effect">
+                    <a href="{{ url('/certifications') }}" class="btn btn-secondary waves-effect">
                         <i class="bx bx-arrow-back"></i> @lang('app.go_back')
                     </a>
                 </div>
@@ -111,9 +111,20 @@
                             </div>
 
                         </div>
+                        <div class="mb-3 row">
+                            <label for="amount" class="col-md-2 col-form-label">@lang('app.amount'):</label>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <input class="form-control" type="number" step="0.01" min="0"
+                                        value="{{ old('amount', $discipline->amount ?? 0.00) }}" id="amount" name="amount"
+                                        placeholder="Enter amount">
+                                </div>
+                            </div>
+
+                        </div>
                         <div class="d-flex flex-wrap gap-3">
                             <button type="submit" class="btn btn-secondary waves-effect">
-                                <a href="{{ url('/disciplines') }}" class="btn btn-secondary waves-effect">
+                                <a href="{{ url('/certifications') }}" class="btn btn-secondary waves-effect">
                                     <i class="bx bx-arrow-back"></i> @lang('app.go_back')
                                 </a>
                             </button>

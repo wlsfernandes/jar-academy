@@ -29,11 +29,11 @@ class PayPalController extends Controller
         if (!$amount || $amount <= 0) {
             return redirect()->back()->with('error', 'An error occurred: The amount cannot be zero or empty.');
         }
-        
+
         if (!$student->canStartCertification($certification)) {
             return redirect()->back()->with('error', 'You must complete the required certification before proceeding.');
         }
-        
+
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $provider->setAccessToken($provider->getAccessToken());
@@ -174,12 +174,12 @@ class PayPalController extends Controller
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $provider->setAccessToken($provider->getAccessToken());
-
+    
         try {
             $response = $provider->capturePaymentOrder($request->query('token'));
-
+    
             Log::info('PayPal Response:', $response);
-
+    
             if (isset($response['status']) && $response['status'] === 'COMPLETED') {
                 $transactionId = $response['id'] ?? 'unknown';
                 $amount = $request->query('amount');
@@ -188,30 +188,30 @@ class PayPalController extends Controller
                 $student = $user->student;
                 $studentId = $student->id;
                 $disciplineId = $request->query('discipline_id');
-
-                // Save payment data
-                Payment::create([
-                    'student_id' => $studentId,
-                    'transaction_id' => $transactionId,
-                    'status' => 'COMPLETED',
-                    'amount' => $amount,
-                    'currency' => $currency,
+    
+                // Save or update payment record
+                Payment::updateOrCreate(
+                    ['transaction_id' => $transactionId],
+                    [
+                        'student_id' => $studentId,
+                        'status' => 'COMPLETED',
+                        'amount' => $amount,
+                        'currency' => $currency,
+                    ]
+                );
+    
+                // Attach or update discipline with is_paid = true
+                $student->disciplines()->syncWithoutDetaching([
+                    $disciplineId => ['is_paid' => true]
                 ]);
-
-                // Associate student with the discipline
-                $student = Student::find($studentId);
-                $student->disciplines()->attach($disciplineId, [
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                return redirect()->route('disciplines.listDisciplines')->with('success', 'Payment successful. You now have access to this Certification.');
+    
+                return redirect()->route('certifications.myCertifications')->with('success', 'Payment successful. You now have access to this Discipline.');
             }
-
-            return redirect()->route('disciplines.listDisciplines')->withErrors('Payment failed. Please try again.');
+    
+            return redirect()->route('certifications.myCertifications')->withErrors('Payment failed. Please try again.');
         } catch (Exception $e) {
-            return redirect()->route('disciplines.listDisciplines')->withErrors('An error occurred: ' . $e->getMessage());
+            return redirect()->route('certifications.myCertifications')->withErrors('An error occurred: ' . $e->getMessage());
         }
     }
-
+    
 }

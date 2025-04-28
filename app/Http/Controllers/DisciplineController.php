@@ -121,6 +121,7 @@ class DisciplineController extends Controller
                 'certification_id' => $request->certification_id,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
                 'order' => $request->order ?? 1,
+                'amount' => $request->amount ?? 0.00,
             ]);
             DB::commit();
             return redirect()->route('certifications.index')->with('success', 'Discipline created successfully!');
@@ -205,6 +206,7 @@ class DisciplineController extends Controller
                 'module_id' => $request->module,
                 'institution_id' => Auth::user()->institution_id, // Automatically set the institution ID
                 'order' => $request->order ?? 1,
+                'amount' => $request->amount ?? 0.00,
             ]);
             DB::commit();
             return redirect()->route('certifications.index')->with('success', 'Discipline updated successfully!');

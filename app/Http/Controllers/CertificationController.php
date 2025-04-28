@@ -29,17 +29,25 @@ class CertificationController extends Controller
 
     public function myCertifications()
     {
-        $student = Auth::user()->student;
+        $user = auth()->user();
+        $student = $user->student;
+
         $certifications = $student->certifications()
-            ->with([
-                'disciplines' => function ($query) {
-                    $query->orderBy('order');
-                }
-            ])
+            ->with('disciplines') // no need withPivot here
             ->orderBy('order')
             ->get();
-        return view('certifications.mycertifications', compact('certifications'));
+
+        $paidDisciplineIds = $student->disciplines()
+            ->wherePivot('is_paid', true)
+            ->pluck('disciplines.id')
+            ->toArray();
+
+        return view('certifications.mycertifications', compact('certifications', 'paidDisciplineIds'));
     }
+
+
+
+
 
     // Show form to create a new certification
     public function create()
@@ -52,7 +60,9 @@ class CertificationController extends Controller
     {
         $certification = Certification::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
-            $certifications = Certification::orderBy('order')->get();
+        $certifications = Certification::where('institution_id', Auth::user()->institution_id)
+            ->orderBy('order')
+            ->get();
         return view('certifications.edit', compact('certification', 'certifications'));
     }
 
@@ -190,10 +200,14 @@ class CertificationController extends Controller
             // Attach student to certification
             $student->certifications()->syncWithoutDetaching([$certificationId]);
 
-            // Attach student to all disciplines in the certification
+            // Attach student to all disciplines in the certification with is_paid = true
             $certification = Certification::with('disciplines')->findOrFail($certificationId);
             foreach ($certification->disciplines as $discipline) {
-                $student->disciplines()->syncWithoutDetaching([$discipline->id]);
+                $student->disciplines()->syncWithoutDetaching([
+                    $discipline->id => [
+                        'is_paid' => false,
+                    ]
+                ]);
             }
 
             DB::commit();

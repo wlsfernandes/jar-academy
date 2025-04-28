@@ -1,0 +1,8 @@
+{
+    "editor.minimap.sectionHeaderFontSize": 16,
+    "editor.wordWrap": "on",
+    "intelephense.diagnostics.enable": true,
+    "intelephense.diagnostics.undefinedTypes": false,
+    "intelephense.diagnostics.undefinedReturn": false,
+    "editor.formatOnSave": true
+}

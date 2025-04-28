@@ -91,7 +91,7 @@ AMID
                                 required>
                         </div>
                     </div>
-                    <!--     <div class="mb-3 row">
+                        <div class="mb-3 row">
                         <label for="amount" class="col-md-2 col-form-label">@lang('app.price'):</label>
                         <div class="col-md-6">
                             <div class="input-group">
@@ -102,7 +102,7 @@ AMID
                             </div>
                         </div>
 
-                    </div> -->
+                    </div> 
 
                     <div class="mb-3 row">
                         <label for="small_description"

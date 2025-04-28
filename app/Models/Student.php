@@ -47,7 +47,7 @@ class Student extends Model
     public function disciplines()
     {
         return $this->belongsToMany(Discipline::class, 'discipline_student')
-            ->withPivot(['is_submitted', 'submitted_at', 'is_approved', 'approved_at', 'feedback'])
+            ->withPivot(['is_submitted', 'submitted_at', 'is_approved', 'approved_at', 'feedback', 'is_paid'])
             ->withTimestamps();
     }
 

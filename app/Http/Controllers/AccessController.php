@@ -65,4 +65,28 @@ class AccessController extends Controller
 
     }
 
+    public function toggleFree(string $id)
+    {
+        try {
+            DB::transaction(function () use ($id) {
+                $user = User::findOrFail($id);
+                $user->is_free = !$user->is_free; // ✅ Simply invert true/false
+                $user->save();
+    
+                Log::info('User updated successfully.', ['user_id' => $user->id]);
+            });
+    
+            session()->flash('success', 'User updated successfully.');
+            return redirect()->route('access.index');
+        } catch (Exception $e) {
+            Log::error('Error updating user: ' . $e->getMessage());
+    
+            return redirect()->back()->withInput()->withErrors([
+                'error' => 'Failed to update user.'
+            ]);
+        }
+    }
+    
+
+
 }

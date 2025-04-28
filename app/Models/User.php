@@ -14,6 +14,7 @@ class User extends Authenticatable
         'email',
         'password',
         'institution_id',
+        'is_free'
     ];
 
     protected $hidden = [
@@ -22,6 +23,7 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
+        'is_free' => 'boolean',
         'email_verified_at' => 'datetime',
     ];
     public function student()

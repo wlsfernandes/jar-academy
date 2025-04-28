@@ -46,7 +46,7 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     Route::resource('access', AccessController::class)->only(['index', 'destroy']);
     Route::get('/terms', [AccessController::class, 'show'])->name('terms.show');
     Route::post('/terms', [AccessController::class, 'accept'])->name('terms.accept');
-
+    Route::post('user/{id}/toggle-free', [AccessController::class, 'toggleFree'])->name('toggleFree');
 
     // Student access
 

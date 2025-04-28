@@ -133,7 +133,7 @@ class PayPalController extends Controller
         $amount = $discipline->amount;
 
         if (!$amount || $amount <= 0) {
-            return redirect()->back()->with('error', 'An error occurred: The amount cannot be zero or empty.');
+            return redirect()->route('certifications.myCertifications')->withErrors('The Value of the course cannot be zero');
         }
 
         $provider = new PayPalClient;

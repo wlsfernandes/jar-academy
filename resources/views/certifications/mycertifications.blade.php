@@ -9,6 +9,7 @@
     @endcomponent
 
     <div class="row">
+  
         <div class="col-lg-12">
             <div class="card border border-primary">
                 <div class="card-header bg-transparent border-primary">
@@ -53,7 +54,10 @@
                                     <strong>#{{ $discipline->order }}</strong> - {{ $discipline->title }}
                                 </p>
 
-                                @if ($isPaid)
+                                    @php
+                                    $user = auth()->user();
+                                    @endphp
+                                @if ($user->is_free || $isPaid)
                                     <div class="row g-2 mb-2">
                                         <div class="col-sm-4">
                                             <a href="{{ url('/resources/' . $discipline->id . '/docs') }}" class="text-decoration-none">

@@ -28,7 +28,7 @@
                     <div class="card-body">
                         @if (session('success'))
                             <div class="alert alert-success">
-                                <img src="assets/images/paypal.png" style="width:64px;"> {{ session('success') }}
+                               {{ session('success') }}
                             </div>
                         @endif
                         @if (session('error'))

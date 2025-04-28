@@ -34,15 +34,22 @@ Route::get('/', function () {
     return view('site.welcome');
 });
 
+Route::get('/index', function () {
+    return view('index');
+});
+
 Auth::routes();
 
 Route::middleware(['auth', 'institution.scope'])->group(function () {
 
     // Access
     Route::resource('access', AccessController::class)->only(['index', 'destroy']);
+    Route::get('/terms', [AccessController::class, 'show'])->name('terms.show');
+    Route::post('/terms', [AccessController::class, 'accept'])->name('terms.accept');
+
 
     // Student access
-   
+
     Route::get('/view-content/{id}', [ResourceController::class, 'showContent'])->name('view-content');
     Route::get('/listdisciplines', [DisciplineController::class, 'listDisciplines'])->name('disciplines.listDisciplines');
     Route::get('/list-certifications', [CertificationController::class, 'listCertifications'])->name('certifications.listCertifications');

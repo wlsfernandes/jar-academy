@@ -12,7 +12,10 @@ use Exception;
 class AccessController extends Controller
 {
 
-
+    public function show()
+    {
+        return view('auth.terms');
+    }
     public function index()
     {
         try {
@@ -40,6 +43,26 @@ class AccessController extends Controller
             Log::error('Error deleting module and user: ' . $e->getMessage());
             return redirect()->route('modules.index')->with('error', 'An error occurred while deleting the module and user. Please try again.');
         }
+    }
+
+    public function accept(Request $request)
+    {
+        $request->validate([
+            'accepted_terms' => 'accepted',
+        ]);
+
+        // Save in session (optional)
+        session(['accepted_terms' => true]);
+
+        // OR if user is logged in, save in database (optional)
+        if (Auth::check()) {
+            $user = Auth::user();
+            $user->update([
+                'accepted_terms_at' => now(),
+            ]);
+        }
+        return redirect('/index');
+
     }
 
 }

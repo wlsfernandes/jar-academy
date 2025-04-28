@@ -53,7 +53,7 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     Route::get('/view-content/{id}', [ResourceController::class, 'showContent'])->name('view-content');
     Route::get('/listdisciplines', [DisciplineController::class, 'listDisciplines'])->name('disciplines.listDisciplines');
     Route::get('/list-certifications', [CertificationController::class, 'listCertifications'])->name('certifications.listCertifications');
-    Route::get('certifications/{id}/free', [CertificationController::class, 'registerFreeCertification'])->name('registerFreeCertification');
+    Route::get('certifications/{id}/free', [CertificationController::class, 'registerCertification'])->name('registerCertification');
     Route::get('disciplines/{id}/free', [DisciplineController::class, 'registerFreeCertification'])->name('registerFreeCertification');
     Route::get('/mycertifications', [CertificationController::class, 'myCertifications'])->name('certifications.myCertifications');
     Route::get('/mydisciplines', [DisciplineController::class, 'myDisciplines'])->name('disciplines.myDisciplines');

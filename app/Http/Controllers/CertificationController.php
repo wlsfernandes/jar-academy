@@ -188,7 +188,7 @@ class CertificationController extends Controller
         }
     }
 
-    public function registerFreeCertification(Request $request, $id)
+    public function registerCertification(Request $request, $id)
     {
         DB::beginTransaction();
 
@@ -213,12 +213,12 @@ class CertificationController extends Controller
             DB::commit();
 
             return redirect()
-                ->route('certifications.listCertifications')
+                ->route('certifications.myCertifications')
                 ->with('success', 'Registration successful. You now have access to this Certification.');
         } catch (Exception $e) {
             DB::rollBack();
 
-            Log::error('Error registering free certification: ' . $e->getMessage(), [
+            Log::error('Error registering Certification: ' . $e->getMessage(), [
                 'exception' => $e,
                 'user_id' => auth()->id(),
                 'certification_id' => $id,

@@ -18,11 +18,10 @@ class ResourceController extends Controller
 
     public function view(Resource $resource)
 {
-    $student = Student::where('user_id', Auth::id())->firstOrFail();
-
-    // Check if the student already viewed the resource
+   // $resource = Resource::findOrFail()
+    //$student = Student::where('user_id', Auth::id())->firstOrFail();
+    /* Check if the student already viewed the resource
     $viewedResource = $student->resources()->where('resource_id', $resource->id)->first();
-
     if ($viewedResource) {
         // If exists, increment views
         $student->resources()->updateExistingPivot($resource->id, [
@@ -36,7 +35,7 @@ class ResourceController extends Controller
             'last_viewed_at' => now()
         ]);
     }
-
+*/
     return view('resources.content-view', compact('resource'));
 
 }

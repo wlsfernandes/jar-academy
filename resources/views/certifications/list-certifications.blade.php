@@ -52,7 +52,6 @@
                             <tr>
                                 <th>#</th>
                                 <th class="text-center align-middle">@lang('app.enroll')</th>
-                                <th>@lang('app.price')</th>
                                 <th>@lang('app.title')</th>
                                 <th>@lang('app.disciplines')</th>
 
@@ -76,7 +75,7 @@
                                     <td> <a href="{{ url('/certifications/' . $certification->id . '/free') }}"
                                                 class="btn btn-sm btn-info rounded-pill"><i class="bi bi-pencil-square me-1"></i>
                                                 Inscreva-se</a></td>
-                                    <td>{{ $certification->amount ?? '' }}</td>
+                                  
                                     <td>{{ $certification->name ?? '' }}</td>
 
                                     <td>

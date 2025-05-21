@@ -13,6 +13,7 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\StudentTaskController;
 use App\Http\Controllers\StudentTestController;
 use App\Http\Controllers\StudentDisciplineController;
@@ -151,6 +152,7 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::get('/resources/{id}/edit', [ResourceController::class, 'edit'])->name('resources.edit');
         Route::put('/resources/{id}', [ResourceController::class, 'update'])->name('resources.update');
         Route::delete('/resources/{id}', [ResourceController::class, 'destroy'])->name('resources.destroy');
+        Route::delete('/tests/{test}', [TestController::class, 'destroy'])->name('tests.destroy');
 
         Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
     });

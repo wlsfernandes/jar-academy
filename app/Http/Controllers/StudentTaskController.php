@@ -17,7 +17,7 @@ class StudentTaskController extends Controller
     public function edit($id)
     {
         $resource = Resource::findOrFail($id);
-        $task = Task::where('resource_id', $id)->first();
+        $task = Task::where('discipline_id', $resource->discipline->id)->first();
         return view('tasks.edit', compact('resource', 'task'));
     }
 
@@ -45,48 +45,17 @@ class StudentTaskController extends Controller
             $requestData['student_id'] = Auth::user()->id;
             $task = StudentTask::create($requestData); // Create the task and get the task ID
 
-            // Check if resource_id is provided
-            if ($request->has('resource_id')) {
-                $resourceId = $request->input('resource_id');
-
-                // Ensure the resource exists
-                $resource = Resource::find($resourceId);
-
-                if ($resource) {
-                    // Check if the student already viewed the resource
-                    $studentResource = $student->resources()->where('resource_id', $resourceId)->first();
-
-                    if ($studentResource) {
-                        // If exists, increment views and update task_or_test_id with the new task ID
-                        $student->resources()->updateExistingPivot($resourceId, [
-                            'views' => $studentResource->pivot->views + 1,
-                            'last_viewed_at' => now(),
-                            'task_or_test_id' => $task->id, // Store the task ID
-                        ]);
-                    } else {
-                        // First view, attach pivot with views = 1 and task ID
-                        $student->resources()->attach($resourceId, [
-                            'views' => 1,
-                            'last_viewed_at' => now(),
-                            'task_or_test_id' => $task->id, // Store the task ID
-                        ]);
-                    }
-                } else {
-                    throw new Exception("Resource not found.");
-                }
-            }
-
             DB::commit();
 
             session()->flash('success', 'Task added and resource marked as viewed.');
             Log::info('Task uploaded successfully and resource viewed.');
+            return redirect()->route('certifications.myCertifications')->with('success', 'Task answered successfully!');
 
-            return redirect()->back()->with('success', 'Task answered successfully!');
         } catch (Exception $e) {
             DB::rollBack();
             session()->flash('error', 'Failed to create task: ' . $e->getMessage());
             Log::error('Error uploading task: ' . $e->getMessage());
-            return redirect()->route('courses.myCourses');
+            return redirect()->route('certifications.myCertifications');
         }
     }
 
@@ -109,7 +78,7 @@ class StudentTaskController extends Controller
                 DB::rollBack();
                 session()->flash('error', 'Failed to create task file: ' . $e->getMessage());
                 Log::error('Error uploading file: ' . $e->getMessage());
-                return redirect()->route('courses.myCourses');
+                return redirect()->route('certifications.myCertifications');
             }
         }
 

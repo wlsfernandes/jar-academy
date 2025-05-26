@@ -35,10 +35,16 @@
                                     <th>@lang('app.media_type')</th>
                                     <th class="text-center align-middle">@lang('app.download')</th>
                                     <th class="text-center align-middle">@lang('app.upload_task')</th>
+                                    <th class="text-center align-middle">Status</th>
+                                </tr>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($resources as $resource)
+                                    @php
+                                        $task = $resource->resourceable;
+                                        $answered = $task && $task->studentTasks->isNotEmpty();
+                                     @endphp
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
 
@@ -53,6 +59,13 @@
                                         <td class="text-center align-middle">
                                             <a href="{{ url('/task/' . $resource->id . '/edit') }}" class="px-3 text-primary"><i
                                                     class="uil uil-upload font-size-18"></i></a>
+                                        </td>
+                                        <td>
+                                            @if ($answered)
+                                                <span class="badge bg-success">Answered</span>
+                                            @else
+                                                <span class="badge bg-secondary">Not answered</span>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

@@ -10,16 +10,16 @@
     @slot('title') Resources @endslot
     @endcomponent
 
-
-
-    <!-- display resources -->
     <div class="row">
         <div class="col-lg-12">
             <div class="card border border-primary">
                 <div class="card-header bg-transparent border-primary">
-                    <h5 class="my-0 text-primary"><i class="uil uil-file-plus"></i> @lang('app.tasks')</b></h5>
+                    <h5 class="my-0 text-primary">
+                        <i class="uil uil-file-plus"></i> @lang('app.tasks')
+                    </h5>
                 </div>
-                @if ($resources->isEmpty())
+
+                @if ($tasks->isEmpty())
                     <div class="alert alert-warning" role="alert">
                         @lang('app.there_no_resource')
                     </div>
@@ -37,30 +37,32 @@
                                     <th class="text-center align-middle">@lang('app.upload_task')</th>
                                     <th class="text-center align-middle">Status</th>
                                 </tr>
-                                </tr>
                             </thead>
                             <tbody>
-                                @foreach ($resources as $resource)
+                                @foreach ($tasks as $task)
                                     @php
-                                        $task = $resource->resourceable;
-                                        $answered = $task && $task->studentTasks->isNotEmpty();
-                                     @endphp
+                                        $resource = $task->resource;
+                                        $answered = $task->studentTasks->isNotEmpty();
+                                    @endphp
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-
-                                        <td>{{ $resource->title ?? ''}}</td>
-                                        <td>{{ $resource->description ?? ''}}</td>
-                                        <td>{{ $resource->type ?? ''}}</td>
-                                        <td class="text-center align-middle"> <a class="px-3 text-danger"
-                                                href="{{ $resource->url }}" target="_blank" class="me-2"
-                                                style="font-size: 22px; text-decoration: none;">
-                                                <i class="uil uil-file-plus"></i>
-                                            </a></td>
+                                        <td>{{ $resource->title ?? '' }}</td>
+                                        <td>{{ $resource->description ?? '' }}</td>
+                                        <td>{{ $resource->type ?? '' }}</td>
                                         <td class="text-center align-middle">
-                                            <a href="{{ url('/task/' . $resource->id . '/edit') }}" class="px-3 text-primary"><i
-                                                    class="uil uil-upload font-size-18"></i></a>
+                                            @if ($resource && $resource->url)
+                                                <a href="{{ $resource->url }}" target="_blank" class="px-3 text-danger"
+                                                    style="font-size: 22px;">
+                                                    <i class="uil uil-file-plus"></i>
+                                                </a>
+                                            @endif
                                         </td>
-                                        <td>
+                                        <td class="text-center align-middle">
+                                            <a href="{{ url('/task/' . $task->id . '/edit') }}" class="px-3 text-primary">
+                                                <i class="uil uil-upload font-size-18"></i>
+                                            </a>
+                                        </td>
+                                        <td class="text-center align-middle">
                                             @if ($answered)
                                                 <span class="badge bg-success">Answered</span>
                                             @else
@@ -70,12 +72,10 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-
                         </table>
-
                     </div>
                 @endif
             </div>
-        </div> <!-- end col -->
-    </div> <!-- end row -->
+        </div>
+    </div>
 @endsection

@@ -2,7 +2,7 @@
 @extends('layouts.master')
 
 @section('title')
-   Resources
+    Resources
 @endsection
 
 @section('content')
@@ -37,7 +37,7 @@
 
                     <form action="{{ route('addTask') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="resource_id" value="{{$resource->id}}" />
+                        <input type="hidden" name="resource_id" value="{{$resource->id ?? 0}}" />
                         <input type="hidden" name="task_id" value="{{$task->id}}" />
                         <div class="mb-3 row">
                             <label for="title" class="col-md-2 col-form-label">@lang('app.title'):</label>
@@ -47,11 +47,11 @@
                             </div>
                         </div>
 
-                        @if($resource->url)
+                        @if(isset($task->resource->url))
                             <div class="mb-3 row">
                                 <label for="file" class="col-md-2 col-form-label">Click here to see the Task:</label>
                                 <div class="col-md-6 d-flex align-items-center">
-                                    <a href="{{ $resource->url }}" target="_blank" class="me-2"
+                                    <a href="{{ $task->resource->url }}" target="_blank" class="me-2"
                                         style="font-size: 18px; text-decoration: none;">
                                         <i class="uil uil-file-plus"></i>
                                     </a>

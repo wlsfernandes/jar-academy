@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Task;
 use App\Models\Resource;
 use App\Models\Student;
 use App\Models\StudentTask;
@@ -60,28 +61,21 @@ class ResourceController extends Controller
     }
 
 
-    public function tasks($id)
+    public function tasks($disciplineId)
     {
         $studentId = Auth::id();
 
-        $resources = Resource::where('discipline_id', $id)
-            ->where('resource_type', 'tarefa')
-            ->with('resourceable') // Load Task relation
+        $tasks = Task::where('discipline_id', $disciplineId)
+            ->with([
+                'resource',
+                'studentTasks' => function ($q) use ($studentId) {
+                    $q->where('student_id', $studentId);
+                }
+            ])
             ->get();
 
-        // Attach answered status manually
-        foreach ($resources as $resource) {
-            $task = $resource->resourceable;
-
-            // Add a dynamic property `answered`
-            $resource->answered = $task && StudentTask::where('student_id', $studentId)
-                ->where('task_id', $task->id ?? 0)
-                ->exists();
-        }
-
-        return view('resources.tasks', compact('resources'));
+        return view('resources.tasks', compact('tasks'));
     }
-
 
     public function tests($id)
     {

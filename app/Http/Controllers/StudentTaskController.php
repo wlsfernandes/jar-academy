@@ -16,12 +16,17 @@ class StudentTaskController extends Controller
 
     public function edit($id)
     {
+        $task = Task::with('resource')->findOrFail($id);
+        return view('tasks.edit', compact('task'));
+    }
+    /*
+ public function edit($id)
+    {
         $resource = Resource::findOrFail($id);
         $task = Task::where('discipline_id', $resource->discipline->id)->first();
         return view('tasks.edit', compact('resource', 'task'));
     }
-
-
+    */
     public function addTask(Request $request)
     {
         $request->validate([

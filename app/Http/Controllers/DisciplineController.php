@@ -331,7 +331,9 @@ class DisciplineController extends Controller
 
             // Handle different resourceable types
             if ($resourceType === 'tarefa') {
-                $task = Task::create([]);
+                $task = Task::create(
+                    ['discipline_id' => $discipline->id]
+                );
                 $task->resource()->create(array_merge($resourceData, [
                     'discipline_id' => $discipline->id,
                 ]));

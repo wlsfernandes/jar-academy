@@ -70,7 +70,7 @@
                                             </a>
                                         </div>
                                         <div class="col-sm-4">
-                                            <a href="{{ url('/resources/' . $discipline->id . '/tasks') }}" class="text-decoration-none">
+                                            <a href="{{ url('/task/' . $discipline->id . '/tasks') }}" class="text-decoration-none">
                                                 <div class="card text-center h-100 shadow-sm border">
                                                     <div class="card-body p-2">
                                                         <i class="uil uil-apps font-size-24 text-primary"></i>

@@ -237,15 +237,10 @@ class DisciplineController extends Controller
         // Existing resources directly linked to discipline (e.g. not via task)
         $resources = $discipline->resources;
 
-        // New: Load tasks for this discipline, with their resource (morphOne)
-        $tasks = Task::where('discipline_id', $discipline->id)
-            ->with('resource')
-            ->get();
-
         $resource_types = Resource::getResourceTypes();
         $types = Resource::getTypes();
 
-        return view('disciplines.resources', compact('discipline', 'resources', 'tasks', 'resource_types', 'types'));
+        return view('disciplines.resources', compact('discipline', 'resources', 'resource_types', 'types'));
     }
 
     public function tests($id)
@@ -263,6 +258,17 @@ class DisciplineController extends Controller
         $tests = Test::where('discipline_id', $id)->get();
         return view('disciplines.new-test', compact('discipline', 'types', 'tests'));
     }
+
+
+    public function newTask($id)
+    {
+        $discipline = Discipline::where('institution_id', Auth::user()->institution_id)
+            ->findOrFail($id);
+        $types = Resource::getTypes();
+        $tasks = Task::where('discipline_id', $id)->get();
+        return view('disciplines.new-task', compact('discipline', 'types', 'tasks'));
+    }
+
 
     public function addTest(Request $request, $id)
     {
@@ -300,6 +306,54 @@ class DisciplineController extends Controller
             Log::error('Error uploading resource: ' . $e->getMessage());
 
             return redirect()->back()->with('error', 'Error to create test!');
+        }
+    }
+
+    public function addTask(Request $request, $id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $discipline = Discipline::findOrFail($id);
+            $url = null;
+
+            // Handle file or URL input
+            if ($request->hasFile('document')) {
+                $file = $request->file('document');
+                $url = StorageS3::uploadToS3($file);
+
+                if (!$url) {
+                    DB::rollBack();
+                    return back()->withErrors(['document' => 'File upload failed.']);
+                }
+            } elseif ($request->filled('resource_url')) {
+                $url = $request->input('resource_url');
+            } else {
+                DB::rollBack();
+                return back()->withErrors(['resource_url' => 'You must provide either a file or a URL.']);
+            }
+
+            // Create the task
+            $task = Task::create([
+                'discipline_id' => $discipline->id,
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'type' => $request->input('type'), // e.g. 'pdf', 'video', etc.
+                'url' => $url,
+            ]);
+
+            DB::commit();
+
+            session()->flash('success', 'Task created successfully.');
+            Log::info('Task uploaded successfully.');
+
+            return redirect()->back()->with('success', 'Task created successfully!');
+        } catch (Exception $e) {
+            DB::rollBack();
+            session()->flash('error', 'Failed to upload task: ' . $e->getMessage());
+            Log::error('Error uploading task: ' . $e->getMessage());
+
+            return redirect()->back()->with('error', 'Error creating task!');
         }
     }
 

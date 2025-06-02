@@ -13,6 +13,7 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\StudentTaskController;
 use App\Http\Controllers\StudentTestController;
@@ -74,6 +75,7 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
     Route::post('/studentTasks', [StudentTaskController::class, 'addTask'])->name('addTask');
     Route::get('/test/{id}/edit', [StudentTestController::class, 'edit'])->name('edit');
     Route::post('/tests/submit', [StudentTestController::class, 'submitTest'])->name('submitTest');
+    Route::get('/task/{id}/tasks', [TaskController::class, 'listMyTasks'])->name('listMyTasks');
 
     // Paypall
     Route::get('paypal/payment/{id}', [PayPalController::class, 'createPayment'])->name('paypal.payment');
@@ -145,14 +147,18 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::delete('/disciplines/{id}', [DisciplineController::class, 'destroy'])->name('disciplines.destroy');
         Route::get('/disciplines/{id}/resources', [DisciplineController::class, 'resources'])->name('disciplines.resources');
         Route::get('/disciplines/{id}/new-test', [DisciplineController::class, 'newTest'])->name('disciplines.newTest');
+        Route::get('/disciplines/{id}/new-task', [DisciplineController::class, 'newTask'])->name('disciplines.newTask');
         Route::post('/disciplines/{id}/add-resource', [DisciplineController::class, 'addResource'])->name('disciplines.addResource');
         Route::post('/disciplines/{id}/tests', [DisciplineController::class, 'addTest'])->name('disciplines.addTest');
+        Route::post('/disciplines/{id}/tasks', [DisciplineController::class, 'addTask'])->name('disciplines.addTask');
+
 
         // Resources
         Route::get('/resources/{id}/edit', [ResourceController::class, 'edit'])->name('resources.edit');
         Route::put('/resources/{id}', [ResourceController::class, 'update'])->name('resources.update');
         Route::delete('/resources/{id}', [ResourceController::class, 'destroy'])->name('resources.destroy');
         Route::delete('/tests/{test}', [TestController::class, 'destroy'])->name('tests.destroy');
+        Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('task.destroy');
 
         Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
     });

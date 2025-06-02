@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
 @section('title')
-    Test
+    Task
 @endsection
 
 @section('content')
     @component('common-components.breadcrumb')
     @slot('pagetitle') AMID @endslot
-    @slot('title') Create Test @endslot
+    @slot('title') Create Task @endslot
     @endcomponent
 
     <!-- add Resource -->
@@ -30,12 +30,12 @@
                             </ul>
                         </div>
                     @endif
-                    <h4 class="card-title">Create a Test
+                    <h4 class="card-title">Create a Task
                     </h4>
                     <p class="card-title-desc"></p>
 
                     <form method="POST" enctype="multipart/form-data"
-                        action="{{ route('disciplines.addTest', $discipline->id) }}" accept-charset="UTF-8"
+                        action="{{ route('disciplines.addTask', $discipline->id) }}" accept-charset="UTF-8"
                         style="display:inline">
                         @csrf
 
@@ -87,7 +87,7 @@
                                     <i class="bx bx-arrow-back"></i> Go Back
                                 </a>
                             </button>
-                            <button type="submit" class="btn btn-primary waves-effect waves-light">Create Resource</button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Create Task</button>
                         </div>
                     </form>
                 </div>
@@ -100,9 +100,9 @@
         <div class="col-lg-12">
             <div class="card border border-primary">
                 <div class="card-header bg-transparent border-primary">
-                    <h5 class="my-0 text-primary"><i class="uil uil-file-plus"></i> Tests</b></h5>
+                    <h5 class="my-0 text-primary"><i class="uil uil-file-plus"></i> Tasks</b></h5>
                 </div>
-                @if ($tests->isEmpty())
+                @if ($tasks->isEmpty())
                     <div class="alert alert-warning" role="alert">
                         @lang('app.there_no_resource')
                     </div>
@@ -120,25 +120,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($tests as $test)
+                                @foreach ($tasks as $task)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td> <a href="{{ $test->url }}" target="_blank" class="me-2"
+                                        <td> <a href="{{ $task->url }}" target="_blank" class="me-2"
                                                 style="font-size: 18px; text-decoration: none;">
                                                 <i class="uil uil-file-plus"></i>
                                             </a></td>
-                                        <td>{{ $test->title ?? ''}}</td>
-                                        <td>{{ $test->description ?? ''}}</td>
+                                        <td>{{ $task->title ?? ''}}</td>
+                                        <td>{{ $task->description ?? ''}}</td>
 
 
                                         <td class="text-center align-middle">
 
                                             <a href="javascript:void(0);" class="px-3 text-danger"
-                                                onclick="event.preventDefault(); if(confirm('Confirm delete?')) { document.getElementById('delete-form-{{ $test->id }}').submit(); }">
+                                                onclick="event.preventDefault(); if(confirm('Confirm delete?')) { document.getElementById('delete-form-{{ $task->id }}').submit(); }">
                                                 <i class="uil uil-trash-alt font-size-18"></i>
                                             </a>
 
-                                            <form id="delete-form-{{ $test->id }}" action="{{ url('/tests/' . $test->id) }}"
+                                            <form id="delete-form-{{ $task->id }}" action="{{ url('/tasks/' . $task->id) }}"
                                                 method="POST" style="display: none;">
                                                 @method('DELETE')
                                                 @csrf

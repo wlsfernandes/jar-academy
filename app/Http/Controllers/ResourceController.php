@@ -90,16 +90,33 @@ class ResourceController extends Controller
     public function destroy($id)
     {
         DB::beginTransaction();
+
         try {
-            $resources = Resource::findOrFail($id);
-            $resources->delete();
+            $resource = Resource::findOrFail($id);
+
+            // Check if the resource is attached to a Task
+            if ($resource->resourceable_type === Task::class) {
+                // Delete the related Task
+                $task = Task::find($resource->resourceable_id);
+                if ($task) {
+                    $task->delete();
+                }
+            }
+
+            // Delete the resource
+            $resource->delete();
+
             DB::commit();
-            return redirect()->back()->with('success', 'Resources deleted successfully!');
+
+            return redirect()->back()->with('success', 'Resource and related task deleted successfully!');
         } catch (Exception $e) {
-            Log::error('Error deleting resources and user: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'An error occurred while deleting the resources and user. Please try again.');
+            DB::rollBack();
+            Log::error('Error deleting resource: ' . $e->getMessage());
+
+            return redirect()->back()->with('error', 'An error occurred while deleting the resource. Please try again.');
         }
     }
+
 
 
 

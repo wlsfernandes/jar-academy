@@ -41,7 +41,8 @@
                                         <div class="d-flex align-items-center gap-3">
 
                                             {{-- Action Icons --}}
-                                            <div class="d-flex align-items-center gap-2 bg-primary-subtle text-primary p-2 rounded">
+                                            <div
+                                                class="d-flex align-items-center gap-2 bg-primary-subtle text-primary p-2 rounded">
                                                 <a href="{{ url('/certifications/' . $certification->id) }}"
                                                     class="text-primary" title="View">
                                                     <i class="fas fa-eye"></i>
@@ -88,17 +89,25 @@
                                                 <div class="border rounded p-2 mb-2">
                                                     <div class="d-flex justify-content-between">
                                                         <div class="text-secondary">
-                                                            <strong>#{{ $discipline->order }}</strong> - {{ $discipline->title }}  <strong>$ {{ $discipline->amount ?? 0.00 }}</strong>
+                                                            <strong>#{{ $discipline->order }}</strong> - {{ $discipline->title }}
+                                                            <strong>$ {{ $discipline->amount ?? 0.00 }}</strong>
                                                         </div>
                                                         <div class="d-flex gap-2 align-items-start pt-2">
-                                                            <a href="{{ url('/disciplines/' . $discipline->id) }}" class="text-secondary"
-                                                                title="View"><i class="fas fa-eye"></i></a>
+                                                            <a href="{{ url('/disciplines/' . $discipline->id) }}"
+                                                                class="text-secondary" title="View"><i class="fas fa-eye"></i></a>
 
                                                             <a href="{{ url('/disciplines/' . $discipline->id . '/resources') }}"
-                                                                class="text-secondary"><i class="fas fa-check-square"></i></a>
-
+                                                                class="text-secondary" title="Resources">
+                                                                <i class="fas fa-file"></i>
+                                                            </a>
+                                                            <a href="{{ url('/disciplines/' . $discipline->id . '/new-task') }}"
+                                                                class="text-secondary" title="Tasks">
+                                                                <i class="fas fa-check-square"></i>
+                                                            </a>
                                                             <a href="{{ url('/disciplines/' . $discipline->id . '/new-test') }}"
-                                                                class="text-secondary"><i class="fas fa-vial "></i></a>
+                                                                class="text-secondary" title="Tests">
+                                                                <i class="fas fa-vial"></i>
+                                                            </a>
 
                                                             <a href="{{ url('/disciplines/' . $discipline->id . '/edit') }}"
                                                                 class="text-secondary" title="Edit"><i class="fas fa-edit"></i></a>

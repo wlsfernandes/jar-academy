@@ -94,11 +94,14 @@
                         </div>
 
                         <div class="text-center mt-4">
-                            <a href="{{ url('/course') }}" class="btn btn-secondary waves-effect waves-light">
+                            <button type="button" class="btn btn-secondary waves-effect waves-light"
+                                onclick="history.back()">
                                 <i class="bx bx-arrow-back"></i> Go Back
-                            </a>
+                            </button>
+
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Create Resource</button>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -166,59 +169,7 @@
         </div>
     </div>
 
-    <!-- Task List -->
-    <div class="row mt-5">
-        <div class="col-lg-12">
-            <div class="card border border-info">
-                <div class="card-header bg-transparent border-info">
-                    <h5 class="my-0 text-info">
-                        <i class="uil uil-tasks"></i> @lang('app.tasks')
-                    </h5>
-                </div>
 
-                @if ($tasks->isEmpty())
-                    <div class="alert alert-warning" role="alert">
-                        @lang('app.no_tasks_found')
-                    </div>
-                @else
-                    <div class="card-body">
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>@lang('app.task')</th>
-                                    <th>@lang('app.resource_title')</th>
-                                    <th>@lang('app.resource_description')</th>
-                                    <th>@lang('app.media_type')</th>
-                                    <th class="text-center">@lang('app.actions')</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($tasks as $task)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>Task #{{ $task->id }}</td>
-                                        <td>{{ $task->resource->title ?? '-' }}</td>
-                                        <td>{{ $task->resource->description ?? '-' }}</td>
-                                        <td>{{ $task->resource->type ?? '-' }}</td>
-                                        <td class="text-center">
-                                            @if ($task->resource)
-                                                <a href="{{ $task->resource->url }}" class="btn btn-sm btn-info" target="_blank">
-                                                    <i class="uil uil-eye"></i> @lang('app.view')
-                                                </a>
-                                            @else
-                                                <span class="text-muted">No resource</span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                @endif
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('scripts')

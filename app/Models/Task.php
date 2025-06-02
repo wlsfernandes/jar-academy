@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     use HasFactory;
-    protected $fillable = ['discipline_id'];
 
-    public function resource()
-    {
-        return $this->morphOne(Resource::class, 'resourceable')
-            ->where('resource_type', 'tarefa');
-    }
+    protected $fillable = [
+        'discipline_id',
+        'title',
+        'description',
+        'type',
+        'url',
+    ];
 
     public function studentTasks()
     {

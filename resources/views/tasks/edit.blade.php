@@ -8,7 +8,7 @@
 @section('content')
     @component('common-components.breadcrumb')
     @slot('pagetitle') AMID @endslot
-    @slot('title') Resource @endslot
+    @slot('title') Task @endslot
     @endcomponent
 
     <!-- add Resource -->
@@ -31,27 +31,24 @@
                             </ul>
                         </div>
                     @endif
-                    <h4 class="card-title">Upload a resource
-                    </h4>
                     <p class="card-title-desc"></p>
 
                     <form action="{{ route('addTask') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="resource_id" value="{{$resource->id ?? 0}}" />
                         <input type="hidden" name="task_id" value="{{$task->id}}" />
                         <div class="mb-3 row">
                             <label for="title" class="col-md-2 col-form-label">@lang('app.title'):</label>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" value="{{ old('title', $resource->title ?? '') }}"
+                                <input class="form-control" type="text" value="{{ old('title', $task->title ?? '') }}"
                                     id="title" name="title" required>
                             </div>
                         </div>
 
-                        @if(isset($task->resource->url))
+                        @if(isset($task->url))
                             <div class="mb-3 row">
                                 <label for="file" class="col-md-2 col-form-label">Click here to see the Task:</label>
                                 <div class="col-md-6 d-flex align-items-center">
-                                    <a href="{{ $task->resource->url }}" target="_blank" class="me-2"
+                                    <a href="{{ $task->url }}" target="_blank" class="me-2"
                                         style="font-size: 18px; text-decoration: none;">
                                         <i class="uil uil-file-plus"></i>
                                     </a>

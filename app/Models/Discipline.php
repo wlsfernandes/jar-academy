@@ -27,8 +27,11 @@ class Discipline extends Model
     {
         return $this->hasMany(Test::class);
     }
-   
-    
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 
     // Define the relationship for one or many classrooms
 

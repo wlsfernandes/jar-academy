@@ -109,6 +109,7 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::get('/student-tests/{id}/view', [StudentTestController::class, 'show'])->name('student-tests.show');
 
         Route::get('/students/grade', [StudentController::class, 'grade'])->name('grade');
+        Route::get('/students-tasks', [StudentController::class, 'studentTasks'])->name('studentTasks');
         Route::get('/students/completed-certifications', [StudentController::class, 'completedCertifications'])->name('completedCertifications');
         Route::get('/students', [StudentController::class, 'index'])->name('students.index');
         Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');

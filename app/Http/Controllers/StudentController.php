@@ -164,73 +164,83 @@ class StudentController extends Controller
     }
 
     public function grade()
-{
-    $students = Student::with([
-        'user',
-        'testSubmissions.test',
-        'certifications.disciplines.tests'
-    ])->get();
+    {
+        $students = Student::with([
+            'user',
+            'testSubmissions.test',
+            'certifications.disciplines.tests'
+        ])->get();
 
-    // Filter students who have missing or ungraded tests
-    $filtered = $students->filter(function ($student) {
-        foreach ($student->certifications as $certification) {
-            $allTests = $certification->disciplines
-                ->pluck('tests')
-                ->flatten();
+        // Filter students who have missing or ungraded tests
+        $filtered = $students->filter(function ($student) {
+            foreach ($student->certifications as $certification) {
+                $allTests = $certification->disciplines
+                    ->pluck('tests')
+                    ->flatten();
 
-            foreach ($allTests as $test) {
-                $submission = $student->testSubmissions
-                    ->where('test_id', $test->id)
-                    ->first();
+                foreach ($allTests as $test) {
+                    $submission = $student->testSubmissions
+                        ->where('test_id', $test->id)
+                        ->first();
 
-                // Not started OR not graded
-                if (!$submission || $submission->grade === null) {
-                    return true; // this student still needs grading
+                    // Not started OR not graded
+                    if (!$submission || $submission->grade === null) {
+                        return true; // this student still needs grading
+                    }
                 }
             }
-        }
 
-        return false; // all tests done and graded
-    });
+            return false; // all tests done and graded
+        });
 
-    return view('students.grade', ['students' => $filtered->values()]);
-}
+        return view('students.grade', ['students' => $filtered->values()]);
+    }
+
+    public function studentTasks()
+    {
+        $students = Student::with([
+            'user',
+            'certifications.disciplines.tasks'
+        ])->get();
+
+        return view('students.tasks', compact('students'));
+    }
 
 
-public function completedCertifications()
-{
-    $students = Student::with([
-        'user',
-        'testSubmissions.test',
-        'certifications.disciplines.tests'
-    ])->get();
+    public function completedCertifications()
+    {
+        $students = Student::with([
+            'user',
+            'testSubmissions.test',
+            'certifications.disciplines.tests'
+        ])->get();
 
-    // Filter students who have completed all tests for their certifications
-    $completedStudents = $students->filter(function ($student) {
-        foreach ($student->certifications as $certification) {
-            $allTests = $certification->disciplines
-                ->pluck('tests')
-                ->flatten();
+        // Filter students who have completed all tests for their certifications
+        $completedStudents = $students->filter(function ($student) {
+            foreach ($student->certifications as $certification) {
+                $allTests = $certification->disciplines
+                    ->pluck('tests')
+                    ->flatten();
 
-            foreach ($allTests as $test) {
-                $submission = $student->testSubmissions
-                    ->where('test_id', $test->id)
-                    ->first();
+                foreach ($allTests as $test) {
+                    $submission = $student->testSubmissions
+                        ->where('test_id', $test->id)
+                        ->first();
 
-                // If a test is not started or not graded, certification is not complete
-                if (!$submission || $submission->grade === null) {
-                    return false; // skip this student
+                    // If a test is not started or not graded, certification is not complete
+                    if (!$submission || $submission->grade === null) {
+                        return false; // skip this student
+                    }
                 }
             }
-        }
 
-        return true; // all required tests are graded
-    });
+            return true; // all required tests are graded
+        });
 
-    return view('students.grade', ['students' => $completedStudents->values()]);
-}
+        return view('students.grade', ['students' => $completedStudents->values()]);
+    }
 
-    
+
 
     public function handleApproval(Request $request)
     {

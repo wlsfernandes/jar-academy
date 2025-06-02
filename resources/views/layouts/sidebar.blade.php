@@ -87,6 +87,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('studentTasks') }}">
+                                    <i class="uil-books"></i> Tarefas
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('completedCertifications') }}">
                                     <i class="uil-books"></i> Concluídos
                                 </a>

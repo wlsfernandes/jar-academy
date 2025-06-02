@@ -66,6 +66,12 @@ class ResourceController extends Controller
         $studentId = Auth::id();
 
         $tasks = Task::where('discipline_id', $disciplineId)
+            ->with([
+                'resource',
+                'studentTasks' => function ($q) use ($studentId) {
+                    $q->where('student_id', $studentId);
+                }
+            ])
             ->get();
 
         return view('resources.tasks', compact('tasks'));

@@ -12,7 +12,8 @@ class Task extends Model
 
     public function resource()
     {
-        return $this->morphOne(Resource::class, 'resourceable');
+        return $this->morphOne(Resource::class, 'resourceable')
+            ->where('resource_type', 'tarefa');
     }
 
     public function studentTasks()

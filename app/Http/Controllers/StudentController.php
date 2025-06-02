@@ -200,8 +200,11 @@ class StudentController extends Controller
     {
         $students = Student::with([
             'user',
-            'certifications.disciplines.tasks'
+            'certifications.disciplines.tasks.studentTasks'
         ])->get();
+
+
+
 
         return view('students.tasks', compact('students'));
     }

@@ -21,4 +21,8 @@ class Task extends Model
     {
         return $this->hasMany(StudentTask::class);
     }
+    public function studentTaskFor($userId)
+    {
+        return $this->studentTasks->firstWhere('student_id', $userId);
+    }
 }

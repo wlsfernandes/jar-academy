@@ -43,35 +43,35 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($certification->disciplines as $discipline)
-                                            @if ($discipline->tasks->count())
-                                                @foreach($discipline->tasks as $task)
-                                                    @php
-                                                        $studentTask = \App\Models\StudentTask::where('student_id', $student->id)
-                                                            ->where('task_id', $task->id)
-                                                            ->first();
-                                                    @endphp
-                                                    <tr>
-                                                        <td>{{ $discipline->title }}</td>
-                                                        <td>{{ $task->title ?? 'Untitled Task' }}</td>
-                                                        <td>
-                                                            @if ($studentTask)
-                                                                <a href="{{ $studentTask->url }}" target="_blank" class="badge bg-primary">
-                                                                    📄 See Answer
-                                                                </a>
-                                                            @else
-                                                                <span class="badge bg-danger">❌ Not Submitted</span>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            @else
-                                                <tr>
-                                                    <td>{{ $discipline->title }}</td>
-                                                    <td colspan="2" class="text-muted">No tasks assigned</td>
-                                                </tr>
-                                            @endif
-                                        @endforeach
+                                     @foreach($certification->disciplines as $discipline)
+    @foreach($discipline->tasks as $task)
+        @php
+            $submission = \App\Models\StudentTask::where('student_id', $student->user->id)
+                ->where('task_id', $task->id)
+                ->first();
+        @endphp
+        <tr>
+            <td>{{ $discipline->title }}</td>
+            <td>{{ $task->title ?? 'Untitled Task' }}</td>
+            <td>
+                @if ($submission && !empty($submission->answer))
+                    <a href="{{ url('/task/' . $task->id . '/edit') }}" class="btn btn-sm btn-outline-primary mt-2">
+                        <i class="uil uil-pen font-size-18"></i> ✏️ View Answer
+                    </a>
+
+                    @if ($submission->url)
+                        <a href="{{ $submission->url }}" target="_blank" class="btn btn-sm btn-outline-secondary mt-2 ms-2">
+                            📄 View Attachment
+                        </a>
+                    @endif
+                @else
+                    <span class="badge bg-danger">❌ Not Concluded</span>
+                @endif
+            </td>
+        </tr>
+    @endforeach
+@endforeach
+
                                     </tbody>
                                 </table>
                             </div>
@@ -80,7 +80,9 @@
                 </div>
             </div>
         @empty
-            <div class="alert alert-warning">No students or certifications found.</div>
+            <div class="alert alert-warning">
+                No students or certifications found.
+            </div>
         @endforelse
     </div>
 

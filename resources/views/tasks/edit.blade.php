@@ -68,7 +68,8 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h4 class="card-title">{{ $title }}</h4>
-                                            <textarea name="{{ $field }}" id="{{ $field }}Editor">{{ old($field) }}</textarea>
+                                            <textarea name="{{ $field }}"
+                                                id="{{ $field }}Editor">{{ old($field, $studentTask->$field ?? '') }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -77,11 +78,11 @@
 
 
                         <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-secondary waves-effect waves-light">
-                                <a href="{{ url('mycertifications') }}" style="color:white">
-                                    <i class="bx bx-arrow-back"></i> Go Back
-                                </a>
+                            <button type="button" class="btn btn-secondary waves-effect waves-light"
+                                onclick="history.back()">
+                                <i class="bx bx-arrow-back"></i> Go Back
                             </button>
+
                             <button type="submit"
                                 class="btn btn-primary waves-effect waves-light">@lang('app.update_task')</button>
                         </div>

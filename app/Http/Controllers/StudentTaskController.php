@@ -17,8 +17,13 @@ class StudentTaskController extends Controller
     public function edit($id)
     {
         $task = Task::findOrFail($id);
-        return view('tasks.edit', compact('task'));
+
+        $studentTask = StudentTask::where('task_id', $task->id)
+            ->first();
+
+        return view('tasks.edit', compact('task', 'studentTask'));
     }
+
     /*
  public function edit($id)
     {

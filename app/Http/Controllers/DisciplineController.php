@@ -233,10 +233,19 @@ class DisciplineController extends Controller
     {
         $discipline = Discipline::where('institution_id', Auth::user()->institution_id)
             ->findOrFail($id);
+
+        // Existing resources directly linked to discipline (e.g. not via task)
         $resources = $discipline->resources;
+
+        // New: Load tasks for this discipline, with their resource (morphOne)
+        $tasks = Task::where('discipline_id', $discipline->id)
+            ->with('resource')
+            ->get();
+
         $resource_types = Resource::getResourceTypes();
         $types = Resource::getTypes();
-        return view('disciplines.resources', compact('discipline', 'resources', 'resource_types', 'types'));
+
+        return view('disciplines.resources', compact('discipline', 'resources', 'tasks', 'resource_types', 'types'));
     }
 
     public function tests($id)

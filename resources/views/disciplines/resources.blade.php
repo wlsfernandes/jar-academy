@@ -182,7 +182,7 @@
                 const fileInputContainer = document.getElementById("file-input-container");
                 const urlInputContainer = document.getElementById("url-input-container");
 
-                if (mediaType === "video" || mediaType === "audio") {
+                if (mediaType === "video" || mediaType === "audio" || mediaType === "power-point") {
                     fileInputContainer.style.display = "none";
                     urlInputContainer.style.display = "block";
                 } else {

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'actions' => 'Actions',
     'delete' => 'Delete',
     'books' => 'Books',
     'author' => 'Author',

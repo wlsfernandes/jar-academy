@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'delete' => 'Delete',
+    'books' => 'Books',
+    'author' => 'Author',
+    'book_url' => 'Book URL',
+    'book' => 'Book',
     'amount' => 'Amount',
     'there_no_test' => 'There is no test to this discipline',
     'update_task' => 'Finalizar Tarefa',
@@ -47,5 +52,5 @@ return [
     'certifications' => 'Certificações',
     'certification' => 'Certificação',
     'my_certifications' => 'Minhas Certificações',
-    'order'=>'Order',
+    'order' => 'Order',
 ];

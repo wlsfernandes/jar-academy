@@ -146,6 +146,7 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::post('/disciplines', [DisciplineController::class, 'store'])->name('disciplines.store');
         Route::post('/store-discipline', [DisciplineController::class, 'storeDiscipline'])->name('storeDiscipline');
         Route::post('/store-book', [BookController::class, 'storeBook'])->name('storeBook');
+        Route::delete('/books/{id}', [BookController::class, 'destroy'])->name('books.destroy');
         Route::get('/disciplines/{id}', [DisciplineController::class, 'show'])->name('disciplines.show');
         Route::get('/disciplines/{id}/edit', [DisciplineController::class, 'edit'])->name('disciplines.edit');
         Route::put('/disciplines/{id}', [DisciplineController::class, 'update'])->name('disciplines.update');

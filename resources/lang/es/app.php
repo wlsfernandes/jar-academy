@@ -1,6 +1,12 @@
 <?php
 
 return [
+    'delete' => 'Eliminar',
+    'books' => 'Libros',
+    'author' => 'Autor',
+    'book_url' => 'Enlace del libro',
+    'book' => 'Libro',
+
     'there_no_test' => 'No hay prueba para esta materia',
     'update_task' => 'Finalizar Tarea',
     'access' => 'Acceder',

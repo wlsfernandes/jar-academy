@@ -51,6 +51,10 @@
                                                     class="text-primary" title="Add Discipline">
                                                     <i class="fas fa-plus"></i>
                                                 </a>
+                                                <a href="{{ route('certifications.book', $certification->id) }}"
+                                                    class="text-primary" title="Add Book to Certification">
+                                                    <i class="fas fa-book-medical"></i> <!-- a book with a plus icon -->
+                                                </a>
                                                 <a href="{{ url('/certifications/' . $certification->id . '/edit') }}"
                                                     class="text-primary" title="Edit">
                                                     <i class="fas fa-edit"></i>

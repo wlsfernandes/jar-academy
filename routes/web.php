@@ -5,6 +5,7 @@ use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\CertificationController;
@@ -130,6 +131,8 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::delete('/modules/{id}', [ModuleController::class, 'destroy'])->name('modules.destroy');
         //Certifications
         Route::get('/certifications/{id}/discipline', [DisciplineController::class, 'newDiscipline'])->name('newDiscipline');
+        Route::get('/certifications/{certification}/book', [BookController::class, 'addBook'])->name('certifications.book');
+
         Route::get('/certifications', [CertificationController::class, 'index'])->name('certifications.index');
         Route::get('/certifications/create', [CertificationController::class, 'create'])->name('certifications.create');
         Route::post('/certifications', [CertificationController::class, 'store'])->name('certifications.store');
@@ -142,6 +145,7 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::get('/disciplines/create', [DisciplineController::class, 'create'])->name('disciplines.create');
         Route::post('/disciplines', [DisciplineController::class, 'store'])->name('disciplines.store');
         Route::post('/store-discipline', [DisciplineController::class, 'storeDiscipline'])->name('storeDiscipline');
+        Route::post('/store-book', [BookController::class, 'storeBook'])->name('storeBook');
         Route::get('/disciplines/{id}', [DisciplineController::class, 'show'])->name('disciplines.show');
         Route::get('/disciplines/{id}/edit', [DisciplineController::class, 'edit'])->name('disciplines.edit');
         Route::put('/disciplines/{id}', [DisciplineController::class, 'update'])->name('disciplines.update');

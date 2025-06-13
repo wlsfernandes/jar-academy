@@ -31,9 +31,13 @@ class Certification extends Model
     {
         return $this->belongsTo(Certification::class, 'parent_id');
     }
-    
+
     public function children()
     {
         return $this->hasMany(Certification::class, 'parent_id');
+    }
+    public function books()
+    {
+        return $this->hasMany(Book::class);
     }
 }

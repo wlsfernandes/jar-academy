@@ -33,7 +33,7 @@ class CertificationController extends Controller
         $student = $user->student;
 
         $certifications = $student->certifications()
-            ->with('disciplines') // no need withPivot here
+            ->with(['disciplines', 'books']) // no need withPivot here
             ->orderBy('order')
             ->get();
 

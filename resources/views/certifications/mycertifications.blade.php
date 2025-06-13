@@ -29,7 +29,7 @@
                             </ul>
                         </div>
                     @endif
-                    <div class="row">
+<div class="row">
     @foreach($certifications as $certification)
         <div class="col-md-12 mb-4">
             <div class="card border border-primary h-100">
@@ -42,11 +42,40 @@
                     @endif
                 </div>
 
-                @if($certification->disciplines->count())
-                    <div class="card-body p-2" style="display: none;">
+                <div class="card-body p-2" style="display: none;">
+                    
+                    {{-- Books Section --}}
+                    @if($certification->books->count())
+                        <div class="alert alert-info d-flex align-items-center gap-2 mb-3" role="alert">
+                            <i class="fas fa-book-open fa-lg"></i>
+                            <span>
+                                {{ $certification->books->count() }}
+                                {{ Str::plural('book', $certification->books->count()) }} available for this certification.
+                            </span>
+                        </div>
+
+                        <ul class="list-group list-group-flush mb-4">
+                            @foreach ($certification->books as $book)
+                                <li class="list-group-item">
+                                    <strong>{{ $book->title }}</strong>
+                                    @if($book->author)
+                                        <em> by {{ $book->author }}</em>
+                                    @endif
+                                    <br>
+                                    <a href="{{ $book->book_url }}" target="_blank">
+                                        <i class="fas fa-link"></i> View Book
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+
+                    {{-- Disciplines Section --}}
+                    @if($certification->disciplines->count())
                         @foreach($certification->disciplines as $discipline)
                             @php
                                 $isPaid = in_array($discipline->id, $paidDisciplineIds);
+                                $user = auth()->user();
                             @endphp
 
                             <div class="border rounded p-2 mb-2">
@@ -54,9 +83,6 @@
                                     <strong>#{{ $discipline->order }}</strong> - {{ $discipline->title }}
                                 </p>
 
-                                    @php
-                                    $user = auth()->user();
-                                    @endphp
                                 @if ($user->is_free || $isPaid)
                                     <div class="row g-2 mb-2">
                                         <div class="col-sm-4">
@@ -100,8 +126,8 @@
                                 @endif
                             </div>
                         @endforeach
-                    </div>
-                @endif
+                    @endif
+                </div> <!-- end .card-body -->
             </div>
         </div>
     @endforeach

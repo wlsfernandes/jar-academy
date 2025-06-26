@@ -72,7 +72,7 @@
 
                     {{-- Disciplines Section --}}
                     @if($certification->disciplines->count())
-                        @foreach($certification->disciplines as $discipline)
+                       @foreach($certification->disciplines->sortBy('order') as $discipline)
                             @php
                                 $isPaid = in_array($discipline->id, $paidDisciplineIds);
                                 $user = auth()->user();

@@ -28,7 +28,7 @@
                     <div class="card-body">
                         @if (session('success'))
                             <div class="alert alert-success">
-                               {{ session('success') }}
+                                {{ session('success') }}
                             </div>
                         @endif
                         @if (session('error'))
@@ -61,21 +61,21 @@
                             @foreach ($certifications as $certification)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                               <!--     <td>
-                                        @if ($certification->isFree)
-                                            <a href="{{ url('/certifications/' . $certification->id . '/free') }}"
-                                                class="btn btn-sm btn-info rounded-pill"><i class="bi bi-pencil-square me-1"></i>
-                                                Inscreva-se</a>
-                                        @else
-                                            <a href="{{ url('/paypal/payment/' . $certification->id) }}"
-                                                class="px-3 text-success"><img src="assets/images/paypal.png" style="width:60px;">
-                                                </img></a>
-                                        @endif
-                                    </td> -->
+                                    <!--     <td>
+                                                                        @if ($certification->isFree)
+                                                                            <a href="{{ url('/certifications/' . $certification->id . '/free') }}"
+                                                                                class="btn btn-sm btn-info rounded-pill"><i class="bi bi-pencil-square me-1"></i>
+                                                                                Inscreva-se</a>
+                                                                        @else
+                                                                            <a href="{{ url('/paypal/payment/' . $certification->id) }}"
+                                                                                class="px-3 text-success"><img src="assets/images/paypal.png" style="width:60px;">
+                                                                                </img></a>
+                                                                        @endif
+                                                                    </td> -->
                                     <td> <a href="{{ url('/certifications/' . $certification->id . '/free') }}"
-                                                class="btn btn-sm btn-info rounded-pill"><i class="bi bi-pencil-square me-1"></i>
-                                                Inscreva-se</a></td>
-                                  
+                                            class="btn btn-sm btn-info rounded-pill"><i class="bi bi-pencil-square me-1"></i>
+                                            Inscreva-se</a></td>
+
                                     <td>{{ $certification->name ?? '' }}</td>
 
                                     <td>

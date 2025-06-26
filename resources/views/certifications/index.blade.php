@@ -87,67 +87,69 @@
                                     <div class="card-body">
                                     </div>
                                     @if($certification->disciplines->count())
-                                        <div class="card-body border-top" style="display: none;">
-                                            <h6 class="text-muted mb-3">Disciplinas:</h6>
-                                            @foreach($certification->disciplines as $discipline)
-                                                <div class="border rounded p-2 mb-2">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="text-secondary">
-                                                            <strong>#{{ $discipline->order }}</strong> - {{ $discipline->title }}
-                                                            <strong>$ {{ $discipline->amount ?? 0.00 }}</strong>
-                                                        </div>
-                                                        <div class="d-flex gap-2 align-items-start pt-2">
-
-
-                                                            <div class="d-flex gap-3">
-                                                                <div class="text-center">
-                                                                    <a href="{{ url('/disciplines/' . $discipline->id . '/resources') }}"
-                                                                        class="text-secondary" title="Resources">
-                                                                        <i class="fas fa-file fa-lg"></i><br>
-                                                                        <small>Documents</small>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="text-center">
-                                                                    <a href="{{ url('/disciplines/' . $discipline->id . '/new-task') }}"
-                                                                        class="text-secondary" title="Tasks">
-                                                                        <i class="fas fa-check-square fa-lg"></i><br>
-                                                                        <small>Tasks</small>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="text-center">
-                                                                    <a href="{{ url('/disciplines/' . $discipline->id . '/new-test') }}"
-                                                                        class="text-secondary" title="Tests">
-                                                                        <i class="fas fa-vial fa-lg"></i><br>
-                                                                        <small>Tests</small>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="text-center">
-                                                                    <a href="{{ url('/disciplines/' . $discipline->id) }}"
-                                                                        class="text-secondary" title="View"><i
-                                                                            class="fas fa-eye"></i><br><small>View</small></a>
-                                                                </div>
-                                                                <div class="text-center"> <a
-                                                                        href="{{ url('/disciplines/' . $discipline->id . '/edit') }}"
-                                                                        class="text-secondary" title="Edit"><i
-                                                                            class="fas fa-edit"></i></i><br><small>Edit</small></a>
-                                                                </div>
-                                                                <div class="text-center"> <a href="#" class="text-danger" title="Delete"
-                                                                        onclick="event.preventDefault(); if(confirm('Confirm delete?')) document.getElementById('delete-discipline-{{ $discipline->id }}').submit();">
-                                                                        <i class="fas fa-trash-alt"></i><br><small>Delete</small></a>
-                                                                    <form id="delete-discipline-{{ $discipline->id }}" method="POST"
-                                                                        action="{{ url('/disciplines/' . $discipline->id) }}"
-                                                                        style="display: none;">
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                    </form>
-                                                                </div>
+                                        @foreach($certification->disciplines->sortBy('order') as $discipline)
+                                            <div class="card-body border-top" style="display: none;">
+                                                <h6 class="text-muted mb-3">Disciplinas:</h6>
+                                                @foreach($certification->disciplines as $discipline)
+                                                    <div class="border rounded p-2 mb-2">
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="text-secondary">
+                                                                <strong>#{{ $discipline->order }}</strong> - {{ $discipline->title }}
+                                                                <strong>$ {{ $discipline->amount ?? 0.00 }}</strong>
                                                             </div>
+                                                            <div class="d-flex gap-2 align-items-start pt-2">
 
+
+                                                                <div class="d-flex gap-3">
+                                                                    <div class="text-center">
+                                                                        <a href="{{ url('/disciplines/' . $discipline->id . '/resources') }}"
+                                                                            class="text-secondary" title="Resources">
+                                                                            <i class="fas fa-file fa-lg"></i><br>
+                                                                            <small>Documents</small>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="text-center">
+                                                                        <a href="{{ url('/disciplines/' . $discipline->id . '/new-task') }}"
+                                                                            class="text-secondary" title="Tasks">
+                                                                            <i class="fas fa-check-square fa-lg"></i><br>
+                                                                            <small>Tasks</small>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="text-center">
+                                                                        <a href="{{ url('/disciplines/' . $discipline->id . '/new-test') }}"
+                                                                            class="text-secondary" title="Tests">
+                                                                            <i class="fas fa-vial fa-lg"></i><br>
+                                                                            <small>Tests</small>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="text-center">
+                                                                        <a href="{{ url('/disciplines/' . $discipline->id) }}"
+                                                                            class="text-secondary" title="View"><i
+                                                                                class="fas fa-eye"></i><br><small>View</small></a>
+                                                                    </div>
+                                                                    <div class="text-center"> <a
+                                                                            href="{{ url('/disciplines/' . $discipline->id . '/edit') }}"
+                                                                            class="text-secondary" title="Edit"><i
+                                                                                class="fas fa-edit"></i></i><br><small>Edit</small></a>
+                                                                    </div>
+                                                                    <div class="text-center"> <a href="#" class="text-danger" title="Delete"
+                                                                            onclick="event.preventDefault(); if(confirm('Confirm delete?')) document.getElementById('delete-discipline-{{ $discipline->id }}').submit();">
+                                                                            <i class="fas fa-trash-alt"></i><br><small>Delete</small></a>
+                                                                        <form id="delete-discipline-{{ $discipline->id }}" method="POST"
+                                                                            action="{{ url('/disciplines/' . $discipline->id) }}"
+                                                                            style="display: none;">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
+                                                @endforeach
+                                            </div>
+                                        @endforeach
                                     @endif
                                 </div>
                             </div>

@@ -45,11 +45,12 @@
                     <div>
 
                         <!--   <a href="{{ url('/user/create') }}">
-                                <button type="button" class="btn btn-success waves-effect waves-light mb-3"><i
-                                        class="fas fa-plus"></i> Add New</button> </a> -->
+                                                                                <button type="button" class="btn btn-success waves-effect waves-light mb-3"><i
+                                                                                        class="fas fa-plus"></i> Add New</button> </a> -->
                     </div>
 
                     <h4 class="card-title">Users</h4>
+                    <p>All Reset Password it will received a password of <code>amidLearning2030</code></p>
                     <table id="datatable-users" class="table table-striped table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 
@@ -59,9 +60,12 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
-                                <th><div class="badge bg-pill bg-info-subtle text-info font-size-12">
-                                    Free Access
-                                </div></th>
+                                <th>Reset Password</th>
+                                <th>
+                                    <div class="badge bg-pill bg-info-subtle text-info font-size-12">
+                                        Free Access
+                                    </div>
+                                </th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -75,6 +79,19 @@
                                         @if($user->roles->isNotEmpty())
                                             {{ $user->roles->pluck('name')->join(', ') }}
                                         @endif
+                                    </td>
+                                    <td>
+                                        <!-- Reset Passowrd -->
+                                        <a href="#" class="px-3 text-primary"
+                                            onclick="event.preventDefault(); document.getElementById('block-file-form-team-{{ $user->id }}').submit();">
+                                            <i class="uil uil-refresh text-info font-size-18"></i>
+                                        </a>
+                                        <form id="block-file-form-team-{{ $user->id }}"
+                                            action="{{ route('user.resetPassword', $user->id) }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
+
                                     </td>
                                     <td>
                                         <a href="javascript:void(0);" class="px-3 text-primary"
@@ -97,7 +114,7 @@
                                     </td>
                                     <td>
                                         <!--    <a href="{{ url('/user/' . $user->id . '/edit') }}" class="px-3 text-primary"><i
-                                                            class="uil uil-pen font-size-18"></i></a> -->
+                                                                                                                                                            class="uil uil-pen font-size-18"></i></a> -->
 
                                         <a href="javascript:void(0);" class="px-3 text-danger"
                                             onclick="event.preventDefault(); if(confirm('Confirm delete?')) { document.getElementById('delete-form-{{ $user->id }}').submit(); }">

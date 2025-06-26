@@ -166,6 +166,9 @@ Route::middleware(['auth', 'institution.scope'])->group(function () {
         Route::delete('/tests/{test}', [TestController::class, 'destroy'])->name('tests.destroy');
         Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('task.destroy');
 
+        Route::post('user/{id}/reset', [AccessController::class, 'resetPassword'])->name('user.resetPassword');
+
+
         Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
     });
 

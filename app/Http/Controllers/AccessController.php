@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -72,21 +73,38 @@ class AccessController extends Controller
                 $user = User::findOrFail($id);
                 $user->is_free = !$user->is_free; // ✅ Simply invert true/false
                 $user->save();
-    
+
                 Log::info('User updated successfully.', ['user_id' => $user->id]);
             });
-    
+
             session()->flash('success', 'User updated successfully.');
             return redirect()->route('access.index');
         } catch (Exception $e) {
             Log::error('Error updating user: ' . $e->getMessage());
-    
+
             return redirect()->back()->withInput()->withErrors([
                 'error' => 'Failed to update user.'
             ]);
         }
     }
-    
 
+    public function resetPassword(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            $user = User::find($id);
+            $user->password = Hash::make('amidLearning2030');
+            $user->save();
+            DB::commit();
+            session()->flash('success', 'User Password Reset changed successfully.');
+            Log::info('User Password Reset successfully.');
+            return redirect()->route('access.index');
+        } catch (Exception $e) {
+            DB::rollBack();
+            session()->flash('error', 'Failed to update User Password Reset: ' . $e->getMessage());
+            Log::error('Error updating User Password Reset: ' . $e->getMessage());
+            return redirect()->back()->withInput()->withErrors(['error' => 'Failed to update User Password Resetg: ']);
+        }
+    }
 
 }

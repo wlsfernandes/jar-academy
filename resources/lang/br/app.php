@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'avaliation' => 'Avaliação',
     'actions' => 'Ações',
     'delete' => 'Excluir',
     'books' => 'Livros',

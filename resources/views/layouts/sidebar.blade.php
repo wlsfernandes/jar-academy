@@ -83,19 +83,15 @@
                             </li>
                             <li>
                                 <a href="{{ route('grade') }}">
-                                    <i class="uil-books"></i> Avaliar
+                                    <i class="uil-books"></i> <span>@lang('app.avaliation')</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('studentTasks') }}">
-                                    <i class="uil-books"></i> Tarefas
+                                    <i class="uil-books"></i> <span>@lang('app.tasks')</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{ route('completedCertifications') }}">
-                                    <i class="uil-books"></i> Concluídos
-                                </a>
-                            </li>
+
                         </ul>
                     </li>
 
@@ -116,7 +112,7 @@
                     <li>
                         <a href="{{url('payments')}}" class="waves-effect">
                             <i class="uil-money-bill"></i>
-                            <span>Payments</span>
+                            <span><span>@lang('app.payments')</span></span>
                         </a>
                     </li>
                 @endcan
